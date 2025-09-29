@@ -1,0 +1,31 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 24 sept 2025, 11:04:00
+    Author     : ESDPC
+*/
+.text-field, .password-field {
+    -fx-background-color: transparent;     /* Fondo transparente */
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+
+    -fx-border-color: transparent transparent #5A2A83 transparent; 
+    /* solo la línea inferior visible, color púrpura (#5A2A83) */
+    
+    -fx-border-width: 0 0 2 0;  /* grosor de la línea inferior */
+    -fx-border-radius: 0;
+}
+
+#loginButton {
+    -fx-background-color:#5A2A83
+}
+.signupLabel{
+    -fx-text-fill:#5A2A83
+}
+/* efecto hover al pasar el mouse por encima*/
+.signupLabel:hover {
+    -fx-text-fill: darkcyan;
+    -fx-cursor:hand
+}

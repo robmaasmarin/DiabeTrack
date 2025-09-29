@@ -1,0 +1,26 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 25 sept 2025, 17:31:37
+    Author     : ESDPC
+*/
+#choiceLanguage {
+    -fx-margin: 20 25 0 0; /* alineamos elementos */
+}
+
+#profileImg {
+    -fx-margin: 8 25 0 0;
+}
+
+.topBar {
+    -fx-background-color: linear-gradient(to right, #5d08a5, #ffffff);
+    -fx-padding: 10px;
+    
+}
+.comboHbox {
+    -fx-spacing: 15; /*separación interna de los elementos*/
+    -fx-padding: 0 25 0 0;/*lo empujamos un poco hacia dentro*/
+}
+

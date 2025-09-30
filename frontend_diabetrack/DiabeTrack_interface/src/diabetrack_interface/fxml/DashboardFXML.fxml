@@ -23,7 +23,7 @@
       <Insets bottom="10" left="10" right="10" top="10" />
    </padding>
                     <children>
-                        <ComboBox fx:id="choiceLanguage" prefWidth="150.0" styleClass="choiceLanguage">
+                        <ComboBox fx:id="choiceLanguage" prefWidth="200.0" styleClass="choiceLanguage">
                             <HBox.margin>
                                 <Insets right="25.0" top="20.0" />
                             </HBox.margin>

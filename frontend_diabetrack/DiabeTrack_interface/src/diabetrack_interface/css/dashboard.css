@@ -8,6 +8,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 */
 #choiceLanguage {
     -fx-margin: 20 25 0 0; /* alineamos elementos */
+    -fx-min-width: 180;
 }
 
 #profileImg {
@@ -20,7 +21,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     
 }
 .comboHbox {
-    -fx-spacing: 15; /*separación interna de los elementos*/
-    -fx-padding: 0 25 0 0;/*lo empujamos un poco hacia dentro*/
+    -fx-spacing: 35; /*separación interna de los elementos*/
+    -fx-padding: 0 60 0 0;/*lo empujamos un poco hacia dentro*/
 }
 
+.stackContact {
+    -fx-background-color: linear-gradient(to left, #5d08a5, #ffffff);
+    -fx-padding: 10px;
+}
+
+.btnContact {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-underline: true;
+}

@@ -9,14 +9,19 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.LineChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -42,6 +47,58 @@ public class NewDashboardFXMLController implements Initializable {
 
     @FXML
     private ImageView profileImg;
+    @FXML
+    private VBox VBoxContainerCentro;
+
+    @FXML
+    private LineChart<String, Number> graficaChart;
+
+    @FXML
+    private GridPane gridActions;
+
+    @FXML
+    private VBox vBoxRegistro;
+
+    @FXML
+    private ImageView imgRegister;
+
+    @FXML
+    private Label labelRegister;
+
+    @FXML
+    private VBox vBoxCalculator;
+
+    @FXML
+    private ImageView imgCalculator;
+
+    @FXML
+    private Label labelBolo;
+
+    @FXML
+    private VBox vBoxInformes;
+
+    @FXML
+    private ImageView imgInformes;
+
+    @FXML
+    private Label labelInformes;
+
+    @FXML
+    private VBox vBoxProfile;
+
+    @FXML
+    private ImageView imgProfile;
+
+    @FXML
+    private Label labelProfile;
+    @FXML
+    private VBox vBoxLatestEntrie;
+    
+    @FXML
+    private Label labelHelp;
+    
+    @FXML
+    private Button btnContact;
 
     /**
      * Initializes the controller class.
@@ -50,8 +107,7 @@ public class NewDashboardFXMLController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // estiramos imagen barra superior al maximizar
         //logoHeader.fitWidthProperty().bind(stackContainer.widthProperty());
-        
-        
+
         // TODO
         //creación objetos idioma
         Idioma galego = new Idioma("Galego", new Image(getClass().getResourceAsStream("/diabetrack_interface/resources/images/bgalega.png")));

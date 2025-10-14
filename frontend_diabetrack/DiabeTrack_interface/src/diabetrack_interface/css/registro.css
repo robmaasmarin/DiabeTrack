@@ -1,0 +1,74 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 30 sept 2025, 16:12:28
+    Author     : ESDPC
+
+*/
+/* --- TabPane general --- */
+
+
+.stepLabel {
+    -fx-text-fill: #5d08a5;
+    -fx-font-size: 18;
+-fx-font-weight: bold;
+}
+.logoRegistro {
+    -fx-pref-width: 242;
+    -fx-margin-top: 30
+}
+.labelRegistroNuevo {
+    -fx-margin-top: 30
+}
+.anchorTab {
+    
+    -fx-background-color: linear-gradient(to bottom, white, #5d08a5);
+}
+
+.vboxData{
+    -fx-background-color: white;
+    
+}   
+.emailField  {
+    -fx-margin-top: 30
+}
+
+.emailField, .passField, .passConf  {
+    -fx-background-radius: 15;
+-fx-border-radius: 15;
+}
+
+.labelRegistroNuevo {
+    -fx-text-fill: #5d08a5;
+    -fx-margin-top: 30
+}
+
+.nextButton {
+    -fx-background-radius: 15;
+-fx-border-radius: 15;
+-fx-background-color: #5d08a5;
+-fx-text-fill: #ffffff;
+-fx-pref-width: 300;
+-fx-pref-height: 40;
+-fx-font-size: 23;
+-fx-font-weight: bold;
+}
+
+.vboxData2 {
+    -fx-padding: 30 0 0 40;
+    -fx-background-color: white;
+}
+
+.nameTField, .surnameTField, .pesoTfield, .alturaTfield  {
+        -fx-background-radius: 15;
+-fx-border-radius: 15;
+}
+
+.nameLabel, .surnameLabel, .fechaLabel, .genreLabel, .weightLabel, .alturaLabel, .medicalLabel, .tipoDLabel, .yearLabel {
+    -fx-text-fill: #5d08a5;
+    -fx-font-size: 20;
+-fx-font-weight: bold;
+    
+}

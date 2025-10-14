@@ -1,0 +1,75 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 12 oct 2025, 9:40:17
+    Author     : ESDPC
+*/
+
+/* ==============================
+   ESTILOS GENERALES DE TABS
+   ============================== */
+
+/* Área completa del TabPane */
+.tab-pane {
+    -fx-background-color: #5d08a5;
+    -fx-border-color: #d1c4e9;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+}
+
+/* Barra superior de pestañas */
+.tab-pane > .tab-header-area {
+    -fx-background-color: #ede7f6;
+    -fx-padding: 5 0 0 0;
+}
+
+/* Cada pestaña (no seleccionada) */
+.tab-pane .tab-header-area .tab {
+    -fx-background-color: #d1c4e9;
+    -fx-text-base-color: #4a148c;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10 10 0 0;
+    -fx-padding: 8 15 8 15;
+}
+
+/* Pestaña seleccionada */
+.tab-pane .tab-header-area .tab:selected {
+    -fx-background-color: #5d08a5; /* Morado principal */
+    -fx-text-base-color: #ffffff;
+}
+
+/* Efecto hover */
+.tab-pane .tab-header-area .tab:hover {
+    -fx-background-color: #7b32c3;
+    -fx-cursor: hand;
+}
+
+/* Área del contenido */
+.tab-pane > .tab-content-area {
+    -fx-background-color: #fafafa;
+    -fx-padding: 20;
+    -fx-border-color: #d1c4e9;
+    -fx-border-radius: 0 0 10 10;
+    -fx-background-radius: 0 0 10 10;
+}
+
+/* ==============================
+   ESTILOS POR PESTAÑA ESPECÍFICA
+   ============================== */
+
+/* Datos básicos */
+.tab-pane .tab-header-area .tab.basicTab:selected {
+    -fx-background-color: #5d08a5;
+}
+
+/* Datos médicos */
+.tab-pane .tab-header-area .tab.medicalTab:selected {
+    -fx-background-color: #009688;
+}
+
+/* Preferencias */
+.tab-pane .tab-header-area .tab.prefTab:selected {
+    -fx-background-color: #fbc02d;
+}

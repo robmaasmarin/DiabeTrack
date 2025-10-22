@@ -1,0 +1,165 @@
+Listado de rutas de carpetas para el volumen OS
+El n£mero de serie del volumen es C62E-A5B3
+C:.
+³   .gitignore
+³   estructura.txt
+³   README.md
+³   
+ÃÄÄÄbackend_diabetrack
+ÀÄÄÄfrontend_diabetrack
+    ÀÄÄÄDiabeTrack_interface
+        ³   build.xml
+        ³   manifest.mf
+        ³   
+        ÃÄÄÄbuild
+        ³   ³   built-jar.properties
+        ³   ³   
+        ³   ÃÄÄÄclasses
+        ³   ³   ³   .netbeans_automatic_build
+        ³   ³   ³   .netbeans_update_resources
+        ³   ³   ³   
+        ³   ³   ÀÄÄÄdiabetrack_interface
+        ³   ³       ³   FXMain_Diabetrack.class
+        ³   ³       ³   
+        ³   ³       ÃÄÄÄcontrollers
+        ³   ³       ³       DashboardFXMLController$1.class
+        ³   ³       ³       DashboardFXMLController$2.class
+        ³   ³       ³       DashboardFXMLController.class
+        ³   ³       ³       LoginFXMLController.class
+        ³   ³       ³       NewDashboardFXMLController$1.class
+        ³   ³       ³       NewDashboardFXMLController$2.class
+        ³   ³       ³       NewDashboardFXMLController.class
+        ³   ³       ³       RegistroFXMLController.class
+        ³   ³       ³       SplashFXMLController.class
+        ³   ³       ³       
+        ³   ³       ÃÄÄÄcss
+        ³   ³       ³       dashboard.css
+        ³   ³       ³       login.css
+        ³   ³       ³       registro.css
+        ³   ³       ³       tabs.css
+        ³   ³       ³       
+        ³   ³       ÃÄÄÄfxml
+        ³   ³       ³       DashboardFXML.fxml
+        ³   ³       ³       LoginFXML.fxml
+        ³   ³       ³       NewDashboardFXML.fxml
+        ³   ³       ³       RegistroFXML.fxml
+        ³   ³       ³       SplashFXML.fxml
+        ³   ³       ³       
+        ³   ³       ÃÄÄÄmodels
+        ³   ³       ³       Idioma.class
+        ³   ³       ³       
+        ³   ³       ÃÄÄÄresources
+        ³   ³       ³   ÀÄÄÄimages
+        ³   ³       ³       ³   bgalega.png
+        ³   ³       ³       ³   blancomorado.png
+        ³   ³       ³       ³   blancomorado600.png
+        ³   ³       ³       ³   circle-info-solid-fullpurple.png
+        ³   ³       ³       ³   degradadoHeader.png
+        ³   ³       ³       ³   espanabandera.png
+        ³   ³       ³       ³   logoletrasblancassinfondohorizontal.png
+        ³   ³       ³       ³   logoletrasblancohorizontal.png
+        ³   ³       ³       ³   logoletrasmoradohorizontal.png
+        ³   ³       ³       ³   logomasdegradado.png
+        ³   ³       ³       ³   logosinletraspurple.png
+        ³   ³       ³       ³   moradotodo.png
+        ³   ³       ³       ³   user_8338841.png
+        ³   ³       ³       ³   
+        ³   ³       ³       ÀÄÄÄfuncionalidadesIcons
+        ³   ³       ³               add.png
+        ³   ³       ³               informes.png
+        ³   ³       ³               jeringa.png
+        ³   ³       ³               profile.png
+        ³   ³       ³               
+        ³   ³       ÃÄÄÄtestClasses
+        ³   ³       ³       RegistroTest.class
+        ³   ³       ³       
+        ³   ³       ÀÄÄÄutils
+        ³   ³               ScreenUtils.class
+        ³   ³               
+        ³   ÃÄÄÄempty
+        ³   ÀÄÄÄgenerated-sources
+        ³       ÀÄÄÄap-source-output
+        ÃÄÄÄdist
+        ³   ³   DiabeTrack_interface.jar
+        ³   ³   README.TXT
+        ³   ³   
+        ³   ÀÄÄÄlib
+        ³           javafx-swt.jar
+        ³           javafx.base.jar
+        ³           javafx.controls.jar
+        ³           javafx.fxml.jar
+        ³           javafx.graphics.jar
+        ³           javafx.media.jar
+        ³           javafx.swing.jar
+        ³           javafx.web.jar
+        ³           
+        ÃÄÄÄnbproject
+        ³   ³   build-impl.xml
+        ³   ³   genfiles.properties
+        ³   ³   project.properties
+        ³   ³   project.xml
+        ³   ³   
+        ³   ÀÄÄÄprivate
+        ³       ³   config.properties
+        ³       ³   private.properties
+        ³       ³   private.xml
+        ³       ³   
+        ³       ÀÄÄÄretriever
+        ³               catalog.xml
+        ³               
+        ÃÄÄÄsrc
+        ³   ÀÄÄÄdiabetrack_interface
+        ³       ³   FXMain_Diabetrack.java
+        ³       ³   
+        ³       ÃÄÄÄcontrollers
+        ³       ³       DashboardFXMLController.java
+        ³       ³       LoginFXMLController.java
+        ³       ³       NewDashboardFXMLController.java
+        ³       ³       RegistroFXMLController.java
+        ³       ³       SplashFXMLController.java
+        ³       ³       
+        ³       ÃÄÄÄcss
+        ³       ³       dashboard.css
+        ³       ³       login.css
+        ³       ³       registro.css
+        ³       ³       tabs.css
+        ³       ³       
+        ³       ÃÄÄÄfxml
+        ³       ³       DashboardFXML.fxml
+        ³       ³       LoginFXML.fxml
+        ³       ³       NewDashboardFXML.fxml
+        ³       ³       RegistroFXML.fxml
+        ³       ³       SplashFXML.fxml
+        ³       ³       
+        ³       ÃÄÄÄmodels
+        ³       ³       Idioma.java
+        ³       ³       
+        ³       ÃÄÄÄresources
+        ³       ³   ÀÄÄÄimages
+        ³       ³       ³   bgalega.png
+        ³       ³       ³   blancomorado.png
+        ³       ³       ³   blancomorado600.png
+        ³       ³       ³   circle-info-solid-fullpurple.png
+        ³       ³       ³   degradadoHeader.png
+        ³       ³       ³   espanabandera.png
+        ³       ³       ³   logoletrasblancassinfondohorizontal.png
+        ³       ³       ³   logoletrasblancohorizontal.png
+        ³       ³       ³   logoletrasmoradohorizontal.png
+        ³       ³       ³   logomasdegradado.png
+        ³       ³       ³   logosinletraspurple.png
+        ³       ³       ³   moradotodo.png
+        ³       ³       ³   user_8338841.png
+        ³       ³       ³   
+        ³       ³       ÀÄÄÄfuncionalidadesIcons
+        ³       ³               add.png
+        ³       ³               informes.png
+        ³       ³               jeringa.png
+        ³       ³               profile.png
+        ³       ³               
+        ³       ÃÄÄÄtestClasses
+        ³       ³       RegistroTest.java
+        ³       ³       
+        ³       ÀÄÄÄutils
+        ³               ScreenUtils.java
+        ³               
+        ÀÄÄÄtest

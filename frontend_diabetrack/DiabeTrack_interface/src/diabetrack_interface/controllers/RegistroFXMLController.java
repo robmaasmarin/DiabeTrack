@@ -106,7 +106,7 @@ public class RegistroFXMLController implements Initializable {
     private RadioButton mujerRB;
 
     @FXML
-    private  GridPane gridPesoAltura;
+    private  GridPane gridPesoAltura, gridInsulina;
 
     @FXML
     private Label weightLabel;

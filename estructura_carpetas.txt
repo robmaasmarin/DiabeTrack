@@ -1,0 +1,38 @@
+Listado de rutas de carpetas para el volumen OS
+El n£mero de serie del volumen es C62E-A5B3
+C:.
++---backend_diabetrack
+\---frontend_diabetrack
+    \---DiabeTrack_interface
+        +---build
+        |   +---classes
+        |   |   \---diabetrack_interface
+        |   |       +---controllers
+        |   |       +---css
+        |   |       +---fxml
+        |   |       +---models
+        |   |       +---resources
+        |   |       |   \---images
+        |   |       |       \---funcionalidadesIcons
+        |   |       +---testClasses
+        |   |       \---utils
+        |   +---empty
+        |   \---generated-sources
+        |       \---ap-source-output
+        +---dist
+        |   \---lib
+        +---nbproject
+        |   \---private
+        |       \---retriever
+        +---src
+        |   \---diabetrack_interface
+        |       +---controllers
+        |       +---css
+        |       +---fxml
+        |       +---models
+        |       +---resources
+        |       |   \---images
+        |       |       \---funcionalidadesIcons
+        |       +---testClasses
+        |       \---utils
+        \---test

@@ -5,7 +5,9 @@
 package com.diabetrack.backend;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
+
 
 /**
  *
@@ -13,7 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
  * 
  */
 @SpringBootApplication
-@ComponentScan(basePackages = "com.diabetrack.backend")
+@EntityScan(basePackages = "com.diabetrack.backend.model")
 public class Diabetrack {
 
     public static void main(String[] args) {

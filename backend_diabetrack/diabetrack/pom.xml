@@ -24,11 +24,7 @@
     </properties>
 
     <dependencies>
-        <!-- Web (para controladores REST y servidor embebido Tomcat) -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+        
        
 
     <!-- SPRING BOOT WEB (para crear API REST) -->
@@ -57,12 +53,7 @@
         <optional>true</optional>
     </dependency>
 
-    <!-- TESTS (opcional, pero déjalo por si lo pides más tarde) -->
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-test</artifactId>
-        <scope>test</scope>
-    </dependency>
+ 
 
 
 

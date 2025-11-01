@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.diabetrack.backend.model;
+import com.diabetrack.backend.model.Alimento;
+import com.diabetrack.backend.model.Usuario;
+
 
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
@@ -18,7 +21,7 @@ public class Registro {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_registro;
+    private Long idRegistro;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario")
@@ -32,4 +35,8 @@ public class Registro {
     @ManyToOne
     @JoinColumn(name = "id_alimento")
     private Alimento alimento;
+
+    public void setIdRegistro(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

@@ -4,10 +4,13 @@
  */
 package com.diabetrack.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -40,6 +43,24 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "id_rol")
     private Rol rol;
+  /*  
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+private List<Alimento> alimentos = new ArrayList<>();
+    */
+    @OneToMany(mappedBy = "usuario")
+@JsonManagedReference(value = "usuario-alimentos")
+private List<Alimento> alimentos;
+
+
+    public List<Alimento> getAlimentos() {
+    return alimentos;
+}
+
+public void setAlimentos(List<Alimento> alimentos) {
+    this.alimentos = alimentos;
+}
+
+    
 
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;

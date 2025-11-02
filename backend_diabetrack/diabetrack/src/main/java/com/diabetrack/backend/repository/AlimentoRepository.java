@@ -5,6 +5,7 @@
 package com.diabetrack.backend.repository;
 
 import com.diabetrack.backend.model.Alimento;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -15,5 +16,9 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface AlimentoRepository extends JpaRepository<Alimento, Long> {
+    List<Alimento> findByUsuarioIdUsuario(Long idUsuario);
+    
+    // Devuelve los alimentos creados por un usuario específico
+    List<Alimento> findByUsuario_IdUsuario(Long idUsuario);
     
 }

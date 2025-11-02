@@ -5,7 +5,11 @@
 package com.diabetrack.backend.controller;
 
 import com.diabetrack.backend.model.Alimento;
+import com.diabetrack.backend.model.Categoria;
+import com.diabetrack.backend.model.Usuario;
 import com.diabetrack.backend.repository.AlimentoRepository;
+import com.diabetrack.backend.repository.CategoriaRepository;
+import com.diabetrack.backend.repository.UsuarioRepository;
 import com.diabetrack.backend.service.AlimentoService;
 import org.springframework.web.bind.annotation.*;
 import lombok.*;
@@ -14,45 +18,56 @@ import lombok.*;
  * @author ESDPC
  */
 
-
 import java.util.List;
 import java.util.Optional;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/api/alimentos")
-@CrossOrigin(origins = "*")
 public class AlimentoController {
 
     private final AlimentoService alimentoService;
+    private final UsuarioRepository usuarioRepository;
+    private final CategoriaRepository categoriaRepository;
 
-    public AlimentoController(AlimentoService alimentoService) {
+    public AlimentoController(
+            AlimentoService alimentoService,
+            UsuarioRepository usuarioRepository,
+            CategoriaRepository categoriaRepository) {
         this.alimentoService = alimentoService;
+        this.usuarioRepository = usuarioRepository;
+        this.categoriaRepository = categoriaRepository;
     }
-
-    @GetMapping
-    public List<Alimento> getAllAlimentos() {
-        return alimentoService.getAllAlimentos();
-    }
-
-    @GetMapping("/{id}")
-    public Optional<Alimento> getAlimentoById(@PathVariable Long id) {
-        return alimentoService.getAlimentoById(id);
-    }
-
-    @PostMapping
-    public Alimento createAlimento(@RequestBody Alimento alimento) {
-        return alimentoService.saveAlimento(alimento);
-    }
-
-    @PutMapping("/{id}")
-    public Alimento updateAlimento(@PathVariable Long id, @RequestBody Alimento alimento) {
-        alimento.setIdAlimento(id);
-        return alimentoService.saveAlimento(alimento);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteAlimento(@PathVariable Long id) {
-        alimentoService.deleteAlimento(id);
-    }
-    
+    @GetMapping("/usuario/{idUsuario}")
+public List<Alimento> getAlimentosByUsuario(@PathVariable Long idUsuario) {
+    return alimentoService.getAlimentosByUsuario(idUsuario);
 }
+
+
+    @PostMapping("/usuario/{idUsuario}")
+    public ResponseEntity<Alimento> createAlimento(
+            @PathVariable Long idUsuario,
+            @RequestBody Alimento alimento) {
+
+        // 1️⃣ Buscar el usuario
+        Usuario usuario = usuarioRepository.findById(idUsuario)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + idUsuario));
+
+        // 2️⃣ Buscar la categoría
+        if (alimento.getCategoria() == null || alimento.getCategoria().getIdCategoria() == null) {
+            throw new RuntimeException("Debe indicar una categoría válida (idCategoria)");
+        }
+
+        Categoria categoria = categoriaRepository.findById(alimento.getCategoria().getIdCategoria())
+                .orElseThrow(() -> new RuntimeException("Categoría no encontrada con ID: " + alimento.getCategoria().getIdCategoria()));
+
+        // 3️⃣ Asignar relaciones
+        alimento.setUsuario(usuario);
+        alimento.setCategoria(categoria);
+
+        // 4️⃣ Guardar
+        Alimento saved = alimentoService.saveAlimento(alimento);
+        return ResponseEntity.ok(saved);
+    }
+}
+

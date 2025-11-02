@@ -14,6 +14,18 @@ public class AlimentoDTO {
     private Double carbohidratos;
     private Integer indiceGlucemico;
     private Double racion;
+    private Long idCategoria;
+    private Long idUsuario;
+    
+    // getters y setters
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
 
     public Long getIdAlimento() {
         return idAlimento;

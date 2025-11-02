@@ -79,6 +79,11 @@ public class CategoriaService {
         dto.setCarbohidratos(alimento.getCarbohidratos());
         dto.setIndiceGlucemico(alimento.getIndiceGlucemico());
         dto.setRacion(alimento.getRacion());
+        
+        if (alimento.getUsuario() != null) { // ← NUEVO
+        dto.setIdUsuario(alimento.getUsuario().getIdUsuario());
+    }
+        
         return dto;
     }
 }

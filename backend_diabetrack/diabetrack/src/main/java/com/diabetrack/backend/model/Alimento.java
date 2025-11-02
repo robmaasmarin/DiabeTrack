@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.diabetrack.backend.model;
+
 import com.diabetrack.backend.model.Categoria;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -19,7 +20,6 @@ import java.util.List;
 @Setter
 @Table(name = "alimentos")
 public class Alimento {
-     
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,28 +30,76 @@ public class Alimento {
     private double racion;
 
     @ManyToOne
-@JoinColumn(name = "id_categoria")
-@JsonBackReference
-private Categoria categoria;
+    @JoinColumn(name = "id_categoria")
+    @JsonBackReference
+    private Categoria categoria;
+/*
+    @ManyToOne
+    @JoinColumn(name = "id_usuario", nullable = true)
+    private Usuario usuario; // null = alimento general
+*/
+    @ManyToOne
+@JoinColumn(name = "id_usuario", nullable = true)
+@JsonBackReference(value = "usuario-alimentos")
+private Usuario usuario;
 
 
     @OneToMany(mappedBy = "alimento")
     private List<Registro> registros;
-    
+
     // Getters y setters
-    public Long getIdAlimento() { return idAlimento; }
-    public void setIdAlimento(Long idAlimento) { this.idAlimento = idAlimento; }
+    public Long getIdAlimento() {
+        return idAlimento;
+    }
 
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setIdAlimento(Long idAlimento) {
+        this.idAlimento = idAlimento;
+    }
 
-    public double getCarbohidratos() { return carbohidratos; }
-    public void setCarbohidratos(double carbohidratos) { this.carbohidratos = carbohidratos; }
+    public String getNombre() {
+        return nombre;
+    }
 
-    public int getIndiceGlucemico() { return indiceGlucemico; }
-    public void setIndiceGlucemico(int indiceGlucemico) { this.indiceGlucemico = indiceGlucemico; }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-    public double getRacion() { return racion; }
-    public void setRacion(double racion) { this.racion = racion; }
-    
+    public double getCarbohidratos() {
+        return carbohidratos;
+    }
+
+    public void setCarbohidratos(double carbohidratos) {
+        this.carbohidratos = carbohidratos;
+    }
+
+    public int getIndiceGlucemico() {
+        return indiceGlucemico;
+    }
+
+    public void setIndiceGlucemico(int indiceGlucemico) {
+        this.indiceGlucemico = indiceGlucemico;
+    }
+
+    public double getRacion() {
+        return racion;
+    }
+
+    public void setRacion(double racion) {
+        this.racion = racion;
+    }
+public Usuario getUsuario() {
+    return usuario;
+}
+
+public void setUsuario(Usuario usuario) {
+    this.usuario = usuario;
+}
+public Categoria getCategoria() {
+    return categoria;
+}
+
+public void setCategoria(Categoria categoria) {
+    this.categoria = categoria;
+}
+
 }

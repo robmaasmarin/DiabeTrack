@@ -41,7 +41,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <PasswordField layoutX="62.0" layoutY="209.0" prefHeight="26.0" prefWidth="476.0" promptText="************" />
+      <PasswordField fx:id="passwordField" layoutX="62.0" layoutY="209.0" prefHeight="26.0" prefWidth="476.0" promptText="************" />
       <Label fx:id="forgotpassLabel" layoutX="398.0" layoutY="257.0" text="¿Olvidó su contraseña?" textFill="#9c9999">
          <font>
             <Font name="System Bold" size="13.0" />

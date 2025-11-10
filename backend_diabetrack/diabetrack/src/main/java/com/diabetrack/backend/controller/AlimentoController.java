@@ -11,6 +11,7 @@ import com.diabetrack.backend.repository.AlimentoRepository;
 import com.diabetrack.backend.repository.CategoriaRepository;
 import com.diabetrack.backend.repository.UsuarioRepository;
 import com.diabetrack.backend.service.AlimentoService;
+import java.util.ArrayList;
 import org.springframework.web.bind.annotation.*;
 import lombok.*;
 /**
@@ -42,7 +43,23 @@ public class AlimentoController {
 public List<Alimento> getAlimentosByUsuario(@PathVariable Long idUsuario) {
     return alimentoService.getAlimentosByUsuario(idUsuario);
 }
+@GetMapping
+    public List<Alimento> getAllAlimentos() {
+        return alimentoService.getAllAlimentos();
+    }
+    //nuevo endpoint para obtener alimentos globales más alimentos guardados por usuario
+    @GetMapping("/usuario/{id}/todos")
+public ResponseEntity<List<Alimento>> getAlimentosGlobalesYUsuario(@PathVariable Long id) {
+    List<Alimento> globales = alimentoService.getAlimentosGlobales();
+    List<Alimento> personales = alimentoService.getAlimentosByUsuario(id);
 
+    // Combinar ambas listas
+    List<Alimento> todos = new ArrayList<>();
+    todos.addAll(globales);
+    todos.addAll(personales);
+
+    return ResponseEntity.ok(todos);
+}
 
     @PostMapping("/usuario/{idUsuario}")
     public ResponseEntity<Alimento> createAlimento(

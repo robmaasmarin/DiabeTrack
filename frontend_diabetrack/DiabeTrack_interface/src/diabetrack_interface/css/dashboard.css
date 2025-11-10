@@ -34,4 +34,19 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-background-color: transparent;
     -fx-border-color: transparent;
     -fx-underline: true;
+    -fx-cursor: hand;
+}
+
+.placeholderLabel {
+    -fx-text-fill: #888888;
+    -fx-font-size: 14px;
+    -fx-font-style: italic;
+    -fx-padding: 20px;
+}
+
+.table-view {
+    -fx-background-image: url("/diabetrack_interface/resources/images/calculoback.PNG");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;  /* Hace que ocupe todo el área */
+    -fx-background-position: center center;
 }

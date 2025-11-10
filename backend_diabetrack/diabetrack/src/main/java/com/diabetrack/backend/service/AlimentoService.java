@@ -47,6 +47,12 @@ public class AlimentoService {
     public List<Alimento> getAlimentosByUsuario(Long idUsuario) {
         return alimentoRepository.findByUsuarioIdUsuario(idUsuario);
     }
+    public List<Alimento> getAlimentosGlobales() {
+    return alimentoRepository.findByUsuarioIsNull();
+}
+
+
+
     
     @Autowired
 private UsuarioRepository usuarioRepository; // inyecta el repo

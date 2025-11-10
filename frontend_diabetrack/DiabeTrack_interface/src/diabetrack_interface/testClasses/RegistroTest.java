@@ -14,7 +14,7 @@ public class RegistroTest extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/diabetrack_interface/fxml/RegistroFXML.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/diabetrack_interface/fxml/LoginFXML.fxml"));
         Scene scene = new Scene(root);
         stage.setTitle("Test Registro");
         stage.setScene(scene);

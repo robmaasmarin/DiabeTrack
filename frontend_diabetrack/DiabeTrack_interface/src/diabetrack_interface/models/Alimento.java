@@ -1,5 +1,7 @@
 package diabetrack_interface.models;
 
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -22,7 +24,7 @@ public class Alimento {
         this.carbohidratos = carbohidratos;
         this.racion = racion;
     }
-
+    
     public Long getIdAlimento() { return idAlimento; }
     public String getNombre() { return nombre; }
     public double getCarbohidratos() { return carbohidratos; }

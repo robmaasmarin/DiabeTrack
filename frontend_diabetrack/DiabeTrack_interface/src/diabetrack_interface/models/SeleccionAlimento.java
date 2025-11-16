@@ -20,6 +20,10 @@ public class SeleccionAlimento {
 
     public Alimento getAlimento() { return alimento.get(); }
     public ObjectProperty<Alimento> alimentoProperty() { return alimento; }
+    public String getNombre() {
+    return getAlimento().getNombre();
+}
+
 
     public double getCantidad() { return cantidad.get(); }
     public DoubleProperty cantidadProperty() { return cantidad; }
@@ -30,5 +34,8 @@ public class SeleccionAlimento {
     }
 
     public double getCarbs() { return carbs.get(); }
+    public double getCarbohidratosTotales() {
+        return getCarbs();
+    }
     public DoubleProperty carbsProperty() { return carbs; }
 }

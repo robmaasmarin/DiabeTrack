@@ -69,11 +69,6 @@
                                     </Label>
                                  </children>
                               </HBox>
-                              <Button fx:id="nextButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" styleClass="nextButton" text="Siguiente">
-                                 <font>
-                                    <Font name="System Bold" size="22.0" />
-                                 </font>
-                              </Button>
                            </children></VBox>
                      </children></AnchorPane>
             </content>
@@ -117,11 +112,6 @@
                                  <TextField fx:id="alturaTfield" maxWidth="100.0" styleClass="alturaTfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               </children>
                            </GridPane>
-                           <Button fx:id="nextButton2" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" styleClass="nextButton" text="Siguiente">
-                                 <font>
-                                    <Font name="System Bold" size="22.0" />
-                                 </font>
-                              </Button>
                         </VBox>
                      </children></AnchorPane>
             </content>
@@ -133,7 +123,7 @@
                         <VBox fx:id="vboxData3" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="400.0" spacing="15.0" styleClass="vboxData" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
                            <children>
                               <Label fx:id="medicalLabel" styleClass="medicalLabel" text="Datos médicos" />
-                              <Label fx:id="tipoDLabel" styleClass="tipoDLabel" text="Tipo de diabetes:" />
+                              <Label fx:id="tipoInsulinaLabel" styleClass="tipoInsulinaLabel" text="Tipo de insulina:" />
                               <ComboBox fx:id="tipoDCombo" prefWidth="150.0" styleClass="tipoDCombo" />
                               <Label fx:id="yearLabel" styleClass="yearLabel" text="Año de diagnóstico" />
                               <ComboBox fx:id="yearCombo" prefWidth="150.0" styleClass="yearCombo" />
@@ -147,8 +137,8 @@
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label fx:id="insulinaTipoLabel" styleClass="insulinaTipoLabel" text="Tipo de insulina" GridPane.rowIndex="1" />
-                                    <ComboBox fx:id="insulinaTipoCombo" prefHeight="25.0" prefWidth="155.0" styleClass="insulinaTipoCombo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <Label fx:id="insulinaMarcaLabel" styleClass="insulinaMarcaLabel" text="Marca insulina" GridPane.rowIndex="1" />
+                                    <ComboBox fx:id="insulinaMarcaCombo" prefHeight="25.0" prefWidth="155.0" styleClass="insulinaMarcaCombo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
                               <Button fx:id="createAccount" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" styleClass="nextButton" text="Crear Cuenta">

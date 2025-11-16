@@ -4,6 +4,7 @@
  */
 package com.diabetrack.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -50,6 +51,10 @@ private List<Alimento> alimentos = new ArrayList<>();
     @OneToMany(mappedBy = "usuario")
 @JsonManagedReference(value = "usuario-alimentos")
 private List<Alimento> alimentos;
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+@JsonIgnore
+private List<RegistroComida> registrosComida;
 
 
     public List<Alimento> getAlimentos() {
@@ -167,4 +172,5 @@ public void setAlimentos(List<Alimento> alimentos) {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
+    
 }

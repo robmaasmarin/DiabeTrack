@@ -7,6 +7,7 @@ package com.diabetrack.backend.model;
 import com.diabetrack.backend.model.Categoria;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,12 +22,18 @@ import java.util.List;
 @Table(name = "alimentos")
 public class Alimento {
 
+    @JsonProperty("idAlimento")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_alimento")
     private Long idAlimento;
+    @JsonProperty("nombre")
     private String nombre;
+    @JsonProperty("carbohidratos")
     private double carbohidratos;
+    @JsonProperty("indiceGlucemico")
     private int indiceGlucemico;
+    @JsonProperty("racion")
     private double racion;
 
     @ManyToOne
@@ -48,9 +55,11 @@ private Usuario usuario;
     private List<Registro> registros;
 
     // Getters y setters
+    @JsonProperty("idAlimento")
     public Long getIdAlimento() {
         return idAlimento;
     }
+@JsonProperty("id")
 
     public void setIdAlimento(Long idAlimento) {
         this.idAlimento = idAlimento;

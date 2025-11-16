@@ -30,15 +30,26 @@ public class AlimentoController {
     private final AlimentoService alimentoService;
     private final UsuarioRepository usuarioRepository;
     private final CategoriaRepository categoriaRepository;
+    private final AlimentoRepository alimentoRepository;
 
-    public AlimentoController(
-            AlimentoService alimentoService,
-            UsuarioRepository usuarioRepository,
-            CategoriaRepository categoriaRepository) {
-        this.alimentoService = alimentoService;
-        this.usuarioRepository = usuarioRepository;
-        this.categoriaRepository = categoriaRepository;
-    }
+public AlimentoController(
+        AlimentoService alimentoService,
+        UsuarioRepository usuarioRepository,
+        CategoriaRepository categoriaRepository,
+        AlimentoRepository alimentoRepository) {  
+    this.alimentoService = alimentoService;
+    this.usuarioRepository = usuarioRepository;
+    this.categoriaRepository = categoriaRepository;
+    this.alimentoRepository = alimentoRepository;  
+}
+
+    @GetMapping("/{id}")
+public ResponseEntity<Alimento> obtenerPorId(@PathVariable Long id) {
+    return alimentoRepository.findById(id)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
+}
+
     @GetMapping("/usuario/{idUsuario}")
 public List<Alimento> getAlimentosByUsuario(@PathVariable Long idUsuario) {
     return alimentoService.getAlimentosByUsuario(idUsuario);
@@ -60,6 +71,7 @@ public ResponseEntity<List<Alimento>> getAlimentosGlobalesYUsuario(@PathVariable
 
     return ResponseEntity.ok(todos);
 }
+
 
     @PostMapping("/usuario/{idUsuario}")
     public ResponseEntity<Alimento> createAlimento(

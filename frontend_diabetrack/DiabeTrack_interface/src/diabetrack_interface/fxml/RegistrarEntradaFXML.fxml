@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/23.0.1" 
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="diabetrack_interface.controllers.RegistrarEntradaFXMLController"
+      spacing="20" alignment="TOP_CENTER"
+      prefWidth="900" prefHeight="700"
+      stylesheets="@../css/registrarEntrada.css">
+
+    <!-- Título -->
+    <Label text="Registrar Entrada" styleClass="titulo"/>
+
+    <!-- GLUCOSA -->
+    <HBox spacing="10">
+        <Label text="Glucosa (mg/dL):"/>
+        <TextField fx:id="txtGlucosa" promptText="Ej: 120"/>
+    </HBox>
+
+    <!-- SELECT ALIMENTO -->
+    <HBox spacing="10">
+        <ComboBox fx:id="comboAlimentos" promptText="Seleccionar alimento"/>
+        <TextField fx:id="txtCantidad" promptText="Cantidad (g)"/>
+        <Button text="Añadir" fx:id="btnAñadirAlimento"/>
+    </HBox>
+
+    <!-- TABLA ALIMENTOS -->
+    <TableView fx:id="tablaAlimentos" prefHeight="200">
+        <columns>
+            <TableColumn fx:id="colNombre" text="Alimento"/>
+            <TableColumn fx:id="colCantidad" text="Cantidad (g)"/>
+            <TableColumn fx:id="colCarbs" text="Carbohidratos (g)"/>
+        </columns>
+    </TableView>
+
+    <!-- TOTAL CARBS -->
+    <Label fx:id="labelCarbsTotales" text="Carbohidratos totales: 0 g"
+           styleClass="carbsTotales"/>
+
+    <!-- BOLO CALCULADO -->
+    <Label fx:id="labelBolo" text="Bolo recomendado: -" />
+
+    <!-- BOTÓN GUARDAR -->
+    <Button fx:id="btnGuardar" text="Guardar entrada" styleClass="btnGuardar"/>
+</VBox>

@@ -18,6 +18,8 @@ import jakarta.persistence.OneToMany;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  *
@@ -32,7 +34,7 @@ public class RegistroComida {
 
     private Double glucosaAntes;
     private Double carbohidratos;
-    private Integer boloCalculado;
+    private Double  boloCalculado;
 
     private LocalDateTime fechaHora;
 
@@ -45,6 +47,10 @@ private Usuario usuario;
     @OneToMany(mappedBy = "registro", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<RegistroAlimento> alimentos = new ArrayList<>();
+    
+    
+
+
 
     // ---------- GETTERS & SETTERS ----------
 
@@ -68,11 +74,11 @@ private Usuario usuario;
         this.carbohidratos = carbohidratos;
     }
 
-    public Integer getBoloCalculado() {
+    public Double getBoloCalculado() {
         return boloCalculado;
     }
 
-    public void setBoloCalculado(Integer boloCalculado) {
+    public void setBoloCalculado(Double boloCalculado) {
         this.boloCalculado = boloCalculado;
     }
 

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+                                  http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="RegistrosUsuario"
+              pageWidth="595" pageHeight="842"
+              columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20"
+              >
+
+    <field name="fecha" class="java.lang.String"/>
+    <field name="glucosaAntes" class="java.lang.Double"/>
+    <field name="carbohidratos" class="java.lang.Double"/>
+    <field name="boloCalculado" class="java.lang.Double"/>
+
+    <title>
+        <band height="50">
+            <staticText>
+                <reportElement x="0" y="10" width="400" height="40"/>
+                <text><![CDATA[Reporte de últimos registros]]></text>
+            </staticText>
+        </band>
+    </title>
+
+    <columnHeader>
+        <band height="20">
+            <staticText><reportElement x="0" y="0" width="120" height="20"/><text><![CDATA[Fecha]]></text></staticText>
+            <staticText><reportElement x="130" y="0" width="120" height="20"/><text><![CDATA[Glucosa]]></text></staticText>
+            <staticText><reportElement x="260" y="0" width="120" height="20"/><text><![CDATA[Carbohidratos]]></text></staticText>
+            <staticText><reportElement x="390" y="0" width="120" height="20"/><text><![CDATA[Bolo]]></text></staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="20">
+            <textField><reportElement x="0" y="0" width="120" height="20"/><textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression></textField>
+            <textField><reportElement x="130" y="0" width="120" height="20"/><textFieldExpression><![CDATA[$F{glucosaAntes}]]></textFieldExpression></textField>
+            <textField><reportElement x="260" y="0" width="120" height="20"/><textFieldExpression><![CDATA[$F{carbohidratos}]]></textFieldExpression></textField>
+            <textField><reportElement x="390" y="0" width="120" height="20"/><textFieldExpression><![CDATA[$F{boloCalculado}]]></textFieldExpression></textField>
+        </band>
+    </detail>
+
+</jasperReport>

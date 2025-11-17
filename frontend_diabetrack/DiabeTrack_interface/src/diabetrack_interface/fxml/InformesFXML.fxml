@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+
+<BorderPane  id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="diabetrack_interface.controllers.InformesFXMLController">
+     <top>
+        <HBox spacing="10" alignment="CENTER">
+            <padding>
+                <Insets top="15" bottom="15" left="10" right="10"/>
+            </padding>
+
+            <Label text="Informes" style="-fx-font-size: 26px; -fx-font-weight:bold;"/>
+        </HBox>
+    </top>
+
+    <!-- MENÚ LATERAL -->
+    <left>
+        <VBox spacing="15">
+            <padding>
+                <Insets top="20" left="15" right="10"/>
+            </padding>
+
+            <Button text="Informe semanal (últimos 7 días)"
+                    fx:id="btnInformeSemanal"
+                    prefWidth="220"/>
+
+            <Button text="Informe mensual (últimos 30 días)"
+                    fx:id="btnInformeMensual"
+                    prefWidth="220"/>
+
+            <Button text="Informe alimentos consumidos"
+                    fx:id="btnInformeAlimentos"
+                    prefWidth="220"/>
+
+            <Separator/>
+
+            <Button text="Volver"
+                    fx:id="btnVolver"
+                    prefWidth="220"/>
+        </VBox>
+    </left>
+
+    <!-- AREA CENTRAL (texto explicativo por ahora) -->
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="10">
+            <padding>
+                <Insets top="30"/>
+            </padding>
+
+            <Label text="Selecciona un informe en el panel lateral"
+                   style="-fx-font-size:18px;"/>
+
+            <Label text="Aquí posteriormente se mostrará una vista previa o información adicional."
+                   wrapText="true"
+                   maxWidth="400"/>
+        </VBox>
+    </center>
+
+</BorderPane >

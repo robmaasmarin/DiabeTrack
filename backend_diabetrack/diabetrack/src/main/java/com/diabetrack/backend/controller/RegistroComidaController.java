@@ -6,8 +6,11 @@ package com.diabetrack.backend.controller;
 
 import com.diabetrack.backend.model.RegistroComida;
 import com.diabetrack.backend.service.RegistroComidaService;
+import com.diabetrack.backend.dto.ResumenSemanalDTO;
+import com.diabetrack.backend.service.ReporteService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,6 +43,36 @@ public class RegistroComidaController {
     @GetMapping
 public List<RegistroComida> obtenerTodos() {
     return service.obtenerTodos();
+}
+    @GetMapping("/usuario/{id}/ultimos5")
+public List<RegistroComida> getUltimos5(@PathVariable Long id) {
+    return service.ultimos5(id);
+}
+@GetMapping("/usuario/{id}/ultimos7dias")
+public List<RegistroComida> getUltimos7Dias(@PathVariable Long id) {
+    return service.ultimos7Dias(id);
+}
+@GetMapping("/usuario/{id}/resumen7dias")
+public ResumenSemanalDTO resumen7dias(@PathVariable Long id) {
+    return service.resumen7dias(id);
+}
+@Autowired
+private ReporteService reporteService;
+
+@GetMapping("/usuario/{id}/reporte-ultimos5")
+public ResponseEntity<byte[]> reporteUltimos5(@PathVariable Long id) {
+    try {
+        byte[] pdf = reporteService.generarReporteUltimos(id);
+
+        return ResponseEntity.ok()
+                .header("Content-Type", "application/pdf")
+                .header("Content-Disposition", "attachment; filename=reporte.pdf")
+                .body(pdf);
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        return ResponseEntity.internalServerError().build();
+    }
 }
 
 }

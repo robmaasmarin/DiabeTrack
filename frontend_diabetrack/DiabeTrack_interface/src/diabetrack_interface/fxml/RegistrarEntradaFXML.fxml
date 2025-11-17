@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/23.0.1" 
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="diabetrack_interface.controllers.RegistrarEntradaFXMLController"
-      spacing="20" alignment="TOP_CENTER"
-      prefWidth="900" prefHeight="700"
-      stylesheets="@../css/registrarEntrada.css">
+<VBox alignment="TOP_CENTER" prefHeight="700" prefWidth="900" spacing="20" stylesheets="@../css/registrarEntrada.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="diabetrack_interface.controllers.RegistrarEntradaFXMLController">
 
     <!-- Título -->
-    <Label text="Registrar Entrada" styleClass="titulo"/>
+    <Label styleClass="titulo" text="Registrar Entrada" />
+   <ListView fx:id="listaUltimos" prefHeight="200.0" prefWidth="200.0" styleClass="listaUltimos" />
 
     <!-- GLUCOSA -->
     <HBox spacing="10">
-        <Label text="Glucosa (mg/dL):"/>
-        <TextField fx:id="txtGlucosa" promptText="Ej: 120"/>
+        <Label text="Glucosa (mg/dL):" />
+        <TextField fx:id="txtGlucosa" promptText="Ej: 120" />
     </HBox>
 
     <!-- SELECT ALIMENTO -->
     <HBox spacing="10">
-        <ComboBox fx:id="comboAlimentos" promptText="Seleccionar alimento"/>
-        <TextField fx:id="txtCantidad" promptText="Cantidad (g)"/>
-        <Button text="Añadir" fx:id="btnAñadirAlimento"/>
+        <ComboBox fx:id="comboAlimentos" promptText="Seleccionar alimento" />
+        <TextField fx:id="txtCantidad" promptText="Cantidad (g)" />
+        <Button fx:id="btnAñadirAlimento" text="Añadir" />
     </HBox>
 
     <!-- TABLA ALIMENTOS -->
     <TableView fx:id="tablaAlimentos" prefHeight="200">
         <columns>
-            <TableColumn fx:id="colNombre" text="Alimento"/>
-            <TableColumn fx:id="colCantidad" text="Cantidad (g)"/>
-            <TableColumn fx:id="colCarbs" text="Carbohidratos (g)"/>
+            <TableColumn fx:id="colNombre" text="Alimento" />
+            <TableColumn fx:id="colCantidad" text="Cantidad (g)" />
+            <TableColumn fx:id="colCarbs" text="Carbohidratos (g)" />
         </columns>
     </TableView>
 
     <!-- TOTAL CARBS -->
-    <Label fx:id="labelCarbsTotales" text="Carbohidratos totales: 0 g"
-           styleClass="carbsTotales"/>
+    <Label fx:id="labelCarbsTotales" styleClass="carbsTotales" text="Carbohidratos totales: 0 g" />
 
     <!-- BOLO CALCULADO -->
     <Label fx:id="labelBolo" text="Bolo recomendado: -" />
 
     <!-- BOTÓN GUARDAR -->
-    <Button fx:id="btnGuardar" text="Guardar entrada" styleClass="btnGuardar"/>
+    <Button fx:id="btnGuardar" styleClass="btnGuardar" text="Guardar entrada" />
 </VBox>

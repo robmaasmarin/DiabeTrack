@@ -50,6 +50,7 @@ private List<Alimento> alimentos = new ArrayList<>();
     */
     @OneToMany(mappedBy = "usuario")
 @JsonManagedReference(value = "usuario-alimentos")
+    @JsonIgnore
 private List<Alimento> alimentos;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)

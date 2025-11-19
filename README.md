@@ -61,8 +61,8 @@ Para el __backend__ también se contempla una estructura siguiendo el mismo patr
 - Contener lógica de negocio (por ejemplo el cálculo de insulina).
 - Repository: comunicación con la BBDD.
 - Model entidades JPA mapeadas a las tablas.
-Estructura actual del backend:<br>
-![Estructura backend](/readme_images/estructurabacktend.PNG)
+Estructura actual del backend:<br><br>
+![Estructura backend](/readme_images/estructurabacktend1.PNG)
 
 
 Esta organización permitirá mantener una clara separación entre las capas de presentación, negocio y acceso a datos, facilitando el trabajo en equipo y las futuras ampliaciones.
@@ -92,8 +92,38 @@ Boceto de la bbdd:
 ---
 
 ## 5. Instalación y ejecución
+
+- Ejecución
+
+Una vez instalada la app se abrirá a través de su ejecutable, cargará una splash screen durante unos segundos:  
+  
+![Splash](/readme_images/splash.png)
+  
+A continuación aparecerá la pantalla de login:  
+
+![Login](/readme_images/login.png)
+  
+  
+En caso de que no tengamos cuenta creada, desde la pantalla de login podemos acceder al formulario para darnos de alta en el sistema. El formulario está correctamente configurado desde el controlador para validar que los campos contienen información en los formatos solicitados:  
+
+![Registro](/readme_images/registro1.png) ![Registro](/readme_images/registro2.png) ![Registro](/readme_images/registro3.png)  
+En caso de cumplimentar correctamente todos los capos solicitados se creará la cuenta una vez validado el formulario.  
+
+Tras la creación del la cuenta podremos iniciar sesión para poder utilizar las diferentes funcionalidades de la app. Una vez ingresadas las credenciales accederemos al panel principal:  
+
+![Dashboard](/readme_images/dashboard.png)  
+  
+  Contaremos con las siguientes opciones:
+- Registrar entrada: perite registrar las diferentes ingestas con sus correspondientes valores que permitirán realizar y registrar el cálculo del bolo. Muestra en pantalla los últimos 5 registros.  
+![RegistroEntrada1](/readme_images/RegistrarEntrada1.png) ![RegistroEntrada1](/readme_images/RegistrarEntrada2.png) ![RegistroEntrada1](/readme_images/RegistrarEntrada3.png)  
+- Cálculo del bolo: nos permite realizar el cálculo del bolo en base a diferentes valores y alimentos escogidos, pero sin registro de ingestas.  
+![CalculoBolo](/readme_images/CalculoBolo.png)   
+- Informes: permite la descarga en PDF de diferentes informes.  
+![Informe](/readme_images/Informe1.png)  ![Informe](/readme_images/Informe2.png)
+
+
    
-![En construcción](/readme_images/work.png)
+
 
 ---
 
@@ -112,21 +142,10 @@ La aplicación tendrá, entre otras, las siguientes funcionalidades:
 ## 8. Capturas
 
   
-Una vez instalada la app se abrirá a través de su ejecutable, cargará una splash screen durante unos segundos:  
-  
-![Splash](/readme_images/splash.png)
-  
-A continuación aparecerá la pantalla de login:  
 
-![Login](/readme_images/login.png)
-  
-Una vez iniciemos sesión nos encontraremos con el panel principal:  
 
-![Dashboard](/readme_images/dashboard.png)
-  
-En caso de que no tengamos cuenta creada, desde la pantalla de login podemos acceder al formulario para darnos de alta en el sistema:  
 
-![Registro](/readme_images/registro1.png) ![Registro](/readme_images/registro2.png)
+
 
 ---
 

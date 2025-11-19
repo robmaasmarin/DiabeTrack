@@ -8,7 +8,9 @@ import com.diabetrack.backend.dto.RegistroReporteDTO;
 import com.diabetrack.backend.model.RegistroComida;
 import com.diabetrack.backend.repository.RegistroComidaRepository;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,14 +41,16 @@ public class ReporteService {
 
 
         InputStream jrxml = getClass().getResourceAsStream("/reports/report_registros.jrxml");
+JasperReport report = JasperCompileManager.compileReport(jrxml);
 
-        JasperReport report = JasperCompileManager.compileReport(jrxml);
+Map<String, Object> params = new HashMap<>();
+params.put("REPORT_DIR", getClass().getResource("/reports/").toString());
 
-        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(data);
+JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(data);
+JasperPrint jp = JasperFillManager.fillReport(report, params, ds);
 
-        JasperPrint jp = JasperFillManager.fillReport(report, null, ds);
+return JasperExportManager.exportReportToPdf(jp);
 
-        return JasperExportManager.exportReportToPdf(jp);
     }
 }
 

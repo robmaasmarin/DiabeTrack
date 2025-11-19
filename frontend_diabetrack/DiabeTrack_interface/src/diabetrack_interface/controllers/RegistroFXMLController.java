@@ -3,6 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package diabetrack_interface.controllers;
+import com.google.gson.Gson;
+import diabetrack_interface.dto.UsuarioDTO;
+import diabetrack_interface.models.Usuario;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -189,14 +194,44 @@ public class RegistroFXMLController implements Initializable {
 
         // configuración de botones
         createAccount.setOnAction(e -> {
-            if (validarCampos()) {
-                // Avanzar al siguiente paso
-                System.out.println("Validación correcta, continuar...");
-            } 
-            //else {
-                //System.out.println("Error en validación, mostrar mensaje al usuario.");
-            //}
-        });
+    if (validarCampos()) {
+        try {
+
+            UsuarioDTO u = buildUsuarioDTO();
+
+            Gson gson = new Gson();
+            String json = gson.toJson(u);
+
+            URL apiUrl  = new URL("http://localhost:8080/api/usuarios/registro");
+            System.out.println("enviando datos al servidor");
+            HttpURLConnection conn = (HttpURLConnection) apiUrl.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json; utf-8");
+            conn.setDoOutput(true);
+
+            try (OutputStream os = conn.getOutputStream()) {
+                os.write(json.getBytes("UTF-8"));
+            }
+
+            int response = conn.getResponseCode();
+            if (response == 200 || response == 201) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setHeaderText(null);
+                alert.setContentText("Cuenta creada correctamente");
+                alert.show();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Error al crear cuenta");
+                alert.setContentText("Código HTTP: " + response);
+                alert.show();
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+});
+
     }
     
 
@@ -290,7 +325,24 @@ if (!password.equals(confirm)) {
 
         return true; // Todo correcto
     }
-    
+    private UsuarioDTO buildUsuarioDTO() {
+    UsuarioDTO u = new UsuarioDTO();
+
+    u.setEmail(emailField.getText());
+    u.setPassword(passField.getText());
+    u.setNombre(nameTField.getText());
+    u.setApellido(surnameTField.getText());
+    u.setFechaNacimiento(datePicker.getValue().toString());
+    u.setSexo(hombreRB.isSelected() ? "Hombre" : "Mujer");
+    u.setPeso(Integer.parseInt(pesoTfield.getText()));
+    u.setAltura(Integer.parseInt(alturaTfield.getText()));
+    u.setTipoInsulina((String) tipoDCombo.getValue());
+    u.setMarcaInsulina((String) insulinaMarcaCombo.getValue());
+    u.setYearDiagnostico((int) yearCombo.getValue());
+
+    return u;
+}
+
     
     //mostramos error en caso de que la validación de los campos no dé ok
      /*private void mostrarError(String mensaje) {

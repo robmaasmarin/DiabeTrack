@@ -2,41 +2,145 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
-                                  http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
-              name="RegistrosUsuario"
+              http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="reporte_registros"
               pageWidth="595" pageHeight="842"
-              columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20"
-              >
+              columnWidth="555"
+              leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<parameter name="REPORT_DIR" class="java.lang.String"/>
+    <!-- ========================= -->
+    <!--         ESTILOS           -->
+    <!-- ========================= -->
+    <!-- SOLO se pueden usar atributos gráficos aquí -->
+ 
 
+    <!-- ========================= -->
+    <!-- CAMPOS DEL DTO            -->
+    <!-- ========================= -->
     <field name="fecha" class="java.lang.String"/>
     <field name="glucosaAntes" class="java.lang.Double"/>
     <field name="carbohidratos" class="java.lang.Double"/>
     <field name="boloCalculado" class="java.lang.Double"/>
 
+
+    <!-- ========================= -->
+    <!--        BACKGROUND         -->
+    <!-- ========================= -->
+    <background>
+        <band height="120">
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="120" backcolor="#5A00A8" mode="Opaque"/>
+            </rectangle>
+        </band>
+    </background>
+
+
+
+    <!-- ========================= -->
+    <!--           TITULO          -->
+    <!-- ========================= -->
     <title>
-        <band height="50">
-            <staticText>
-                <reportElement x="0" y="10" width="400" height="40"/>
-                <text><![CDATA[Reporte de últimos registros]]></text>
-            </staticText>
+        <band height="120">
+
+            <image>
+    <reportElement x="10" y="10" width="90" height="90"/>
+    <imageExpression><![CDATA[$P{REPORT_DIR} + "moradotodo.png"]]></imageExpression>
+
+</image>
+
+
+            <textField>
+                <reportElement x="120" y="35" width="400" height="40" forecolor="#FFFFFF"/>
+                <textElement>
+                    <font size="22" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Reporte de Últimos Registros"]]></textFieldExpression>
+            </textField>
+
         </band>
     </title>
 
+
+    <!-- ========================= -->
+    <!--   CABECERA DE LA TABLA    -->
+    <!-- ========================= -->
     <columnHeader>
-        <band height="20">
-            <staticText><reportElement x="0" y="0" width="120" height="20"/><text><![CDATA[Fecha]]></text></staticText>
-            <staticText><reportElement x="130" y="0" width="120" height="20"/><text><![CDATA[Glucosa]]></text></staticText>
-            <staticText><reportElement x="260" y="0" width="120" height="20"/><text><![CDATA[Carbohidratos]]></text></staticText>
-            <staticText><reportElement x="390" y="0" width="120" height="20"/><text><![CDATA[Bolo]]></text></staticText>
+        <band height="25">
+
+            <textField>
+                <reportElement x="0"   y="0" width="150" height="25" backcolor="#EEEEEE" mode="Opaque"/>
+                <textElement>
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Fecha"]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="150" y="0" width="130" height="25" backcolor="#EEEEEE" mode="Opaque"/>
+                <textElement>
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Glucosa"]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="280" y="0" width="140" height="25" backcolor="#EEEEEE" mode="Opaque"/>
+                <textElement>
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Carbohidratos"]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="420" y="0" width="135" height="25" backcolor="#EEEEEE" mode="Opaque"/>
+                <textElement>
+                    <font size="12" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Bolo"]]></textFieldExpression>
+            </textField>
+
         </band>
     </columnHeader>
 
+
+    <!-- ========================= -->
+    <!--          DETALLE          -->
+    <!-- ========================= -->
     <detail>
-        <band height="20">
-            <textField><reportElement x="0" y="0" width="120" height="20"/><textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression></textField>
-            <textField><reportElement x="130" y="0" width="120" height="20"/><textFieldExpression><![CDATA[$F{glucosaAntes}]]></textFieldExpression></textField>
-            <textField><reportElement x="260" y="0" width="120" height="20"/><textFieldExpression><![CDATA[$F{carbohidratos}]]></textFieldExpression></textField>
-            <textField><reportElement x="390" y="0" width="120" height="20"/><textFieldExpression><![CDATA[$F{boloCalculado}]]></textFieldExpression></textField>
+        <band height="22">
+
+            <textField>
+                <reportElement x="0"   y="0" width="150" height="22"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+            </textField>
+
+            <textField pattern="###.##">
+                <reportElement x="150" y="0" width="130" height="22"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{glucosaAntes}]]></textFieldExpression>
+            </textField>
+
+            <textField pattern="###.## g">
+                <reportElement x="280" y="0" width="140" height="22"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{carbohidratos}]]></textFieldExpression>
+            </textField>
+
+            <textField pattern="###.## U">
+                <reportElement x="420" y="0" width="135" height="22"/>
+                <textElement>
+                    <font size="12"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$F{boloCalculado}]]></textFieldExpression>
+            </textField>
+
         </band>
     </detail>
 

@@ -5,7 +5,9 @@
 package com.diabetrack.backend.repository;
 
 import com.diabetrack.backend.model.Registro;
+import com.diabetrack.backend.model.Rol;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,6 +20,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RegistroRepository extends JpaRepository<Registro, Long> {
 
+   @Query("SELECT r FROM Rol r WHERE LOWER(r.nombre) = LOWER(:nombre)")
+    Optional<Rol> findByNombreIgnoreCase(@Param("nombre") String nombre);
     @Query("SELECT r FROM Registro r WHERE r.usuario.idUsuario = :idUsuario")
-    List<Registro> findByUsuarioId(@Param("idUsuario") Long idUsuario);
+List<Registro> findByUsuarioIdUsuario(@Param("idUsuario") Long idUsuario);
+
 }

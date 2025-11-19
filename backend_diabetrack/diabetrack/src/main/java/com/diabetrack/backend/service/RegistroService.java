@@ -42,7 +42,7 @@ public class RegistroService {
 
     // Ejemplo: obtener registros por usuario
     public List<Registro> getRegistrosByUsuario(Long idUsuario) {
-    return registroRepository.findByUsuarioId(idUsuario);
+    return registroRepository.findByUsuarioIdUsuario(idUsuario);
 }
 
 }

@@ -160,7 +160,7 @@ public class NewDashboardFXMLController implements Initializable {
         });
         vBoxInformes.setOnMouseClicked(e -> {
             Stage stage = Navigator.getStageFrom(vBoxInformes);
-            Navigator.changeScene(stage, "/diabetrack_interface/fxml/CalculoBoloFXML.fxml");
+            Navigator.changeScene(stage, "/diabetrack_interface/fxml/InformesFXML.fxml");
         });
 
         // acceso al perfil

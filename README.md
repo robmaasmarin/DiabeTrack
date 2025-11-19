@@ -90,8 +90,33 @@ Boceto de la bbdd:
   
 
 ---
+  
+  ## 5. Pruebas con Postman preintegración
 
-## 5. Instalación y ejecución
+  - Listar todos los alimentos  
+  ![Postman](/readme_images/Postman1.PNG)  
+
+  - Obtener un alimento por id  
+
+    ![Postman](/readme_images/Postman2.PNG) 
+
+  - Crear alimento (endpoint admin /usuario/{id})
+     
+     ![Postman](/readme_images/Postman3.PNG) 
+      ![Postman](/readme_images/Postman4.PNG)
+       
+  - Guardar un registro de comida
+     
+     ![Postman](/readme_images/Postman5.PNG)
+
+  - Guardar un registro con alimento inexistente
+       
+       ![Postman](/readme_images/Postman6.PNG)
+       ![Postman](/readme_images/Postman7.PNG)
+       ![Postman](/readme_images/Postman8.PNG)
+
+
+## 6. Instalación y ejecución
 
 - Ejecución
 

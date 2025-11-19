@@ -61,30 +61,9 @@ Para el __backend__ también se contempla una estructura siguiendo el mismo patr
 - Contener lógica de negocio (por ejemplo el cálculo de insulina).
 - Repository: comunicación con la BBDD.
 - Model entidades JPA mapeadas a las tablas.
-Un primer boceto para la estructura del backend podría ser el siguiente:  
-src/
-	- main/java/com/diabetrack/  
-		- controller/  
-			UsuarioController.java  
-			AlimentoController.java  
-			EntradaController.java  
-		- model/  
-			Usuario.java  
-			Alimento.java  
-			Entrada.java  
-			DetalleEntrada.java  
-		- repository/  
-			UsuarioRepository.java  
-			AlimentoRepository.java  
-			EntradaRepository.java  
-			DetalleEntradaRepository.java  
-		- Service/  
-			UsuarioService.java  
-			AlimentoService.java  
-			EntradaService.java  
-			DetalleEntradaService.java  
-		- dto/ (en caso de necesitar enviar datos combinados)  
-		DiabetrackApplication.java
+Estructura actual del backend:<br>
+![Estructura backend](/readme_images/estructurabacktend.PNG)
+
 
 Esta organización permitirá mantener una clara separación entre las capas de presentación, negocio y acceso a datos, facilitando el trabajo en equipo y las futuras ampliaciones.
 

@@ -107,10 +107,14 @@ A continuación aparecerá la pantalla de login:
 En caso de que no tengamos cuenta creada, desde la pantalla de login podemos acceder al formulario para darnos de alta en el sistema. El formulario está correctamente configurado desde el controlador para validar que los campos contienen información en los formatos solicitados:    
 
 ![Registro](/readme_images/registro1.png)   
+  
 ![Registro](/readme_images/registro2.png)   
-![Registro](/readme_images/Registro3.png) 
-![Registro](/readme_images/Registro4.png)     
-En caso de cumplimentar correctamente todos los campos solicitados se creará la cuenta una vez validado el formulario.  
+  
+![Registro](/readme_images/Registro3.PNG)   
+  
+![Registro](/readme_images/Registro4.PNG)       
+  
+  En caso de cumplimentar correctamente todos los campos solicitados se creará la cuenta una vez validado el formulario.  
 
 Tras la creación del la cuenta podremos iniciar sesión para poder utilizar las diferentes funcionalidades de la app. Una vez ingresadas las credenciales accederemos al panel principal:  
 
@@ -118,9 +122,12 @@ Tras la creación del la cuenta podremos iniciar sesión para poder utilizar las
   
   Contaremos con las siguientes opciones:
 - Registrar entrada: perite registrar las diferentes ingestas con sus correspondientes valores que permitirán realizar y registrar el cálculo del bolo. Muestra en pantalla los últimos 5 registros.    
-![RegistroEntrada1](/readme_images/RegistrarEntrada1.png)   
-![RegistroEntrada1](/readme_images/RegistrarEntrada2.png)   
-![RegistroEntrada1](/readme_images/RegistrarEntrada3.png)   
+  
+  ![RegistroEntrada1](/readme_images/RegistrarEntrada1.png)   
+    
+  ![RegistroEntrada1](/readme_images/RegistrarEntrada2.png)   
+    
+  ![RegistroEntrada1](/readme_images/RegistrarEntrada3.png)   
 
 - Cálculo del bolo: nos permite realizar el cálculo del bolo en base a diferentes valores y alimentos escogidos, pero sin registro de ingestas.    
 
@@ -129,7 +136,8 @@ Tras la creación del la cuenta podremos iniciar sesión para poder utilizar las
 - Informes: permite la descarga en PDF de diferentes informes.    
 
 ![Informe](/readme_images/Informe1.png)    
-![Informe](/readme_images/Informe2.png)
+  
+  ![Informe](/readme_images/Informe2.png)
 
 
    

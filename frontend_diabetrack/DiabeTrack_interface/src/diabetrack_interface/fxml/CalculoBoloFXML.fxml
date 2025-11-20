@@ -20,6 +20,7 @@
     <top>
         <HBox fx:id="topBar" maxHeight="120" minHeight="120" prefHeight="120.0" prefWidth="0.0" styleClass="topBar" BorderPane.alignment="CENTER">
             <children>
+       
                 <ImageView fx:id="imgLogo" fitHeight="100.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../resources/images/logoletrasblancassinfondohorizontal.png" />
@@ -69,6 +70,7 @@
       </StackPane>
    </bottom>
    <center>
+        
       <VBox fx:id="vBoxCalculo" prefHeight="510.0" prefWidth="529.0" styleClass="vBoxCalculo" BorderPane.alignment="CENTER">
          <children>
             <HBox fx:id="hBoxGlucosa" prefHeight="100.0" prefWidth="200.0" styleClass="hBoxGlucosa">
@@ -105,6 +107,11 @@
         <Label text="Dosis (UD):" />
         <Label fx:id="labelDosis" text="0.0" />
     </HBox>
+    <Button fx:id="btnVolver"
+        text="← Volver"
+        style="-fx-font-size: 16px; -fx-background-color: transparent; -fx-text-fill: white;"
+        alignment="CENTER_LEFT" />
+
          </children>
       </VBox>
    </center>

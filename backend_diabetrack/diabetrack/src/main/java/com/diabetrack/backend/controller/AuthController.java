@@ -31,7 +31,7 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Email no registrado");
         }
 
-        // 🔴 TEMPORAL: comparación directa (solo si no usas BCrypt aun)
+        //
         if (!usuario.getPassword().equals(loginRequest.getPassword())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Contraseña incorrecta");
         }

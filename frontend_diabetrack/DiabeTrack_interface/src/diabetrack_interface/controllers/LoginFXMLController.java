@@ -83,7 +83,7 @@ private void handleLogin(ActionEvent event) {
     }
 
     try {
-        // Cuerpo del login en JSON
+        // cuerpo del login
         String jsonBody = "{ \"email\": \"" + email + "\", \"password\": \"" + password + "\" }";
 
         HttpClient client = HttpClient.newHttpClient();
@@ -96,19 +96,19 @@ private void handleLogin(ActionEvent event) {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-        // 👉 AQUÍ VA EL IF
+        
         if (response.statusCode() == 200) {
 
             System.out.println("LOGIN OK: " + response.body());
 
-            // Convertimos el JSON a objeto Usuario
+            // JSON a objeto Usuario
             Gson gson = new Gson();
             Usuario usuario = gson.fromJson(response.body(), Usuario.class);
 
-            // Guardamos el usuario globalmente
+            // guardamos el usuario globalmente
             CurrentUser.set(usuario);
 
-            // Cambiamos de pantalla al dashboard
+            // cambio de pantalla
             cambiarPantalla("/diabetrack_interface/fxml/NewDashboardFXML.fxml");
 
         } else {

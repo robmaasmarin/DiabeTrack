@@ -35,12 +35,12 @@ public Usuario fromDTO(UsuarioDTO dto) {
     usuario.setNombre(dto.getNombre());
     usuario.setApellido(dto.getApellido());
 
-    // convertir fechaNacimiento (String → LocalDate)
+    // convertir fechaNacimiento (String > LocalDate)
     if (dto.getFechaNacimiento() != null && !dto.getFechaNacimiento().isEmpty()) {
         usuario.setFecha_nacimiento(LocalDate.parse(dto.getFechaNacimiento()));
     }
 
-    // sexo (String → Enum)
+    // sexo (String > Enum)
     if (dto.getSexo() != null) {
         usuario.setSexo(Sexo.valueOf(dto.getSexo().trim()));
 
@@ -54,7 +54,7 @@ public Usuario fromDTO(UsuarioDTO dto) {
         usuario.setAltura(dto.getAltura().doubleValue());
     }
 
-    // año diagnostico (int → LocalDate)
+    // año diagnostico (int > LocalDate)
     if (dto.getYearDiagnostico() != null) {
         usuario.setAño_diagnostico(LocalDate.of(dto.getYearDiagnostico(), 1, 1));
     }
@@ -62,7 +62,7 @@ public Usuario fromDTO(UsuarioDTO dto) {
     usuario.setTipo_insulina(dto.getTipoInsulina());
     usuario.setMarca_insulina(dto.getMarcaInsulina());
 
-    // rol por defecto → usuario
+    // rol por defecto > usuario
     Rol rol = rolService.getRolByName("usuario");
     usuario.setRol(rol);
 

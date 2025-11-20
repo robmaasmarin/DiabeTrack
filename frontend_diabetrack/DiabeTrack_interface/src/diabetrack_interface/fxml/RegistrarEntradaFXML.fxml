@@ -9,8 +9,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+
 
 <VBox alignment="TOP_CENTER" prefHeight="700" prefWidth="900" spacing="20" stylesheets="@../css/registrarEntrada.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="diabetrack_interface.controllers.RegistrarEntradaFXMLController">
+
+    
 
     <!-- Título -->
     <Label styleClass="titulo" text="Registrar Entrada" />
@@ -22,7 +26,7 @@
         <TextField fx:id="txtGlucosa" promptText="Ej: 120" />
     </HBox>
 
-    <!-- SELECT ALIMENTO -->
+    <!--  ALIMENTO -->
     <HBox spacing="10">
         <ComboBox fx:id="comboAlimentos" promptText="Seleccionar alimento" />
         <TextField fx:id="txtCantidad" promptText="Cantidad (g)" />
@@ -46,4 +50,15 @@
 
     <!-- BOTÓN GUARDAR -->
     <Button fx:id="btnGuardar" styleClass="btnGuardar" text="Guardar entrada" />
+    
+       <HBox alignment="CENTER_LEFT">
+    <Button fx:id="btnVolver"
+            text="← Volver"
+            style="-fx-font-size: 16px; -fx-background-color: transparent; -fx-text-fill: black;">
+        <HBox.margin>
+            <Insets left="20.0" top="5.0"/>
+        </HBox.margin>
+    </Button>
+</HBox>
+
 </VBox>

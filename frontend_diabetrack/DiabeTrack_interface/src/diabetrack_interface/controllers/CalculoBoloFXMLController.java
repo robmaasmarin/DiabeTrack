@@ -6,6 +6,7 @@ package diabetrack_interface.controllers;
 
 import diabetrack_interface.models.Alimento;
 import diabetrack_interface.models.SeleccionAlimento;
+import diabetrack_interface.utils.Navigator;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -96,6 +97,8 @@ public class CalculoBoloFXMLController implements Initializable {
     private Button btnCalcularBolo;
     @FXML
     private Label labelDosis;
+    @FXML
+    private Button btnVolver;
 
     /**
      * Initializes the controller class.
@@ -111,16 +114,9 @@ public class CalculoBoloFXMLController implements Initializable {
         colNombre.setCellValueFactory(c -> new ReadOnlyObjectWrapper<>(c.getValue().getAlimento().getNombre()));
         colCantidad.setCellValueFactory(c -> new ReadOnlyObjectWrapper<>(c.getValue().getCantidad()));
         colCarbs.setCellValueFactory(c -> new ReadOnlyObjectWrapper<>(c.getValue().getCarbs()));
-// inicializo la tabla con placeholder
-    /*Label placeholder = new Label("Agrega alimentos para comenzar");
-    placeholder.getStyleClass().add("placeholderLabel"); 
-    tableSeleccion.setPlaceholder(placeholder);*/
-    
-    // Placeholder con imagen
-    /*ImageView placeholderImage = new ImageView(new Image(getClass().getResourceAsStream("/diabetrack_interface/resources/images/calculoback.PNG")));
-    placeholderImage.setFitWidth(150);
-    placeholderImage.setFitHeight(150);
-    placeholderImage.setPreserveRatio(true);*/
+                btnVolver.setOnAction(e -> Navigator.goToDashboard(btnVolver));
+
+
 
     tableSeleccion.getStyleClass().add("table-view");
 

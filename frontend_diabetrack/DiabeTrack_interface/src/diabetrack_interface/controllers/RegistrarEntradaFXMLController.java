@@ -9,6 +9,7 @@ import diabetrack_interface.models.Alimento;
 import diabetrack_interface.models.RegistroAlimentoItem;
 import diabetrack_interface.models.SeleccionAlimento;
 import diabetrack_interface.session.CurrentUser;
+import diabetrack_interface.utils.Navigator;
 import java.net.URI;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -78,6 +79,9 @@ private Button btnGuardar;
 @FXML
 private ListView<String> listaUltimos;
 
+@FXML
+    private Button btnVolver;
+
 
     /**
      * Initializes the controller class.
@@ -111,10 +115,11 @@ colCarbs.setCellValueFactory(new PropertyValueFactory<>("carbohidratosTotales"))
 
         btnAñadirAlimento.setOnAction(e -> añadirAlimento());
         btnGuardar.setOnAction(e -> guardarRegistro());
+        btnVolver.setOnAction(e -> Navigator.goToDashboard(btnVolver));
     }
 
     private void cargarAlimentosDesdeBackend() {
-        String url = "http://localhost:8080/api/alimentos"; // o el endpoint combinado que prefieras
+        String url = "http://localhost:8080/api/alimentos"; 
 
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -177,7 +182,7 @@ private void añadirAlimento() {
         showAlert("Introduce una cantidad válida en gramos");
         return;
     }
-    // Crear item con id + nombre + cantidad + carbs
+    // crear item con id + nombre + cantidad + carbs
 RegistroAlimentoItem item = new RegistroAlimentoItem(
         alimentoSeleccionado.getIdAlimento(),
         alimentoSeleccionado.getNombre(),
@@ -185,7 +190,7 @@ RegistroAlimentoItem item = new RegistroAlimentoItem(
         alimentoSeleccionado.getCarbohidratos()
 );
 
-// Añadir a la lista principal
+// añadir a la lista principal
 lista.add(item);
 
 // Mostrarlo en la tabla
@@ -197,17 +202,9 @@ double totalCarbs = lista.stream()
         .sum();
 
 labelCarbsTotales.setText(String.format("%.1f g", totalCarbs));
-    /*SeleccionAlimento s = new SeleccionAlimento(alimentoSeleccionado, cantidad);
-seleccion.add(s);
-
-    // Actualiza total
-    double totalCarbs = seleccion.stream()
-            .mapToDouble(sel -> (sel.getAlimento().getCarbohidratos() / 100.0) * sel.getCantidad())
-            .sum();
-
-    labelCarbsTotales.setText(String.format("%.1f g", totalCarbs));*/
+   
     txtCantidad.clear();
-    // --- Calcular bolo  ---
+    //  calcular bolo 
 double glucosaAntes = 0.0;
 try {
     glucosaAntes = Double.parseDouble(txtGlucosa.getText());

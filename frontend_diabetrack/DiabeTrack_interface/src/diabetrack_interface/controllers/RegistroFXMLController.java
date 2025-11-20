@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package diabetrack_interface.controllers;
+
 import com.google.gson.Gson;
 import diabetrack_interface.dto.UsuarioDTO;
 import diabetrack_interface.models.Usuario;
@@ -176,13 +177,13 @@ public class RegistroFXMLController implements Initializable {
             }
         });
 // combobox con últimos 40 años
-    int currentYear = java.time.Year.now().getValue();
-    for (int i = 0; i < 40; i++) {
-        yearCombo.getItems().add(currentYear - i);
-    }
+        int currentYear = java.time.Year.now().getValue();
+        for (int i = 0; i < 40; i++) {
+            yearCombo.getItems().add(currentYear - i);
+        }
 
-    // seleccionar el primero por defecto
-    yearCombo.getSelectionModel().selectFirst();
+        // seleccionar el primero por defecto
+        yearCombo.getSelectionModel().selectFirst();
         // Toggle para elección de sexo
         sexoGroup = new ToggleGroup();
         hombreRB.setToggleGroup(sexoGroup);
@@ -194,100 +195,97 @@ public class RegistroFXMLController implements Initializable {
 
         // configuración de botones
         createAccount.setOnAction(e -> {
-    if (validarCampos()) {
-        try {
+            if (validarCampos()) {
+                try {
 
-            UsuarioDTO u = buildUsuarioDTO();
+                    UsuarioDTO u = buildUsuarioDTO();
 
-            Gson gson = new Gson();
-            String json = gson.toJson(u);
+                    Gson gson = new Gson();
+                    String json = gson.toJson(u);
 
-            URL apiUrl  = new URL("http://localhost:8080/api/usuarios/registro");
-            System.out.println("enviando datos al servidor");
-            HttpURLConnection conn = (HttpURLConnection) apiUrl.openConnection();
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; utf-8");
-            conn.setDoOutput(true);
+                    URL apiUrl = new URL("http://localhost:8080/api/usuarios/registro");
+                    System.out.println("enviando datos al servidor");
+                    HttpURLConnection conn = (HttpURLConnection) apiUrl.openConnection();
+                    conn.setRequestMethod("POST");
+                    conn.setRequestProperty("Content-Type", "application/json; utf-8");
+                    conn.setDoOutput(true);
 
-            try (OutputStream os = conn.getOutputStream()) {
-                os.write(json.getBytes("UTF-8"));
+                    try (OutputStream os = conn.getOutputStream()) {
+                        os.write(json.getBytes("UTF-8"));
+                    }
+
+                    int response = conn.getResponseCode();
+                    if (response == 200 || response == 201) {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setHeaderText(null);
+                        alert.setContentText("Cuenta creada correctamente");
+                        alert.show();
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setHeaderText("Error al crear cuenta");
+                        alert.setContentText("Código HTTP: " + response);
+                        alert.show();
+                    }
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
             }
-
-            int response = conn.getResponseCode();
-            if (response == 200 || response == 201) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setContentText("Cuenta creada correctamente");
-                alert.show();
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Error al crear cuenta");
-                alert.setContentText("Código HTTP: " + response);
-                alert.show();
-            }
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-});
+        });
 
     }
-    
 
     private boolean validarCampos() {
         List<String> errores = new ArrayList();
         // Email
         String email = emailField.getText();
         if (email == null || !email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
-                    errores.add("Email inválido");
-            
+            errores.add("Email inválido");
+
         }
 
         // Password
-String password = passField.getText().trim();
-String confirm = passConf.getText().trim();
+        String password = passField.getText().trim();
+        String confirm = passConf.getText().trim();
 
-boolean validPass = password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z0-9]).{8,}$");
+        boolean validPass = password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z0-9]).{8,}$");
 
-if (!validPass) {
+        if (!validPass) {
             errores.add("Contraseña inválido");
-    
-}
-if (!password.equals(confirm)) {
-    errores.add("Las contraseñas no coinciden");
-    
-}
 
+        }
+        if (!password.equals(confirm)) {
+            errores.add("Las contraseñas no coinciden");
+
+        }
 
         // Nombre y apellido
         if (nameTField.getText().isEmpty() || !nameTField.getText().matches("^[A-Za-zÁÉÍÓÚáéíóúñÑ]+$")) {
             errores.add("Nombre inválido");
-            
+
         }
         if (surnameTField.getText().isEmpty() || !surnameTField.getText().matches("^[A-Za-zÁÉÍÓÚáéíóúñÑ]+$")) {
             errores.add("Apellido inválido");
-            
+
         }
 
         // Fecha
         if (datePicker.getValue() == null) {
             errores.add("Fecha inválido");
-            
+
         }
 
         // Sexo
         if (sexoGroup.getSelectedToggle() == null) {
             errores.add("Sexo inválido");
-            
+
         }
 
 // Peso
         try {
             int peso = Integer.parseInt(pesoTfield.getText());
             if (peso < 0 || peso > 180) {
-                
-                
+
             }
         } catch (NumberFormatException e) {
             errores.add("Peso inválido");
@@ -297,7 +295,7 @@ if (!password.equals(confirm)) {
         try {
             int altura = Integer.parseInt(alturaTfield.getText());
             if (altura < 0 || altura > 240) {
-                
+
             }
         } catch (NumberFormatException e) {
             errores.add("Altura inválido");
@@ -306,51 +304,50 @@ if (!password.equals(confirm)) {
         // Tipo insulina
         if (tipoDCombo.getValue() == null) {
             errores.add("Tipo inválido");
-            
+
         }
 
         // Marca insulina
         if (insulinaMarcaCombo.getValue() == null) {
             errores.add("Marca inválido");
-            
+
         }
-         if (!errores.isEmpty()) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Errores de validación");
-        alert.setHeaderText("Por favor corrige los siguientes errores:");
-        alert.setContentText(String.join("\n", errores));
-        alert.showAndWait();
-        return false;
-    }
+        if (!errores.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Errores de validación");
+            alert.setHeaderText("Por favor corrige los siguientes errores:");
+            alert.setContentText(String.join("\n", errores));
+            alert.showAndWait();
+            return false;
+        }
 
         return true; // Todo correcto
     }
+
     private UsuarioDTO buildUsuarioDTO() {
-    UsuarioDTO u = new UsuarioDTO();
+        UsuarioDTO u = new UsuarioDTO();
 
-    u.setEmail(emailField.getText());
-    u.setPassword(passField.getText());
-    u.setNombre(nameTField.getText());
-    u.setApellido(surnameTField.getText());
-    u.setFechaNacimiento(datePicker.getValue().toString());
-    u.setSexo(hombreRB.isSelected() ? "Hombre" : "Mujer");
-    u.setPeso(Integer.parseInt(pesoTfield.getText()));
-    u.setAltura(Integer.parseInt(alturaTfield.getText()));
-    u.setTipoInsulina((String) tipoDCombo.getValue());
-    u.setMarcaInsulina((String) insulinaMarcaCombo.getValue());
-    u.setYearDiagnostico((int) yearCombo.getValue());
+        u.setEmail(emailField.getText());
+        u.setPassword(passField.getText());
+        u.setNombre(nameTField.getText());
+        u.setApellido(surnameTField.getText());
+        u.setFechaNacimiento(datePicker.getValue().toString());
+        u.setSexo(hombreRB.isSelected() ? "Hombre" : "Mujer");
+        u.setPeso(Integer.parseInt(pesoTfield.getText()));
+        u.setAltura(Integer.parseInt(alturaTfield.getText()));
+        u.setTipoInsulina((String) tipoDCombo.getValue());
+        u.setMarcaInsulina((String) insulinaMarcaCombo.getValue());
+        u.setYearDiagnostico((int) yearCombo.getValue());
 
-    return u;
-}
+        return u;
+    }
 
-    
     //mostramos error en caso de que la validación de los campos no dé ok
-     /*private void mostrarError(String mensaje) {
+    /*private void mostrarError(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error de validación");
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
     }*/
-     
 }

@@ -49,7 +49,7 @@ public class NewDashboardFXMLController implements Initializable {
     private HBox comboHbox;
 
     @FXML
-    private ComboBox<Idioma> choiceLanguage; // cambia ? por tu clase Idioma si usas la misma que antes
+    private ComboBox<Idioma> choiceLanguage; 
 
     @FXML
     private ImageView profileImg;
@@ -180,7 +180,7 @@ public class NewDashboardFXMLController implements Initializable {
             Navigator.changeScene(stage, "/diabetrack_interface/fxml/CalculoBoloFXML.fxml");
         });
 
-        // TODO
+        
         //creación objetos idioma
         Idioma galego = new Idioma("Galego", new Image(getClass().getResourceAsStream("/diabetrack_interface/resources/images/bgalega.png")));
         Idioma spanish = new Idioma("Español", new Image(getClass().getResourceAsStream("/diabetrack_interface/resources/images/espanabandera.png")));
@@ -209,7 +209,7 @@ public class NewDashboardFXMLController implements Initializable {
                 }
             }
         });
-        // Para que también muestre imagen + texto en el botón del ComboBox
+        // mostrar imagen + texto en el botón del ComboBox
         choiceLanguage.setButtonCell(new ListCell<Idioma>() {
             private final ImageView imageView = new ImageView();
 

@@ -16,7 +16,7 @@ public class Alimento {
     private Long idAlimento;
     private String nombre;
     private double carbohidratos; // gramos por 100g
-    private double racion; // gramos por ración (si usas)
+    private double racion; // gramos por ración 
 
     public Alimento(Long idAlimento, String nombre, double carbohidratos, double racion) {
         this.idAlimento = idAlimento;

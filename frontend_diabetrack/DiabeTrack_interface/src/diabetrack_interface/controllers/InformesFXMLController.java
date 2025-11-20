@@ -42,12 +42,12 @@ public class InformesFXMLController {
     btnInformeSemanal.setOnAction(e -> generarInformeSemanal());
         btnInformeMensual.setOnAction(e -> cargarInformeMensual());
         btnInformeAlimentos.setOnAction(e -> cargarInformeAlimentos());
-        //btnVolver.setOnAction(e -> Navigator.goToDashboard());
+        btnVolver.setOnAction(e -> Navigator.goToDashboard(btnVolver));
     }
 
     private void cargarInformeSemanal() {
         System.out.println("→ Generar informe semanal");
-        // FUTURO: llamar a JasperReport con resumen7dias()
+        // pendiente llamar a JasperReport con resumen7dias()
     }
 
     private void cargarInformeMensual() {
@@ -60,7 +60,7 @@ public class InformesFXMLController {
     private void generarInformeSemanal() {
 
     try {
-        long idUsuario = 1;  // <- luego pondremos el usuario real logueado
+        long idUsuario = 1;  // <- posteriormente el usuario logueado
 
         String urlStr = "http://localhost:8080/api/reportes/usuario/" + idUsuario + "/ultimos";
         URL url = new URL(urlStr);
@@ -73,17 +73,17 @@ public class InformesFXMLController {
 
         if (responseCode == 200) {
 
-            // Recibir PDF
+            // recibir PDF
             InputStream is = conn.getInputStream();
             byte[] pdfBytes = is.readAllBytes();
 
-            // Guardar archivo localmente
+            // guardar archivo localmente
             File pdfFile = new File("informe_semanal.pdf");
             try (FileOutputStream fos = new FileOutputStream(pdfFile)) {
                 fos.write(pdfBytes);
             }
 
-            // Abrir el PDF automáticamente
+            // abrir el PDF automáticamente
             Desktop.getDesktop().open(pdfFile);
 
             mostrarInfo("Informe generado correctamente.");

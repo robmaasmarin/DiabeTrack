@@ -42,13 +42,7 @@
          </font>
       </Label>
       <PasswordField fx:id="passwordField" layoutX="62.0" layoutY="209.0" prefHeight="26.0" prefWidth="476.0" promptText="************" />
-      <!-- Este es un comentario de una línea que explica el propósito del siguiente elemento 
-
-      <Label fx:id="forgotpassLabel" layoutX="398.0" layoutY="257.0" text="¿Olvidó su contraseña?" textFill="#9c9999">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </Label> -->
+      
       <Button fx:id="loginButton" layoutX="196.0" layoutY="292.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="40.0" prefWidth="220.0" text="Acceder" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />

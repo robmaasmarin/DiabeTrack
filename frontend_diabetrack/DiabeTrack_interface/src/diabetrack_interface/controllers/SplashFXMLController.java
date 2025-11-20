@@ -35,7 +35,7 @@ public class SplashFXMLController implements Initializable {
         
         
 
-        // TODO
+        
     }
 
 }

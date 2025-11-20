@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import javafx.scene.Node;
 
 public class Navigator {
 
@@ -26,5 +27,10 @@ public class Navigator {
     public static Stage getStageFrom(javafx.scene.Node node) {
         return (Stage) node.getScene().getWindow();
     }
+    public static void goToDashboard(Node node) {
+        Stage stage = getStageFrom(node);
+    changeScene(stage, "/diabetrack_interface/fxml/NewDashboardFXML.fxml");
+}
+    
 }
 

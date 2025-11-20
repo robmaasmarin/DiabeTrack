@@ -40,7 +40,7 @@ public class RegistroService {
         registroRepository.deleteById(id);
     }
 
-    // Ejemplo: obtener registros por usuario
+    //obtener registros por usuario
     public List<Registro> getRegistrosByUsuario(Long idUsuario) {
     return registroRepository.findByUsuarioIdUsuario(idUsuario);
 }

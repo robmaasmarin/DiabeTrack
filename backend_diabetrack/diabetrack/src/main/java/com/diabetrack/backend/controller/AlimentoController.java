@@ -78,11 +78,11 @@ public ResponseEntity<List<Alimento>> getAlimentosGlobalesYUsuario(@PathVariable
             @PathVariable Long idUsuario,
             @RequestBody Alimento alimento) {
 
-        // 1️⃣ Buscar el usuario
+        // buscar el usuario
         Usuario usuario = usuarioRepository.findById(idUsuario)
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado con ID: " + idUsuario));
 
-        // 2️⃣ Buscar la categoría
+        // buscar  categoría
         if (alimento.getCategoria() == null || alimento.getCategoria().getIdCategoria() == null) {
             throw new RuntimeException("Debe indicar una categoría válida (idCategoria)");
         }
@@ -90,11 +90,11 @@ public ResponseEntity<List<Alimento>> getAlimentosGlobalesYUsuario(@PathVariable
         Categoria categoria = categoriaRepository.findById(alimento.getCategoria().getIdCategoria())
                 .orElseThrow(() -> new RuntimeException("Categoría no encontrada con ID: " + alimento.getCategoria().getIdCategoria()));
 
-        // 3️⃣ Asignar relaciones
+        // asignar relaciones
         alimento.setUsuario(usuario);
         alimento.setCategoria(categoria);
 
-        // 4️⃣ Guardar
+        // guardar
         Alimento saved = alimentoService.saveAlimento(alimento);
         return ResponseEntity.ok(saved);
     }

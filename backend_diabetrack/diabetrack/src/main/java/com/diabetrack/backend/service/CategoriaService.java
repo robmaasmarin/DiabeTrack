@@ -48,7 +48,7 @@ public class CategoriaService {
         categoriaRepository.deleteById(id);
     }
 
-    // Conversión DTO -> Entidad
+    // conversión DTO a Entidad
     private Categoria toEntity(CategoriaDTO dto) {
         Categoria categoria = new Categoria();
         categoria.setIdCategoria(dto.getIdCategoria());
@@ -56,7 +56,7 @@ public class CategoriaService {
         return categoria;
     }
 
-    // Conversión Entidad -> DTO
+    // conversión Entidad a DTO
     private CategoriaDTO toDTO(Categoria categoria) {
         CategoriaDTO dto = new CategoriaDTO();
         dto.setIdCategoria(categoria.getIdCategoria());
@@ -80,7 +80,7 @@ public class CategoriaService {
         dto.setIndiceGlucemico(alimento.getIndiceGlucemico());
         dto.setRacion(alimento.getRacion());
         
-        if (alimento.getUsuario() != null) { // ← NUEVO
+        if (alimento.getUsuario() != null) { 
         dto.setIdUsuario(alimento.getUsuario().getIdUsuario());
     }
         

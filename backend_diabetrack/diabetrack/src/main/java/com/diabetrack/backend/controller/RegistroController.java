@@ -47,7 +47,7 @@ public class RegistroController {
 
 @PutMapping("/{id}")
     public Registro updateRegistro(@PathVariable Long id, @RequestBody Registro registro) {
-        registro.setIdRegistro(id); // ✅ corregido
+        registro.setIdRegistro(id); //
         return registroService.saveRegistro(registro);
     }
 

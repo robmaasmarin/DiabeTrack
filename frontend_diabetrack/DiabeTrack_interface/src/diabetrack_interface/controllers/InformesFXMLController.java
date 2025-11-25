@@ -35,6 +35,7 @@ public class InformesFXMLController {
 
     @FXML
     private Button btnVolver;
+    
 
     @FXML
     public void initialize() {

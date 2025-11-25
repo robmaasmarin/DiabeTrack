@@ -76,6 +76,7 @@ public class FXMain_Diabetrack extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+
     }
 
 }

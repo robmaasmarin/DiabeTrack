@@ -44,29 +44,26 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "id_rol")
     private Rol rol;
-  /*  
+    /*  
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 private List<Alimento> alimentos = new ArrayList<>();
-    */
+     */
     @OneToMany(mappedBy = "usuario")
-@JsonManagedReference(value = "usuario-alimentos")
+    @JsonManagedReference(value = "usuario-alimentos")
     @JsonIgnore
-private List<Alimento> alimentos;
+    private List<Alimento> alimentos;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-@JsonIgnore
-private List<RegistroComida> registrosComida;
-
+    @JsonIgnore
+    private List<RegistroComida> registrosComida;
 
     public List<Alimento> getAlimentos() {
-    return alimentos;
-}
+        return alimentos;
+    }
 
-public void setAlimentos(List<Alimento> alimentos) {
-    this.alimentos = alimentos;
-}
-
-    
+    public void setAlimentos(List<Alimento> alimentos) {
+        this.alimentos = alimentos;
+    }
 
     public void setIdUsuario(Long idUsuario) {
         this.idUsuario = idUsuario;
@@ -75,8 +72,6 @@ public void setAlimentos(List<Alimento> alimentos) {
     public Long getIdUsuario() {
         return idUsuario;
     }
-
-    
 
     public String getNombre() {
         return nombre;
@@ -173,5 +168,5 @@ public void setAlimentos(List<Alimento> alimentos) {
     public void setRol(Rol rol) {
         this.rol = rol;
     }
-    
+
 }

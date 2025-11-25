@@ -38,7 +38,7 @@ import org.json.JSONObject;
  *
  * @author ESDPC
  */
-public class LoginFXMLController  {
+public class LoginFXMLController {
 
     @FXML
     private ImageView logoDBT;
@@ -69,57 +69,66 @@ public class LoginFXMLController  {
     @FXML
     private Label signupLabel;
 
-    
     private final HttpClient httpClient = HttpClient.newHttpClient();
 
     @FXML
-private void handleLogin(ActionEvent event) {
-    String email = emailTextField.getText();
-    String password = passwordField.getText();
+    private void handleLogin(ActionEvent event) {
+        String email = emailTextField.getText();
+        String password = passwordField.getText();
 
-    if (email.isEmpty() || password.isEmpty()) {
-        System.out.println("Campos vacíos");
-        return;
-    }
-
-    try {
-        // cuerpo del login
-        String jsonBody = "{ \"email\": \"" + email + "\", \"password\": \"" + password + "\" }";
-
-        HttpClient client = HttpClient.newHttpClient();
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8080/api/auth/login"))
-                .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
-                .build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        
-        if (response.statusCode() == 200) {
-
-            System.out.println("LOGIN OK: " + response.body());
-
-            // JSON a objeto Usuario
-            Gson gson = new Gson();
-            Usuario usuario = gson.fromJson(response.body(), Usuario.class);
-
-            // guardamos el usuario globalmente
-            CurrentUser.set(usuario);
-
-            // cambio de pantalla
-            cambiarPantalla("/diabetrack_interface/fxml/NewDashboardFXML.fxml");
-
-        } else {
-             showAlert("Email o contraseña incorrectos");
+        if (email.isEmpty() || password.isEmpty()) {
+            showAlert("Rellena todos los campos");
+            return;
         }
 
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
-}
+        try {
+            // JSON para backend
+            String jsonBody = "{ \"email\": \"" + email + "\", \"password\": \"" + password + "\" }";
 
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("http://localhost:8080/api/auth/login"))
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
+                    .build();
+
+            httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                    .thenAccept(response -> {
+
+                        if (response.statusCode() == 200) {
+
+                            Gson gson = new Gson();
+                            Usuario usuario = gson.fromJson(response.body(), Usuario.class);
+
+                            // Guardamos sesión
+                            CurrentUser.set(usuario);
+
+                            // cambiar pantalla
+                            Platform.runLater(() -> {
+                                try {
+                                    cambiarPantalla("/diabetrack_interface/fxml/NewDashboardFXML.fxml");
+                                } catch (IOException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            });
+
+                        } else {
+                            Platform.runLater(()
+                                    -> showAlert("Email o contraseña incorrectos")
+                            );
+                        }
+
+                    })
+                    .exceptionally(ex -> {
+                        ex.printStackTrace();
+                        Platform.runLater(() -> showAlert("Error al conectar con el servidor"));
+                        return null;
+                    });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Ha ocurrido un error inesperado");
+        }
+    }
 
     private void showAlert(String message) {
         javafx.application.Platform.runLater(() -> {
@@ -129,12 +138,13 @@ private void handleLogin(ActionEvent event) {
             alert.showAndWait();
         });
     }
+
     private void cambiarPantalla(String fxmlPath) throws IOException {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-    Parent root = loader.load();
-    Stage stage = (Stage) loginButton.getScene().getWindow();
-    stage.setScene(new Scene(root));
-    stage.show();
-}
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+        Parent root = loader.load();
+        Stage stage = (Stage) loginButton.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 
 }

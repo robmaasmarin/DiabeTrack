@@ -31,5 +31,8 @@ public class CurrentUser {
     public static void clear() {
         usuario = null;
     }
+    public static void logout() {
+        usuario = null;
+    }
 }
 

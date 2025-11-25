@@ -5,17 +5,22 @@
 package diabetrack_interface.controllers;
 
 import diabetrack_interface.models.Idioma;
+import diabetrack_interface.session.CurrentUser;
 
 import diabetrack_interface.utils.Navigator;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.chart.LineChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -44,12 +49,6 @@ public class NewDashboardFXMLController implements Initializable {
 
     @FXML
     private Region regionSeparar;
-
-    @FXML
-    private HBox comboHbox;
-
-    @FXML
-    private ComboBox<Idioma> choiceLanguage; 
 
     @FXML
     private ImageView profileImg;
@@ -105,6 +104,8 @@ public class NewDashboardFXMLController implements Initializable {
 
     @FXML
     private Button btnContact;
+    @FXML
+    private Button logOut;
 
     /**
      * Initializes the controller class.
@@ -179,58 +180,31 @@ public class NewDashboardFXMLController implements Initializable {
             Stage stage = Navigator.getStageFrom(vBoxProfile);
             Navigator.changeScene(stage, "/diabetrack_interface/fxml/CalculoBoloFXML.fxml");
         });
+        //botón cierre sesión
+        logOut.setOnAction(e -> {
 
-        
-        //creación objetos idioma
-        Idioma galego = new Idioma("Galego", new Image(getClass().getResourceAsStream("/diabetrack_interface/resources/images/bgalega.png")));
-        Idioma spanish = new Idioma("Español", new Image(getClass().getResourceAsStream("/diabetrack_interface/resources/images/espanabandera.png")));
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Cerrar sesión");
+            alert.setHeaderText("Confirmación requerida");
+            alert.setContentText("¿Seguro que deseas cerrar sesión?");
 
-        choiceLanguage.getItems().addAll(galego, spanish);
+            ButtonType btnSi = new ButtonType("Sí");
+            ButtonType btnNo = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-        //configuración para mostrar imagen + texto
-        choiceLanguage.setCellFactory(cb -> new ListCell<Idioma>() {
+            alert.getButtonTypes().setAll(btnSi, btnNo);
 
-            private final ImageView imageView = new ImageView();
+            // Mostrar diálogo y esperar respuesta
+            Optional<ButtonType> result = alert.showAndWait();
 
-            @Override
-            protected void updateItem(Idioma item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                    setGraphic(null);
+            if (result.isPresent() && result.get() == btnSi) {
+                // limpiar usuario
+                CurrentUser.clear();
 
-                } else {
-                    imageView.setImage(item.getBandera());
-                    imageView.setFitHeight(16);//altura minibandera
-                    imageView.setPreserveRatio(true);
-                    setText(item.getNombre());
-                    setGraphic(imageView);
-
-                }
+                // volver al login
+                Stage stage = Navigator.getStageFrom(vBoxRegistro);
+                Navigator.changeScene(stage, "/diabetrack_interface/fxml/LoginFXML.fxml");
             }
         });
-        // mostrar imagen + texto en el botón del ComboBox
-        choiceLanguage.setButtonCell(new ListCell<Idioma>() {
-            private final ImageView imageView = new ImageView();
-
-            @Override
-            protected void updateItem(Idioma item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                    setGraphic(null);
-                } else {
-                    imageView.setImage(item.getBandera());
-                    imageView.setFitHeight(16);
-                    imageView.setPreserveRatio(true);
-                    setText(item.getNombre());
-                    setGraphic(imageView);
-                }
-            }
-        });
-
-        // idioma a mostrar por defecto
-        choiceLanguage.setValue(spanish);
     }
 
 }

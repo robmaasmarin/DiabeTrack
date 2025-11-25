@@ -36,54 +36,39 @@ public class UsuarioController {
         return usuarioService.getAllUsuarios();
     }
 //TESTEANDO PARA MANEJO DE ERRORES
-  @GetMapping("/{id}")
-public ResponseEntity<Usuario> getUsuarioById(@PathVariable Long id) {
-    Usuario usuario = usuarioService.getUsuarioById(id);
-    if (usuario == null) {
-        return ResponseEntity.notFound().build();
-    }
-    return ResponseEntity.ok(usuario);
-}
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Usuario> getUsuarioById(@PathVariable Long id) {
+        Usuario usuario = usuarioService.getUsuarioById(id);
+        if (usuario == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(usuario);
+    }
 
     @PostMapping
-public Usuario createUsuario(@RequestBody UsuarioDTO dto) {
-    Usuario usuario = usuarioService.fromDTO(dto);
-    return usuarioService.saveUsuario(usuario);
-}
+    public Usuario createUsuario(@RequestBody UsuarioDTO dto) {
+        Usuario usuario = usuarioService.fromDTO(dto);
+        
+        //cifrado
+        usuario.setPassword(usuarioService.encodePassword(dto.getPassword()));
+        return usuarioService.saveUsuario(usuario);
+    }
 
-    
     // creación usuario desde front
-    @PostMapping("/registro")
+@PostMapping("/registro")
 public ResponseEntity<Usuario> registrarUsuario(@RequestBody UsuarioDTO dto) {
 
-    Usuario usuario = new Usuario();
+    Usuario usuario = usuarioService.fromDTO(dto);
 
-    usuario.setEmail(dto.getEmail());
-    usuario.setPassword(dto.getPassword());
-    usuario.setNombre(dto.getNombre());
-    usuario.setApellido(dto.getApellido());
-
-    usuario.setFecha_nacimiento(LocalDate.parse(dto.getFechaNacimiento()));
-
-usuario.setSexo(Sexo.valueOf(capitalize(dto.getSexo())));
-
-    usuario.setPeso(dto.getPeso().doubleValue());
-    usuario.setAltura(dto.getAltura().doubleValue());
-
-    usuario.setAño_diagnostico(LocalDate.of(dto.getYearDiagnostico(), 1, 1));
-
-    usuario.setTipo_insulina(dto.getTipoInsulina());
-    usuario.setMarca_insulina(dto.getMarcaInsulina());
-
-    // Asignar rol por defecto
-    Rol rol = rolService.getRolByName("usuario");
-    usuario.setRol(rol);
+    // Cifrar la contraseña correctamente
+    usuario.setPassword(usuarioService.encodePassword(dto.getPassword()));
 
     Usuario guardado = usuarioService.saveUsuario(usuario);
 
     return ResponseEntity.ok(guardado);
 }
+
 
     @PutMapping("/{id}")
     public Usuario updateUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
@@ -95,8 +80,9 @@ usuario.setSexo(Sexo.valueOf(capitalize(dto.getSexo())));
     public void deleteUsuario(@PathVariable Long id) {
         usuarioService.deleteUsuario(id);
     }
+
     private String capitalize(String s) {
-    return s.substring(0,1).toUpperCase() + s.substring(1).toLowerCase();
-}
+        return s.substring(0, 1).toUpperCase() + s.substring(1).toLowerCase();
+    }
 
 }

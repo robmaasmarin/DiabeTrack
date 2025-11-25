@@ -35,6 +35,10 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -81,6 +85,23 @@ private ListView<String> listaUltimos;
 
 @FXML
     private Button btnVolver;
+@FXML
+private HBox topBar;
+
+@FXML
+private Region regionSeparar;
+
+@FXML
+private HBox comboHbox;
+
+@FXML
+private ImageView imgLogo;
+
+@FXML
+private ImageView profileImg;
+
+@FXML
+private StackPane stackContact;
 
 
     /**
@@ -147,7 +168,7 @@ private void procesarRespuestaAlimentos(String json) {
                 String nombre = o.optString("nombre", "sin nombre");
                 
                 double carbs = o.has("carbohidratos") ? o.getDouble("carbohidratos") : 0.0;
-                System.out.println("carbs parseados: " + carbs);
+                //System.out.println("carbs parseados: " + carbs);
                 double racion = o.has("racion") ? o.getDouble("racion") : 100.0;
                
                 Alimento a = new Alimento(id, nombre, carbs, racion);

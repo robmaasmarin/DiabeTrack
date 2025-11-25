@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
 <BorderPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="diabetrack_interface.controllers.CalculoBoloFXMLController">
     <top>
@@ -29,7 +28,6 @@
                 <Region fx:id="regionSeparar" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
                 <HBox fx:id="comboHbox" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" styleClass="comboHbox">
                     <children>
-                        <ComboBox fx:id="choiceLanguage" prefWidth="150.0" styleClass="choiceLanguage" />
                         <ImageView fx:id="profileImg" fitHeight="45.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" styleClass="profileImg">
                             <image>
                                 <Image url="@../resources/images/user_8338841.png" />
@@ -45,22 +43,6 @@
     </top>
    <bottom>
       <StackPane fx:id="stackContact" prefHeight="150.0" prefWidth="200.0" styleClass="stackContact" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="labelHelp" text="¿NECESITAS AYUDA?" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <Button fx:id="btnContact" mnemonicParsing="false" styleClass="btnContact" text="CONTÁCTANOS" textFill="WHITE">
-               <StackPane.margin>
-                  <Insets top="40.0" />
-               </StackPane.margin>
-               
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Button>
-         </children>
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -107,10 +89,7 @@
         <Label text="Dosis (UD):" />
         <Label fx:id="labelDosis" text="0.0" />
     </HBox>
-    <Button fx:id="btnVolver"
-        text="← Volver"
-        style="-fx-font-size: 16px; -fx-background-color: transparent; -fx-text-fill: white;"
-        alignment="CENTER_LEFT" />
+    <Button fx:id="btnVolver" alignment="CENTER_LEFT" style="-fx-font-size: 16px; -fx-background-color: transparent; -fx-text-fill: white;" text="← Volver" />
 
          </children>
       </VBox>

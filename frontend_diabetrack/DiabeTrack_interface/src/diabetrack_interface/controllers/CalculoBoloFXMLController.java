@@ -55,8 +55,7 @@ public class CalculoBoloFXMLController implements Initializable {
     private Region regionSeparar;
     @FXML
     private HBox comboHbox;
-    @FXML
-    private ComboBox<?> choiceLanguage;
+    
     @FXML
     private ImageView profileImg;
     @FXML

@@ -35,6 +35,12 @@ public class UsuarioController {
     public List<Usuario> getAllUsuarios() {
         return usuarioService.getAllUsuarios();
     }
+
+    // traer usuarios no admin
+    @GetMapping("/no-admin")
+    public List<Usuario> getNonAdminUsers() {
+        return usuarioService.getNonAdminUsers();
+    }
 //TESTEANDO PARA MANEJO DE ERRORES
 
     @GetMapping("/{id}")
@@ -49,31 +55,52 @@ public class UsuarioController {
     @PostMapping
     public Usuario createUsuario(@RequestBody UsuarioDTO dto) {
         Usuario usuario = usuarioService.fromDTO(dto);
-        
+
         //cifrado
         usuario.setPassword(usuarioService.encodePassword(dto.getPassword()));
         return usuarioService.saveUsuario(usuario);
     }
 
     // creación usuario desde front
-@PostMapping("/registro")
-public ResponseEntity<Usuario> registrarUsuario(@RequestBody UsuarioDTO dto) {
+    @PostMapping("/registro")
+    public ResponseEntity<Usuario> registrarUsuario(@RequestBody UsuarioDTO dto) {
 
-    Usuario usuario = usuarioService.fromDTO(dto);
+        Usuario usuario = usuarioService.fromDTO(dto);
 
-    // Cifrar la contraseña correctamente
-    usuario.setPassword(usuarioService.encodePassword(dto.getPassword()));
+        // Cifrar la contraseña correctamente
+        usuario.setPassword(usuarioService.encodePassword(dto.getPassword()));
 
-    Usuario guardado = usuarioService.saveUsuario(usuario);
+        Usuario guardado = usuarioService.saveUsuario(usuario);
 
-    return ResponseEntity.ok(guardado);
-}
-
+        return ResponseEntity.ok(guardado);
+    }
 
     @PutMapping("/{id}")
-    public Usuario updateUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
-        usuario.setIdUsuario(id);
-        return usuarioService.saveUsuario(usuario);
+    public ResponseEntity<Usuario> updateUsuario(@PathVariable Long id, @RequestBody Usuario dto) {
+
+        Usuario original = usuarioService.getUsuarioById(id);
+
+        if (original == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // SOLO campos editables
+        if (dto.getPeso() != null) {
+            original.setPeso(dto.getPeso());
+        }
+        if (dto.getAltura() != null) {
+            original.setAltura(dto.getAltura());
+        }
+        if (dto.getTipo_insulina() != null) {
+            original.setTipo_insulina(dto.getTipo_insulina());
+        }
+        if (dto.getMarca_insulina() != null) {
+            original.setMarca_insulina(dto.getMarca_insulina());
+        }
+
+        Usuario guardado = usuarioService.saveUsuario(original);
+
+        return ResponseEntity.ok(guardado);
     }
 
     @DeleteMapping("/{id}")

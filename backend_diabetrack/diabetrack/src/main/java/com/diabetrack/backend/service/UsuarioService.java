@@ -108,6 +108,9 @@ public class UsuarioService {
     public String encodePassword(String rawPassword) {
     return encoder.encode(rawPassword);
 }
-
+    //usuarios para pantalla admin
+public List<Usuario> getNonAdminUsers() {
+    return usuarioRepository.findByRolNombreNotIgnoreCase("admin");
+}
 
 }

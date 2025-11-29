@@ -1,55 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.Region?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-
-
-<BorderPane id="AnchorPane"
-            prefHeight="800.0"
-            prefWidth="1200.0"
-            xmlns:fx="http://javafx.com/fxml/1"
-            stylesheets="@../css/dashboard.css"
-            fx:controller="diabetrack_interface.controllers.InformesFXMLController">
+<BorderPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../css/dashboard.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="diabetrack_interface.controllers.InformesFXMLController">
 
     <!-- ========== BARRA SUPERIOR (copiada de CalculoBolo) ========== -->
     <top>
-        <HBox fx:id="topBar"
-              maxHeight="120" minHeight="120" prefHeight="120"
-              styleClass="topBar">
+        <HBox fx:id="topBar" maxHeight="120" minHeight="120" prefHeight="120" styleClass="topBar">
 
             <children>
 
                 <ImageView fx:id="imgLogo" fitHeight="100" preserveRatio="true">
                     <image>
-                        <Image url="@../resources/images/logoletrasblancassinfondohorizontal.png"/>
+                        <Image url="@../resources/images/logoletrasblancassinfondohorizontal.png" />
                     </image>
                 </ImageView>
 
-                <Region fx:id="regionSeparar" prefWidth="200" HBox.hgrow="ALWAYS"/>
+                <Region fx:id="regionSeparar" prefWidth="200" HBox.hgrow="ALWAYS" />
 
                 <HBox fx:id="comboHbox" alignment="CENTER_RIGHT" prefWidth="200">
                     <children>
                         <ImageView fx:id="profileImg" fitHeight="45" fitWidth="70" preserveRatio="true">
                             <image>
-                                <Image url="@../resources/images/user_8338841.png"/>
+                                <Image url="@../resources/images/user_8338841.png" />
                             </image>
                             <HBox.margin>
-                                <Insets right="25" top="8"/>
+                                <Insets right="25" top="8" />
                             </HBox.margin>
                         </ImageView>
                     </children>
@@ -63,26 +49,16 @@
     <left>
         <VBox spacing="15">
             <padding>
-                <Insets top="20" left="15" right="10"/>
+                <Insets left="15" right="10" top="20" />
             </padding>
 
-            <Button text="Informe semanal (últimos 7 días)"
-                    fx:id="btnInformeSemanal"
-                    prefWidth="220"/>
+            <Button fx:id="btnInformeSemanal" prefWidth="220" text="Informe semanal (últimos 7 días)" />
 
-            <Button text="Informe mensual (últimos 30 días)"
-                    fx:id="btnInformeMensual"
-                    prefWidth="220"/>
+            <Button fx:id="btnInformeTabla" prefWidth="220" text="Tabla de alimentos" />
 
-            <Button text="Informe alimentos consumidos"
-                    fx:id="btnInformeAlimentos"
-                    prefWidth="220"/>
+            <Separator />
 
-            <Separator/>
-
-            <Button text="Volver"
-                    fx:id="btnVolver"
-                    prefWidth="220"/>
+            <Button fx:id="btnVolver" prefWidth="220" text="Volver" />
         </VBox>
     </left>
 
@@ -90,26 +66,20 @@
     <center>
         <VBox alignment="TOP_CENTER" spacing="10">
             <padding>
-                <Insets top="30"/>
+                <Insets top="30" />
             </padding>
 
-            <Label text="Selecciona un informe en el panel lateral"
-                   style="-fx-font-size:18px;"/>
+            <Label style="-fx-font-size:18px;" text="Selecciona un informe en el panel lateral" />
 
-            <Label text="Aquí posteriormente se mostrará una vista previa o información adicional."
-                   wrapText="true"
-                   maxWidth="400"/>
+            <Label maxWidth="400" text="Aquí posteriormente se mostrará una vista previa o información adicional." wrapText="true" />
         </VBox>
     </center>
 
     <!-- ========== STACK INFERIOR (copiado de CalculoBolo) ========== -->
     <bottom>
-        <StackPane fx:id="stackContact"
-                   prefHeight="150"
-                   styleClass="stackContact"
-                   BorderPane.alignment="CENTER">
+        <StackPane fx:id="stackContact" prefHeight="150" styleClass="stackContact" BorderPane.alignment="CENTER">
             <BorderPane.margin>
-                <Insets top="20"/>
+                <Insets top="20" />
             </BorderPane.margin>
         </StackPane>
     </bottom>

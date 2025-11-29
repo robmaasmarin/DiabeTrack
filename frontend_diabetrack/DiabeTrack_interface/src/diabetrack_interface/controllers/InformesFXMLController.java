@@ -28,10 +28,9 @@ public class InformesFXMLController {
     private Button btnInformeSemanal;
 
     @FXML
-    private Button btnInformeMensual;
+    private Button btnInformeTabla;
 
-    @FXML
-    private Button btnInformeAlimentos;
+    
 
     @FXML
     private Button btnVolver;
@@ -41,27 +40,17 @@ public class InformesFXMLController {
     public void initialize() {
 
     btnInformeSemanal.setOnAction(e -> generarInformeSemanal());
-        btnInformeMensual.setOnAction(e -> cargarInformeMensual());
-        btnInformeAlimentos.setOnAction(e -> cargarInformeAlimentos());
+        btnInformeTabla.setOnAction(e -> generarInformeAlimentos());
+        
         btnVolver.setOnAction(e -> Navigator.goToDashboard(btnVolver));
     }
 
-    private void cargarInformeSemanal() {
-        System.out.println("→ Generar informe semanal");
-        // pendiente llamar a JasperReport con resumen7dias()
-    }
 
-    private void cargarInformeMensual() {
-        System.out.println("→ Generar informe mensual");
-    }
-
-    private void cargarInformeAlimentos() {
-        System.out.println("→ Generar informe de alimentos consumidos");
-    }
+    // método para generar el primer informe
     private void generarInformeSemanal() {
 
     try {
-        long idUsuario = 1;  // <- posteriormente el usuario logueado
+        long idUsuario = 1;  // <- esto cambiará posteriormente al user que se loguee
 
         String urlStr = "http://localhost:8080/api/reportes/usuario/" + idUsuario + "/ultimos";
         URL url = new URL(urlStr);
@@ -88,6 +77,49 @@ public class InformesFXMLController {
             Desktop.getDesktop().open(pdfFile);
 
             mostrarInfo("Informe generado correctamente.");
+        } else {
+            mostrarError("Error al generar el informe (HTTP " + responseCode + ")");
+        }
+
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        mostrarError("Error al conectar con el servidor.");
+    }
+}
+    
+    // método para generar el informe que saca la relación de alimentos en bbdd
+    
+    
+private void generarInformeAlimentos() {
+
+    try {
+
+        String urlStr = "http://localhost:8080/api/reportes/alimentos";
+        URL url = new URL(urlStr);
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setRequestProperty("Accept", "application/pdf");
+
+        int responseCode = conn.getResponseCode();
+
+        if (responseCode == 200) {
+
+            // recibir PDF
+            InputStream is = conn.getInputStream();
+            byte[] pdfBytes = is.readAllBytes();
+
+            // guardar archivo localmente
+            File pdfFile = new File("informe_alimentos.pdf");
+            try (FileOutputStream fos = new FileOutputStream(pdfFile)) {
+                fos.write(pdfBytes);
+            }
+
+            // abrir el PDF automáticamente
+            Desktop.getDesktop().open(pdfFile);
+
+            mostrarInfo("Informe de alimentos generado correctamente.");
+
         } else {
             mostrarError("Error al generar el informe (HTTP " + responseCode + ")");
         }

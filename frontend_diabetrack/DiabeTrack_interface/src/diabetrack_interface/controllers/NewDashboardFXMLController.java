@@ -5,6 +5,7 @@
 package diabetrack_interface.controllers;
 
 import diabetrack_interface.models.Idioma;
+import diabetrack_interface.models.Usuario;
 import diabetrack_interface.session.CurrentUser;
 
 import diabetrack_interface.utils.Navigator;
@@ -106,6 +107,9 @@ public class NewDashboardFXMLController implements Initializable {
     private Button btnContact;
     @FXML
     private Button logOut;
+    @FXML
+    private Button btnAdminPanel;
+    
 
     /**
      * Initializes the controller class.
@@ -178,7 +182,21 @@ public class NewDashboardFXMLController implements Initializable {
         });
         vBoxProfile.setOnMouseClicked(e -> {
             Stage stage = Navigator.getStageFrom(vBoxProfile);
-            Navigator.changeScene(stage, "/diabetrack_interface/fxml/CalculoBoloFXML.fxml");
+            Navigator.changeScene(stage, "/diabetrack_interface/fxml/PerfilUsuarioFXML.fxml");
+        });
+        // botón funciones de admin
+        Usuario u = CurrentUser.get();
+        
+        if (u.getRol().getNombre().equals("admin")) {
+            btnAdminPanel.setVisible(true);
+            
+        }
+        else {
+        btnAdminPanel.setVisible(false);}
+        
+        btnAdminPanel.setOnMouseClicked(e -> {
+            Stage stage = Navigator.getStageFrom(btnAdminPanel);
+            Navigator.changeScene(stage, "/diabetrack_interface/fxml/AdminUsuariosFXML.fxml");
         });
         //botón cierre sesión
         logOut.setOnAction(e -> {

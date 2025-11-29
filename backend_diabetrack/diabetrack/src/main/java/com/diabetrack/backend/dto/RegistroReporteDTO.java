@@ -5,15 +5,13 @@
 package com.diabetrack.backend.dto;
 
 import com.diabetrack.backend.model.RegistroComida;
-import lombok.Getter;
-import lombok.Setter;
+
 
 /**
  *
  * @author ESDPC
  */
-@Getter
-@Setter
+
 public class RegistroReporteDTO {
 
     private String fecha;
@@ -27,4 +25,8 @@ public class RegistroReporteDTO {
         this.carbohidratos = r.getCarbohidratos();
         this.boloCalculado = r.getBoloCalculado();
     }
+     public String getFecha() { return fecha; }
+    public Double getGlucosaAntes() { return glucosaAntes; }
+    public Double getCarbohidratos() { return carbohidratos; }
+    public Double getBoloCalculado() { return boloCalculado; }
 }

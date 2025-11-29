@@ -50,3 +50,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-background-size: cover;  /* Hace que ocupe todo el área */
     -fx-background-position: center center;
 }
+
+.text-field:readonly {
+    -fx-opacity: 1.0;                /* Para que NO se vea gris */
+    -fx-text-fill: #cccccc;          /* Color suave */
+    -fx-background-color: #3B3B3B;   /* Fondo ligeramente distinto */
+    -fx-border-color: #7B2CBF;       /* Borde morado coherente */
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}

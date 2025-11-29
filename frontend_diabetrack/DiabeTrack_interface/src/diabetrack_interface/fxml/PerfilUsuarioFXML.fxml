@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="800" prefWidth="1200" stylesheets="@../css/dashboard.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="diabetrack_interface.controllers.PerfilUsuarioController">
+
+    <!-- ========== BARRA SUPERIOR (MISMA QUE LAS OTRAS PANTALLAS) ========== -->
+    <top>
+        <HBox fx:id="topBar" maxHeight="120" minHeight="120" prefHeight="120" styleClass="topBar">
+
+            <children>
+
+                <ImageView fx:id="imgLogo" fitHeight="100" preserveRatio="true">
+                    <image>
+                        <Image url="@../resources/images/logoletrasblancassinfondohorizontal.png" />
+                    </image>
+                </ImageView>
+
+                <Region fx:id="regionSeparar" prefWidth="200" HBox.hgrow="ALWAYS" />
+
+                <HBox fx:id="comboHbox" alignment="CENTER_RIGHT" prefWidth="200">
+                    <children>
+                        <ImageView fx:id="profileImg" fitHeight="45" fitWidth="70" preserveRatio="true">
+                            <image>
+                                <Image url="@../resources/images/user_8338841.png" />
+                            </image>
+                            <HBox.margin>
+                                <Insets right="25" top="8" />
+                            </HBox.margin>
+                        </ImageView>
+                    </children>
+                </HBox>
+
+            </children>
+        </HBox>
+    </top>
+
+    <!-- ========== CONTENIDO CENTRAL (TU DISEÑO ORIGINAL) ========== -->
+    <center>
+        <AnchorPane>
+            <VBox alignment="TOP_CENTER" layoutY="20" prefWidth="600" spacing="15" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="20">
+                <Label style="-fx-font-size: 22; -fx-font-weight: bold;" text="Perfil de Usuario" />
+
+                <GridPane hgap="10" vgap="10">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="RIGHT" prefWidth="200" />
+                        <ColumnConstraints halignment="LEFT" prefWidth="300" />
+                    </columnConstraints>
+
+                    <!-- Nombre -->
+                    <Label text="Nombre:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <TextField fx:id="txtNombre" editable="false" styleClass="readonly-field" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                    <!-- Apellido -->
+                    <Label text="Apellido:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <TextField fx:id="txtApellido" editable="false" styleClass="readonly-field" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                    <!-- Email -->
+                    <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <TextField fx:id="txtEmail" editable="false" styleClass="readonly-field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                    <!-- Fecha nacimiento -->
+                    <Label text="Fecha nacimiento:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <DatePicker fx:id="dateNacimiento" disable="true" editable="false" styleClass="readonly-field" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                    <!-- Peso -->
+                    <Label text="Peso (kg):" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                    <TextField fx:id="txtPeso" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                    <!-- Altura -->
+                    <Label text="Altura (cm):" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                    <TextField fx:id="txtAltura" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+                    <!-- Tipo insulina -->
+                    <Label text="Tipo insulina:" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                    <TextField fx:id="txtTipoInsulina" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+
+                    <!-- Marca insulina -->
+                    <Label text="Marca insulina:" GridPane.columnIndex="0" GridPane.rowIndex="7" />
+                    <TextField fx:id="txtMarcaInsulina" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+                </GridPane>
+
+                <Button fx:id="btnGuardar" style="-fx-font-size: 14; -fx-background-color: #7B2CBF; -fx-text-fill: white;" text="Guardar cambios" />
+            </VBox>
+        </AnchorPane>
+    </center>
+
+    <!-- ========== STACK INFERIOR (MISMO QUE OTRAS PANTALLAS) ========== -->
+    <bottom>
+        <StackPane fx:id="stackContact" prefHeight="150" styleClass="stackContact" BorderPane.alignment="CENTER">
+            <BorderPane.margin>
+                <Insets top="20" />
+            </BorderPane.margin>
+         <children>
+            <Button fx:id="btnVolver" mnemonicParsing="false" styleClass="btnVolver" text="Volver" />
+         </children>
+        </StackPane>
+    </bottom>
+
+</BorderPane>

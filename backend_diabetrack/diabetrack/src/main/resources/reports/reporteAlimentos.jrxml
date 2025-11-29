@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+              http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="reporte_alimentos"
+              pageWidth="595" pageHeight="842"
+              columnWidth="555"
+              leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+
+    <!-- Para cargar imágenes -->
+    <parameter name="REPORT_DIR" class="java.lang.String"/>
+
+    <!-- CAMPOS -->
+    <field name="nombre" class="java.lang.String"/>
+    <field name="carbohidratos" class="java.lang.Double"/>
+    <field name="indiceGlucemico" class="java.lang.Integer"/>
+
+    <!-- BACKGROUND -->
+    <background>
+        <band height="120">
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="120" backcolor="#5A00A8" mode="Opaque"/>
+            </rectangle>
+        </band>
+    </background>
+     <pageHeader>
+        <band height="120">
+
+            <!-- barra morada de fondo -->
+<rectangle>
+                <reportElement x="0" y="0" width="555" height="120" backcolor="#5A00A8" mode="Opaque"/>
+            </rectangle>
+
+            <!-- logo diabetrack -->
+            <image>
+                <reportElement x="10" y="10" width="90" height="90"/>
+                <imageExpression><![CDATA[$P{REPORT_DIR} + "moradotodo.png"]]></imageExpression>
+            </image>
+
+            <!-- título del informe -->
+            <textField>
+                <reportElement x="120" y="35" width="400" height="40" forecolor="#FFFFFF"/>
+                <textElement>
+                    <font size="22" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Listado de Alimentos"]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </pageHeader>
+
+    <!-- TITULO, logo...
+    <title>
+        <band height="120">
+            
+           
+            <image>
+                <reportElement x="10" y="10" width="90" height="90"/>
+                <imageExpression><![CDATA[$P{REPORT_DIR} + "moradotodo.png"]]></imageExpression>
+            </image>
+
+            
+            <textField>
+                <reportElement x="120" y="35" width="400" height="40" forecolor="#FFFFFF"/>
+                <textElement>
+                    <font size="22" isBold="true"/>
+                </textElement>
+                <textFieldExpression><![CDATA["Listado de Alimentos"]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </title>
+-->
+    <!-- CABECERA DE TABLA -->
+    <columnHeader>
+        <band height="25">
+
+            <!-- Nombre -->
+            <textField>
+                <reportElement x="0" y="0" width="220" height="25" backcolor="#EEEEEE" mode="Opaque"/>
+                <textElement><font size="12" isBold="true"/></textElement>
+                <textFieldExpression><![CDATA["Nombre"]]></textFieldExpression>
+            </textField>
+
+            <!-- Carbohidratos -->
+            <textField>
+                <reportElement x="220" y="0" width="160" height="25" backcolor="#EEEEEE" mode="Opaque"/>
+                <textElement><font size="12" isBold="true"/></textElement>
+                <textFieldExpression><![CDATA["Carbohidratos (g)"]]></textFieldExpression>
+            </textField>
+
+            <!-- Índice glucémico -->
+            <textField>
+                <reportElement x="380" y="0" width="175" height="25" backcolor="#EEEEEE" mode="Opaque"/>
+                <textElement><font size="12" isBold="true"/></textElement>
+                <textFieldExpression><![CDATA["Índice Glucémico"]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </columnHeader>
+
+    <!-- FILA DE DATOS -->
+    <detail>
+        <band height="22">
+
+            <!-- Nombre -->
+            <textField>
+                <reportElement x="0" y="0" width="220" height="22"/>
+                <textElement><font size="12"/></textElement>
+                <textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+            </textField>
+
+            <!-- Carbohidratos -->
+            <textField pattern="###.## g">
+                <reportElement x="220" y="0" width="160" height="22"/>
+                <textElement><font size="12"/></textElement>
+                <textFieldExpression><![CDATA[$F{carbohidratos}]]></textFieldExpression>
+            </textField>
+
+            <!-- Índice glucémico -->
+            <textField pattern="###">
+                <reportElement x="380" y="0" width="175" height="22"/>
+                <textElement><font size="12"/></textElement>
+                <textFieldExpression><![CDATA[$F{indiceGlucemico}]]></textFieldExpression>
+            </textField>
+
+        </band>
+    </detail>
+
+</jasperReport>

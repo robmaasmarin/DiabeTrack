@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="diabetrack_interface.controllers.AdminUsuariosController"
+      spacing="10" alignment="CENTER">
+      
+    <Label text="Gestión de Usuarios" style="-fx-font-size: 22; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="tablaUsuarios" prefWidth="400">
+        <columns>
+            <TableColumn fx:id="colId" text="ID" prefWidth="60"/>
+            <TableColumn fx:id="colNombre" text="Nombre" prefWidth="160"/>
+            <TableColumn fx:id="colEmail" text="Email" prefWidth="180"/>
+            <TableColumn fx:id="colAcciones" text="Acciones" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <Button text="← Volver" onAction="#volver"/>
+</VBox>

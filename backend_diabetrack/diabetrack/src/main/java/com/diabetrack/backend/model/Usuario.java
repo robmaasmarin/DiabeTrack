@@ -28,7 +28,7 @@ public class Usuario {
 
     @Column(unique = true, nullable = false)
     private String email;
-
+    @JsonIgnore
     private String password;
     private LocalDate fecha_nacimiento;
 

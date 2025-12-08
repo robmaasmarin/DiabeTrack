@@ -3,10 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.diabetrack.backend.model;
+
 import com.diabetrack.backend.config.SecurityConfig;
 import com.diabetrack.backend.model.Alimento;
 import com.diabetrack.backend.model.Usuario;
-
 
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
@@ -21,10 +21,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Table(name = "registros")
 public class Registro {
 
+    // idetificador único del registro generado por bbdd
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRegistro;
-
+    // user al que pertenece el registro
     @ManyToOne
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
@@ -33,14 +34,19 @@ public class Registro {
     private Double glucosa;
     private Double dosis_insulina;
     private String observaciones;
-
+    // relación opcional con alimento
     @ManyToOne
     @JoinColumn(name = "id_alimento")
     private Alimento alimento;
 
     public void setIdRegistro(Long id) {
+        this.idRegistro = id;
+    }
+
+    /*
+    public void setIdRegistro(Long id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
-
+     */
 }

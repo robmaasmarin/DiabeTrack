@@ -9,11 +9,11 @@ import com.diabetrack.backend.repository.RegistroRepository;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
+
 /**
  *
  * @author ESDPC
  */
-
 
 @Service
 public class RegistroService {
@@ -42,7 +42,7 @@ public class RegistroService {
 
     //obtener registros por usuario
     public List<Registro> getRegistrosByUsuario(Long idUsuario) {
-    return registroRepository.findByUsuarioIdUsuario(idUsuario);
-}
+        return registroRepository.findByUsuarioIdUsuario(idUsuario);
+    }
 
 }

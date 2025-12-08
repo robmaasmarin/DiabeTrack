@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 @Entity
 public class RegistroComida {
-
+    // identificador único del registro
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -37,13 +37,12 @@ public class RegistroComida {
     private Double  boloCalculado;
 
     private LocalDateTime fechaHora;
-
+    // user al que pertenece el registro - many registros to one usuario
     @ManyToOne(optional = false)
-@JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "usuario_id")
 
 private Usuario usuario;
-
-
+    // lista alimentos consumidos en este registro - cada alimento un registro
     @OneToMany(mappedBy = "registro", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<RegistroAlimento> alimentos = new ArrayList<>();

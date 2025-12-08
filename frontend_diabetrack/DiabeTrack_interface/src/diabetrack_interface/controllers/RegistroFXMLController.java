@@ -7,15 +7,25 @@ package diabetrack_interface.controllers;
 import com.google.gson.Gson;
 import diabetrack_interface.dto.UsuarioDTO;
 import diabetrack_interface.models.Usuario;
+import diabetrack_interface.utils.Navigator;
+import java.io.File;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -33,6 +43,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -131,7 +144,7 @@ public class RegistroFXMLController implements Initializable {
     private TextField alturaTfield;
 
     @FXML
-    private Button createAccount;
+    private Button createAccount, btnElegirFoto;
 
     @FXML
     private AnchorPane anchorTab3;
@@ -139,9 +152,12 @@ public class RegistroFXMLController implements Initializable {
     @FXML
     private VBox vboxData3;
     @FXML
-    private Label medicalLabel, tipoDLabel, yearLabel;
+    private Label medicalLabel, tipoDLabel, yearLabel, labelProfilePicture, fotoStatus;
     @FXML
     private ComboBox tipoDCombo, yearCombo, insulinaMarcaCombo;
+    @FXML
+    private ImageView imagePerfil;
+    private File fotoSeleccionada = null;
 
     private ToggleGroup sexoGroup;
 
@@ -159,7 +175,7 @@ public class RegistroFXMLController implements Initializable {
                 pesoTfield.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
-// resto de campos con restricciones bien a string o a números
+        // resto de campos con restricciones bien a string o a números
         alturaTfield.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 alturaTfield.setText(newValue.replaceAll("[^\\d]", ""));
@@ -176,7 +192,7 @@ public class RegistroFXMLController implements Initializable {
                 surnameTField.setText(newValue.replaceAll("[^a-zA-ZÁÉÍÓÚáéíóúñÑ\\s]", ""));
             }
         });
-// combobox con últimos 40 años
+        // combobox con últimos 40 años
         int currentYear = java.time.Year.now().getValue();
         for (int i = 0; i < 40; i++) {
             yearCombo.getItems().add(currentYear - i);
@@ -192,6 +208,8 @@ public class RegistroFXMLController implements Initializable {
         // Opciones de combos
         tipoDCombo.getItems().addAll("Rápida", "Ultrarápida");
         insulinaMarcaCombo.getItems().addAll("FIASP", "Humalog", "Novorapid", "Otra");
+
+        btnElegirFoto.setOnAction(e -> seleccionarFoto());
 
         // configuración de botones
         createAccount.setOnAction(e -> {
@@ -215,16 +233,64 @@ public class RegistroFXMLController implements Initializable {
                     }
 
                     int response = conn.getResponseCode();
+
                     if (response == 200 || response == 201) {
+
+                        // leemos el objeto usuario del backend
+                        InputStream is = conn.getInputStream();
+                        String jsonRespuesta = new String(is.readAllBytes(), "UTF-8");
+
+                        Gson gson2 = new Gson();
+                        Usuario usuarioCreado = gson2.fromJson(jsonRespuesta, Usuario.class);
+
+                        // 
+                        if (fotoSeleccionada != null) {
+                            subirFotoAlServidor(usuarioCreado.getIdUsuario(), fotoSeleccionada);
+                        }
+
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.initOwner(Navigator.getStageFrom(createAccount));
                         alert.setHeaderText(null);
                         alert.setContentText("Cuenta creada correctamente");
-                        alert.show();
+                        //esperamos a que el user pulse ok para volver al login
+                        alert.showAndWait();
+                        // tras el ok pantalla de login
+                        Parent currentRoot = createAccount.getScene().getRoot();
+                        // definimos transición lentahacia pantalla login
+                        FadeTransition fadeOut = new FadeTransition(Duration.millis(350), currentRoot);
+                        fadeOut.setFromValue(1.0);
+                        fadeOut.setToValue(0.0);
+
+                        fadeOut.setOnFinished(ev -> {
+                            try {
+                                Parent newRoot = FXMLLoader.load(getClass().getResource("/diabetrack_interface/fxml/LoginFXML.fxml"));
+
+                                // nueva escena
+                                Scene scene = new Scene(newRoot);
+                                newRoot.setOpacity(0.0);
+
+                                Stage stage = (Stage) createAccount.getScene().getWindow();
+                                stage.setScene(scene);
+
+                                // hacemos una transición a la nueva pantalla
+                                FadeTransition fadeIn = new FadeTransition(Duration.millis(350), newRoot);
+                                fadeIn.setFromValue(0.0);
+                                fadeIn.setToValue(1.0);
+                                fadeIn.play();
+
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                            }
+                        });
+                        //ejecutamos el fadeout
+                        fadeOut.play();
                     } else {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.initOwner(Navigator.getStageFrom(createAccount));
                         alert.setHeaderText("Error al crear cuenta");
                         alert.setContentText("Código HTTP: " + response);
                         alert.show();
+
                     }
 
                 } catch (Exception ex) {
@@ -314,6 +380,7 @@ public class RegistroFXMLController implements Initializable {
         }
         if (!errores.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(Navigator.getStageFrom(createAccount));
             alert.setTitle("Errores de validación");
             alert.setHeaderText("Por favor corrige los siguientes errores:");
             alert.setContentText(String.join("\n", errores));
@@ -342,12 +409,65 @@ public class RegistroFXMLController implements Initializable {
         return u;
     }
 
+    private void subirFotoAlServidor(Long idUsuario, File archivo) {
+        try {
+            String boundary = "----XYZ123";
+            HttpURLConnection conn = (HttpURLConnection) new URL(
+                    "http://localhost:8080/api/usuarios/usuario/" + idUsuario + "/foto"
+            ).openConnection();
+
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type",
+                    "multipart/form-data; boundary=" + boundary);
+
+            OutputStream output = conn.getOutputStream();
+            PrintWriter writer = new PrintWriter(new OutputStreamWriter(output, "UTF-8"), true);
+
+            writer.append("--" + boundary).append("\r\n");
+            writer.append("Content-Disposition: form-data; name=\"file\"; filename=\"" + archivo.getName() + "\"\r\n");
+            writer.append("Content-Type: application/octet-stream\r\n\r\n");
+            writer.flush();
+
+            Files.copy(archivo.toPath(), output);
+            output.flush();
+
+            writer.append("\r\n--" + boundary + "--\r\n");
+            writer.close();
+
+            if (conn.getResponseCode() != 200) {
+                mostrarError("No se pudo subir la foto");
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+// método para cargar imagen de perfil
+
+    private void seleccionarFoto() {
+        FileChooser fc = new FileChooser();
+        fc.getExtensionFilters().add(
+                new FileChooser.ExtensionFilter("Imágenes", "*.jpg", "*.png", "*.jpeg")
+        );
+
+        File archivo = fc.showOpenDialog(null);
+
+        if (archivo != null) {
+            fotoSeleccionada = archivo;
+            imagePerfil.setImage(new Image(archivo.toURI().toString()));
+            fotoStatus.setText("Foto cargada ✔");
+
+        }
+    }
+
     //mostramos error en caso de que la validación de los campos no dé ok
-    /*private void mostrarError(String mensaje) {
+    private void mostrarError(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initOwner(Navigator.getStageFrom(createAccount));
         alert.setTitle("Error de validación");
         alert.setHeaderText(null);
         alert.setContentText(mensaje);
         alert.showAndWait();
-    }*/
+    }
 }

@@ -16,20 +16,22 @@ import java.util.List;
 @Table(name = "categorias")
 public class Categoria {
 
+    // identificador único de la categoría
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCategoria;
-
+    //nombre
     @Column(nullable = false)
     private String nombre;
-
+    //  relación categoría --> alimentos
     @OneToMany(mappedBy = "categoria", fetch = FetchType.LAZY)
     @JsonManagedReference
     private List<Alimento> alimentos;
-    
+
     public Categoria() {
     }
-      public void setIdCategoria(Long idCategoria) {
+
+    public void setIdCategoria(Long idCategoria) {
         this.idCategoria = idCategoria;
     }
 
@@ -44,13 +46,12 @@ public class Categoria {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
+
     public List<Alimento> getAlimentos() {
         return alimentos;
     }
+
     public void setAlimentos(List<Alimento> alimentos) {
         this.alimentos = alimentos;
     }
 }
-
-

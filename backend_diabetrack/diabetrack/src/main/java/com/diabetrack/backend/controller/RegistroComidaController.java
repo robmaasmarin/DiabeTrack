@@ -31,48 +31,59 @@ public class RegistroComidaController {
     @Autowired
     private RegistroComidaService service;
 
+    // creación registro de comida
     @PostMapping
     public RegistroComida guardar(@RequestBody RegistroComida registro) {
         return service.guardarRegistro(registro);
     }
 
+    // obtener registros por usuario
     @GetMapping("/usuario/{id}")
     public List<RegistroComida> obtenerPorUsuario(@PathVariable Long id) {
         return service.findByUsuario(id);
     }
+
+    // obtener todos los registros
     @GetMapping
-public List<RegistroComida> obtenerTodos() {
-    return service.obtenerTodos();
-}
-    @GetMapping("/usuario/{id}/ultimos5")
-public List<RegistroComida> getUltimos5(@PathVariable Long id) {
-    return service.ultimos5(id);
-}
-@GetMapping("/usuario/{id}/ultimos7dias")
-public List<RegistroComida> getUltimos7Dias(@PathVariable Long id) {
-    return service.ultimos7Dias(id);
-}
-@GetMapping("/usuario/{id}/resumen7dias")
-public ResumenSemanalDTO resumen7dias(@PathVariable Long id) {
-    return service.resumen7dias(id);
-}
-@Autowired
-private ReporteService reporteService;
-
-@GetMapping("/usuario/{id}/reporte-ultimos5")
-public ResponseEntity<byte[]> reporteUltimos5(@PathVariable Long id) {
-    try {
-        byte[] pdf = reporteService.generarReporteUltimos(id);
-
-        return ResponseEntity.ok()
-                .header("Content-Type", "application/pdf")
-                .header("Content-Disposition", "attachment; filename=reporte.pdf")
-                .body(pdf);
-
-    } catch (Exception e) {
-        e.printStackTrace();
-        return ResponseEntity.internalServerError().build();
+    public List<RegistroComida> obtenerTodos() {
+        return service.obtenerTodos();
     }
-}
+
+    // últimos 5 por user
+    @GetMapping("/usuario/{id}/ultimos5")
+    public List<RegistroComida> getUltimos5(@PathVariable Long id) {
+        return service.ultimos5(id);
+    }
+// última semana
+
+    @GetMapping("/usuario/{id}/ultimos7dias")
+    public List<RegistroComida> getUltimos7Dias(@PathVariable Long id) {
+        return service.ultimos7Dias(id);
+    }
+// resumen última semana
+
+    @GetMapping("/usuario/{id}/resumen7dias")
+    public ResumenSemanalDTO resumen7dias(@PathVariable Long id) {
+        return service.resumen7dias(id);
+    }
+    @Autowired
+    private ReporteService reporteService;
+// generamos y devolvemos pdf
+
+    @GetMapping("/usuario/{id}/reporte-ultimos5")
+    public ResponseEntity<byte[]> reporteUltimos5(@PathVariable Long id) {
+        try {
+            byte[] pdf = reporteService.generarReporteUltimos(id);
+
+            return ResponseEntity.ok()
+                    .header("Content-Type", "application/pdf")
+                    .header("Content-Disposition", "attachment; filename=reporte.pdf")
+                    .body(pdf);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
+    }
 
 }

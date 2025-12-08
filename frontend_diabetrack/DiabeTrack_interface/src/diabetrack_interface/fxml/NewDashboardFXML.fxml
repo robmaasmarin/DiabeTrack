@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="diabetrack_interface.controllers.NewDashboardFXMLController">
+<BorderPane id="AnchorPane" style="-fx-background-color: white;" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="diabetrack_interface.controllers.NewDashboardFXMLController">
     <top>
         <HBox fx:id="topBar" maxHeight="120" minHeight="120" prefHeight="120.0" prefWidth="0.0" styleClass="topBar" BorderPane.alignment="CENTER">
             <children>
@@ -28,27 +28,30 @@
                     </image>
                 </ImageView>
                 <Region fx:id="regionSeparar" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                <HBox fx:id="comboHbox" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="370.0" styleClass="comboHbox">
+                <HBox fx:id="comboHbox" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="497.0" styleClass="comboHbox">
                     <children>
-                        <ImageView fx:id="profileImg" fitHeight="45.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" styleClass="profileImg">
+                        <ImageView fx:id="profileImg" fitHeight="45.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" styleClass="profileImg">
                             <image>
-                                <Image url="@../resources/images/user_8338841.png" />
+                                <Image url="@../resources/images/default.png" />
                             </image>
                             <HBox.margin>
-                                <Insets right="25.0" top="8.0" />
+                                <Insets right="35.0" top="8.0" />
                             </HBox.margin>
                         </ImageView>
-                  <Button fx:id="logOut" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" styleClass="logOut" text="Salir" />
-                  <Button fx:id="btnAdminPanel" mnemonicParsing="false" styleClass="btnAdminPanel" text="Administración" />
+                  <Button fx:id="logOut" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" styleClass="logOut" text="Salir" />
                     </children>
                 </HBox>
             </children>
         </HBox>
     </top>
     <center>
+        
         <VBox fx:id="VBoxContainerCentro" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="800.0" spacing="30.0" styleClass="VBoxContainerCentro" BorderPane.alignment="CENTER">
             <children>
-                <LineChart fx:id="graficaChart" animated="false" createSymbols="true" maxHeight="250.0" maxWidth="700.0" minHeight="200.0" minWidth="200.0" prefHeight="300.0" prefWidth="500.0" styleClass="graficaChart" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+                <Label fx:id="labelGraficaVacia" text="No hay registros para mostrar" visible="false"
+       style="-fx-text-fill: gray; -fx-font-size: 16;" />
+
+                <LineChart fx:id="graficaChart" animated="false" createSymbols="true" maxHeight="250.0" maxWidth="700.0" minHeight="200.0" minWidth="200.0" prefHeight="300.0" prefWidth="500.0" styleClass="graficaChart">
                     <xAxis>
                         <CategoryAxis side="BOTTOM" />
                     </xAxis>
@@ -127,10 +130,7 @@
                         <Insets top="100.0" />
                     </VBox.margin>
                 </GridPane>
-                <VBox fx:id="vBoxLatestEntrie" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="vBoxLatestEntrie"> 
-                    <Label style="-fx-font-weight: bold; -fx-font-size: 14px;" text="Última acción: Registro de comida" />
-                    <Label text="Glucosa: 135 mg/dL" />
-                    <Label text="Alimentos: Manzana, Pan integral" />
+                <VBox fx:id="vBoxLatestEntrie" alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" styleClass="vBoxLatestEntrie">
                <VBox.margin>
                   <Insets top="100.0" />
                </VBox.margin>
@@ -149,6 +149,9 @@
          <BorderPane.margin>
             <Insets top="20.0" />
          </BorderPane.margin>
+         <children>
+            <Button fx:id="btnAdminPanel" mnemonicParsing="false" styleClass="btnAdminPanel" text="Administración" />
+         </children>
       </StackPane>
    </bottom>
 </BorderPane>

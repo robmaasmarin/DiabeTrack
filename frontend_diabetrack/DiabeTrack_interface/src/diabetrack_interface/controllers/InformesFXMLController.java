@@ -30,117 +30,115 @@ public class InformesFXMLController {
     @FXML
     private Button btnInformeTabla;
 
-    
-
     @FXML
     private Button btnVolver;
-    
 
     @FXML
     public void initialize() {
-
-    btnInformeSemanal.setOnAction(e -> generarInformeSemanal());
+        // informe semanal
+        btnInformeSemanal.setOnAction(e -> generarInformeSemanal());
+        // informe listado
         btnInformeTabla.setOnAction(e -> generarInformeAlimentos());
-        
+        // botón vuelta al dashboard
         btnVolver.setOnAction(e -> Navigator.goToDashboard(btnVolver));
     }
-
 
     // método para generar el primer informe
     private void generarInformeSemanal() {
 
-    try {
-        long idUsuario = 1;  // <- esto cambiará posteriormente al user que se loguee
+        try {
+            long idUsuario = 1;  // <- esto cambiará posteriormente al user que se loguee
 
-        String urlStr = "http://localhost:8080/api/reportes/usuario/" + idUsuario + "/ultimos";
-        URL url = new URL(urlStr);
+            String urlStr = "http://localhost:8080/api/reportes/usuario/" + idUsuario + "/ultimos";
+            URL url = new URL(urlStr);
 
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("Accept", "application/pdf");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/pdf");
 
-        int responseCode = conn.getResponseCode();
+            int responseCode = conn.getResponseCode();
 
-        if (responseCode == 200) {
+            if (responseCode == 200) {
 
-            // recibir PDF
-            InputStream is = conn.getInputStream();
-            byte[] pdfBytes = is.readAllBytes();
+                // recibir PDF
+                InputStream is = conn.getInputStream();
+                byte[] pdfBytes = is.readAllBytes();
 
-            // guardar archivo localmente
-            File pdfFile = new File("informe_semanal.pdf");
-            try (FileOutputStream fos = new FileOutputStream(pdfFile)) {
-                fos.write(pdfBytes);
+                // guardar archivo localmente
+                File pdfFile = new File("informe_semanal.pdf");
+                try (FileOutputStream fos = new FileOutputStream(pdfFile)) {
+                    fos.write(pdfBytes);
+                }
+
+                // abrir el PDF automáticamente
+                Desktop.getDesktop().open(pdfFile);
+
+                mostrarInfo("Informe generado correctamente.");
+            } else {
+                mostrarError("Error al generar el informe (HTTP " + responseCode + ")");
             }
 
-            // abrir el PDF automáticamente
-            Desktop.getDesktop().open(pdfFile);
-
-            mostrarInfo("Informe generado correctamente.");
-        } else {
-            mostrarError("Error al generar el informe (HTTP " + responseCode + ")");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            mostrarError("Error al conectar con el servidor.");
         }
-
-    } catch (Exception ex) {
-        ex.printStackTrace();
-        mostrarError("Error al conectar con el servidor.");
     }
-}
-    
+
     // método para generar el informe que saca la relación de alimentos en bbdd
-    
-    
-private void generarInformeAlimentos() {
+    private void generarInformeAlimentos() {
 
-    try {
+        try {
 
-        String urlStr = "http://localhost:8080/api/reportes/alimentos";
-        URL url = new URL(urlStr);
+            String urlStr = "http://localhost:8080/api/reportes/alimentos";
+            URL url = new URL(urlStr);
 
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("GET");
-        conn.setRequestProperty("Accept", "application/pdf");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("Accept", "application/pdf");
 
-        int responseCode = conn.getResponseCode();
+            int responseCode = conn.getResponseCode();
 
-        if (responseCode == 200) {
+            if (responseCode == 200) {
 
-            // recibir PDF
-            InputStream is = conn.getInputStream();
-            byte[] pdfBytes = is.readAllBytes();
+                // recibir PDF
+                InputStream is = conn.getInputStream();
+                byte[] pdfBytes = is.readAllBytes();
 
-            // guardar archivo localmente
-            File pdfFile = new File("informe_alimentos.pdf");
-            try (FileOutputStream fos = new FileOutputStream(pdfFile)) {
-                fos.write(pdfBytes);
+                // guardar archivo localmente
+                File pdfFile = new File("informe_alimentos.pdf");
+                try (FileOutputStream fos = new FileOutputStream(pdfFile)) {
+                    fos.write(pdfBytes);
+                }
+
+                // abrir el PDF automáticamente
+                Desktop.getDesktop().open(pdfFile);
+
+                mostrarInfo("Informe de alimentos generado correctamente.");
+
+            } else {
+                mostrarError("Error al generar el informe (HTTP " + responseCode + ")");
             }
 
-            // abrir el PDF automáticamente
-            Desktop.getDesktop().open(pdfFile);
-
-            mostrarInfo("Informe de alimentos generado correctamente.");
-
-        } else {
-            mostrarError("Error al generar el informe (HTTP " + responseCode + ")");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            mostrarError("Error al conectar con el servidor.");
         }
+    }
 
-    } catch (Exception ex) {
-        ex.printStackTrace();
-        mostrarError("Error al conectar con el servidor.");
+    private void mostrarError(String msg) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initOwner(Navigator.getStageFrom(btnVolver));
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+        alert.showAndWait();
+    }
+
+    private void mostrarInfo(String msg) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.initOwner(Navigator.getStageFrom(btnVolver));
+
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+        alert.showAndWait();
     }
 }
-    private void mostrarError(String msg) {
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setHeaderText(null);
-    alert.setContentText(msg);
-    alert.showAndWait();
-}
-
-private void mostrarInfo(String msg) {
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setHeaderText(null);
-    alert.setContentText(msg);
-    alert.showAndWait();
-}
-}
-

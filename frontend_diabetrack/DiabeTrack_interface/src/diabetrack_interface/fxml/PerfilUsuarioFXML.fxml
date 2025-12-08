@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="800" prefWidth="1200" stylesheets="@../css/dashboard.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="diabetrack_interface.controllers.PerfilUsuarioController">
+<BorderPane prefHeight="800" prefWidth="1200" style="-fx-background-color: white;" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="diabetrack_interface.controllers.PerfilUsuarioController">
 
     <!-- ========== BARRA SUPERIOR (MISMA QUE LAS OTRAS PANTALLAS) ========== -->
     <top>
@@ -33,28 +33,17 @@
 
                 <Region fx:id="regionSeparar" prefWidth="200" HBox.hgrow="ALWAYS" />
 
-                <HBox fx:id="comboHbox" alignment="CENTER_RIGHT" prefWidth="200">
-                    <children>
-                        <ImageView fx:id="profileImg" fitHeight="45" fitWidth="70" preserveRatio="true">
-                            <image>
-                                <Image url="@../resources/images/user_8338841.png" />
-                            </image>
-                            <HBox.margin>
-                                <Insets right="25" top="8" />
-                            </HBox.margin>
-                        </ImageView>
-                    </children>
-                </HBox>
+                <HBox fx:id="comboHbox" alignment="CENTER_RIGHT" prefWidth="200" />
 
             </children>
         </HBox>
     </top>
 
-    <!-- ========== CONTENIDO CENTRAL (TU DISEÑO ORIGINAL) ========== -->
+    <!-- ========== CONTENIDO CENTRAL ) ========== -->
     <center>
         <AnchorPane>
             <VBox alignment="TOP_CENTER" layoutY="20" prefWidth="600" spacing="15" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="20">
-                <Label style="-fx-font-size: 22; -fx-font-weight: bold;" text="Perfil de Usuario" />
+                <Label fx:id="labelHeading" style="-fx-font-size: 22; -fx-font-weight: bold;" styleClass="labelHeading" text="Perfil de Usuario" />
 
                 <GridPane hgap="10" vgap="10">
                     <columnConstraints>
@@ -103,14 +92,17 @@
                   <RowConstraints />
                   <RowConstraints />
                </rowConstraints>
+               <VBox.margin>
+                  <Insets left="100.0" top="30.0" />
+               </VBox.margin>
                 </GridPane>
 
-                <Button fx:id="btnGuardar" style="-fx-font-size: 14; -fx-background-color: #7B2CBF; -fx-text-fill: white;" text="Guardar cambios" />
+                <Button fx:id="btnGuardar" styleClass="btnGuardar" text="Guardar cambios" />
             </VBox>
         </AnchorPane>
     </center>
 
-    <!-- ========== STACK INFERIOR (MISMO QUE OTRAS PANTALLAS) ========== -->
+    <!-- ========== STACK INFERIOR  ========== -->
     <bottom>
         <StackPane fx:id="stackContact" prefHeight="150" styleClass="stackContact" BorderPane.alignment="CENTER">
             <BorderPane.margin>

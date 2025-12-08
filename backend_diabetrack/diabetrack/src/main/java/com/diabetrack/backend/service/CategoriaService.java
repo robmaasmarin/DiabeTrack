@@ -21,12 +21,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class CategoriaService {
 
+    // repo acceso categorías en BBDD
     private final CategoriaRepository categoriaRepository;
 
+    // inyectamos por constructor
     public CategoriaService(CategoriaRepository categoriaRepository) {
         this.categoriaRepository = categoriaRepository;
     }
 
+    // obtenemos las categorías
     public List<CategoriaDTO> getAllCategorias() {
         List<Categoria> categorias = categoriaRepository.findAll();
         return categorias.stream().map(this::toDTO).collect(Collectors.toList());
@@ -72,6 +75,7 @@ public class CategoriaService {
         return dto;
     }
 
+    // conversión alimento en AlimentoDTO
     private AlimentoDTO alimentoToDTO(Alimento alimento) {
         AlimentoDTO dto = new AlimentoDTO();
         dto.setIdAlimento(alimento.getIdAlimento());
@@ -79,12 +83,11 @@ public class CategoriaService {
         dto.setCarbohidratos(alimento.getCarbohidratos());
         dto.setIndiceGlucemico(alimento.getIndiceGlucemico());
         dto.setRacion(alimento.getRacion());
-        
-        if (alimento.getUsuario() != null) { 
-        dto.setIdUsuario(alimento.getUsuario().getIdUsuario());
-    }
-        
+
+        if (alimento.getUsuario() != null) {
+            dto.setIdUsuario(alimento.getUsuario().getIdUsuario());
+        }
+
         return dto;
     }
 }
-

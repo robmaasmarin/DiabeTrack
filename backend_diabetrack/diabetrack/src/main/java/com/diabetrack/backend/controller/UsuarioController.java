@@ -4,18 +4,29 @@
  */
 package com.diabetrack.backend.controller;
 
-import com.diabetrack.backend.model.Usuario;
-import com.diabetrack.backend.service.UsuarioService;
-import com.diabetrack.backend.service.RolService;
-import org.springframework.web.bind.annotation.*;
-import java.time.LocalDate;
 import com.diabetrack.backend.dto.UsuarioDTO;
-import com.diabetrack.backend.model.Sexo;
 import com.diabetrack.backend.model.Rol;
+import com.diabetrack.backend.model.Sexo;
+import com.diabetrack.backend.model.Usuario;
+import com.diabetrack.backend.service.RolService;
+import com.diabetrack.backend.service.UsuarioService;
 
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.http.ResponseEntity;
+import java.util.UUID;
+
 import static org.springframework.util.StringUtils.capitalize;
 
 @RestController
@@ -52,6 +63,28 @@ public class UsuarioController {
         return ResponseEntity.ok(usuario);
     }
 
+    // GET para obtener foto de perfil
+    @GetMapping("/usuario/{id}/foto")
+    public ResponseEntity<Resource> obtenerFoto(@PathVariable Long id) {
+        try {
+            Usuario u = usuarioService.getUsuarioById(id);
+            if (u == null || u.getFotoPerfil() == null) {
+                return ResponseEntity.notFound().build();
+            }
+
+            Path imgPath = Paths.get("uploads").resolve(u.getFotoPerfil());
+            Resource img = new UrlResource(imgPath.toUri());
+
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .body(img);
+            
+
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
     @PostMapping
     public Usuario createUsuario(@RequestBody UsuarioDTO dto) {
         Usuario usuario = usuarioService.fromDTO(dto);
@@ -73,6 +106,37 @@ public class UsuarioController {
         Usuario guardado = usuarioService.saveUsuario(usuario);
 
         return ResponseEntity.ok(guardado);
+    }
+    // post para foto de perfil
+
+    @PostMapping("/usuario/{id}/foto")
+    public ResponseEntity<?> subirFoto(
+            @PathVariable Long id,
+            @RequestParam("file") MultipartFile file) {
+
+        try {
+            Usuario u = usuarioService.getUsuarioById(id);
+            if (u == null) {
+                return ResponseEntity.notFound().build();
+            }
+
+            // Generar nombre único
+            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+
+            // Ruta a la carpeta uploads
+            Path uploadPath = Paths.get("uploads").resolve(fileName);
+
+            Files.copy(file.getInputStream(), uploadPath, StandardCopyOption.REPLACE_EXISTING);
+
+            // Guardar nombre en DB
+            u.setFotoPerfil(fileName);
+            usuarioService.saveUsuario(u);
+
+            return ResponseEntity.ok("Foto subida correctamente");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().body("Error al subir la foto");
+        }
     }
 
     @PutMapping("/{id}")

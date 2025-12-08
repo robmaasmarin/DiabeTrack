@@ -4,6 +4,7 @@
  */
 package diabetrack_interface;
 
+import diabetrack_interface.utils.Navigator;
 import diabetrack_interface.utils.ScreenUtils;
 import java.io.IOException;
 import javafx.animation.PauseTransition;
@@ -45,8 +46,11 @@ public class FXMain_Diabetrack extends Application {
             primaryStage.setScene(splashScene);
             primaryStage.sizeToScene();//adaptar tamaño
             primaryStage.show();
+            
+            //centramos el splash en pantalla
+            Navigator.centerOnScreen(primaryStage);
 
-            // Crear una pausa de 3 segundos
+            // crear una transición de 3 segundos
             PauseTransition delay = new PauseTransition(Duration.seconds(3));
             delay.setOnFinished(event -> {
 
@@ -58,6 +62,8 @@ public class FXMain_Diabetrack extends Application {
                     scene.getStylesheets().add(getClass().getResource("/diabetrack_interface/css/login.css").toExternalForm());
 
                     primaryStage.setScene(scene);
+                    //centramos también login
+                    Navigator.centerOnScreen(primaryStage);
 
                     primaryStage.show();
                 } catch (IOException ex) {

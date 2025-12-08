@@ -14,19 +14,23 @@ import org.springframework.stereotype.Service;
  *
  * @author ESDPC
  */
+// autenticación de usuarios
 @Service
 public class AuthService {
 
+    // repo para acceder a usuarios en BBDD
     @Autowired
     private UsuarioRepository usuarioRepository;
-
+    // passenconder para comparación passwords encriptados
     @Autowired
     private PasswordEncoder encoder;
 
     public Usuario login(String email, String password) {
-
+        // búsqueda user por email
         Usuario usuario = usuarioRepository.findByEmail(email).orElse(null);
-        if (usuario == null) return null;
+        if (usuario == null) {
+            return null;
+        }
 
         if (!encoder.matches(password, usuario.getPassword())) {
             return null;
@@ -35,4 +39,3 @@ public class AuthService {
         return usuario;
     }
 }
-

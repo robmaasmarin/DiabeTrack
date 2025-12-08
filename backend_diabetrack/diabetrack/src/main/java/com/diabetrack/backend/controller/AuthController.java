@@ -28,7 +28,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         
-  /*System.out.println("📩 Backend recibió:");
+  /*System.out.println("Backend recibió:");
     System.out.println("Email = " + loginRequest.getEmail());
     System.out.println("Password = [" + loginRequest.getPassword() + "]");*/
         Usuario usuario = usuarioService.findByEmail(loginRequest.getEmail());

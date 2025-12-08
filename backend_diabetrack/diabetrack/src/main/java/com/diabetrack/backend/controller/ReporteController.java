@@ -39,6 +39,7 @@ public class ReporteController {
     @Autowired
     private AlimentoService alimentoService;
 
+    // generar informe en PDF con últimos registros de comida
     @GetMapping("/usuario/{id}/ultimos")
     public ResponseEntity<byte[]> generar(@PathVariable Long id) throws Exception {
 
@@ -49,47 +50,48 @@ public class ReporteController {
                 .header("Content-Disposition", "attachment; filename=reporte.pdf")
                 .body(pdf);
     }
-    // reporte de alimentos
+    // generar reporte de alimentos en PDF
 
     @GetMapping("/alimentos")
-public ResponseEntity<byte[]> generarInformeAlimentos() {
-    try {
-        List<Alimento> lista = alimentoService.getAll();
-        List<AlimentoReporteDTO> datos = lista.stream()
-                .map(AlimentoReporteDTO::new)
-                .toList();
+    public ResponseEntity<byte[]> generarInformeAlimentos() {
+        try {
+            // traemos alimentos de bbdd
+            List<Alimento> lista = alimentoService.getAll();
+            // conversión de alimento al DTO
+            List<AlimentoReporteDTO> datos = lista.stream()
+                    .map(AlimentoReporteDTO::new)
+                    .toList();
+            // parámetros necesarios para reporte
+            Map<String, Object> params = new HashMap<>();
+            params.put("REPORT_DIR", new File(getClass().getResource("/reports/").toURI()).getAbsolutePath() + File.separator);
 
-        Map<String, Object> params = new HashMap<>();
-params.put("REPORT_DIR", new File(getClass().getResource("/reports/").toURI()).getAbsolutePath() + File.separator);
+            // carga archivo desde resources
+            InputStream jrxmlStream = getClass().getResourceAsStream("/reports/reporteAlimentos.jrxml");
 
-        // 🔥 Igual que el informe que SÍ funciona:
-        InputStream jrxmlStream = getClass().getResourceAsStream("/reports/reporteAlimentos.jrxml");
+            if (jrxmlStream == null) {
+                throw new RuntimeException("No se encontró reporteAlimentos.jrxml en /reports/");
+            }
 
-        if (jrxmlStream == null) {
-            throw new RuntimeException("No se encontró reporteAlimentos.jrxml en /reports/");
+            // compilación plantilla jrxml a jasperreport
+            JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlStream);
+            // rellenamos el reporte
+            JasperPrint print = JasperFillManager.fillReport(
+                    jasperReport,
+                    params,
+                    new JRBeanCollectionDataSource(datos)
+            );
+            // exportamos el reporte como pdf
+            byte[] pdf = JasperExportManager.exportReportToPdf(print);
+            // envío al front
+            return ResponseEntity.ok()
+                    .header("Content-Type", "application/pdf")
+                    .header("Content-Disposition", "attachment; filename=alimentos.pdf")
+                    .body(pdf);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
         }
-
-        // 🔥 Compilar en runtime (igual que el informe viejo si usa esto)
-        JasperReport jasperReport = JasperCompileManager.compileReport(jrxmlStream);
-
-        JasperPrint print = JasperFillManager.fillReport(
-                jasperReport,
-                params,
-                new JRBeanCollectionDataSource(datos)
-        );
-
-        byte[] pdf = JasperExportManager.exportReportToPdf(print);
-
-        return ResponseEntity.ok()
-                .header("Content-Type", "application/pdf")
-                .header("Content-Disposition", "attachment; filename=alimentos.pdf")
-                .body(pdf);
-
-    } catch (Exception e) {
-        e.printStackTrace();
-        return ResponseEntity.internalServerError().build();
     }
-}
-
 
 }

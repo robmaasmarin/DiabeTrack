@@ -31,6 +31,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -102,26 +103,26 @@ public class CalculoBoloFXMLController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    // lista observable con alimentos disponibles que traemos desde backend
     private final ObservableList<Alimento> alimentos = FXCollections.observableArrayList();
+    // lista observable con alimentos que el user ha seleccionado para el cálculo
     private final ObservableList<SeleccionAlimento> seleccion = FXCollections.observableArrayList();
-
+    // cliente API para consumir API de backend
     private final HttpClient httpClient = HttpClient.newHttpClient();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // inicializar tabla
+        // inicializar tabla - configuración de columnas
         colNombre.setCellValueFactory(c -> new ReadOnlyObjectWrapper<>(c.getValue().getAlimento().getNombre()));
         colCantidad.setCellValueFactory(c -> new ReadOnlyObjectWrapper<>(c.getValue().getCantidad()));
         colCarbs.setCellValueFactory(c -> new ReadOnlyObjectWrapper<>(c.getValue().getCarbs()));
-                btnVolver.setOnAction(e -> Navigator.goToDashboard(btnVolver));
-
-
-
-    tableSeleccion.getStyleClass().add("table-view");
-
-    
-    // conexión de la tabla con lista
-    
+        
+        // botón para volver al dashboard
+        btnVolver.setOnAction(e -> Navigator.goToDashboard(btnVolver));
+        // aplicación css a tabla
+        tableSeleccion.getStyleClass().add("table-view");
+            
+        // conexión de la tabla con lista
         tableSeleccion.setItems(seleccion);
 
         // listeners botones
@@ -130,8 +131,13 @@ public class CalculoBoloFXMLController implements Initializable {
 
         // cargar alimentos desde backend
         cargarAlimentosDesdeBackend();
+        
+        // quito el mensaje por defecto de la tabla
+        tableSeleccion.setPlaceholder(new Region());
+        // ocultar tabla mientras no tenga productos
+        tableSeleccion.visibleProperty().bind(Bindings.isEmpty(seleccion).not());
     }
-
+    // solicitamos lista de alimentos disponibles
     private void cargarAlimentosDesdeBackend() {
         String url = "http://localhost:8080/api/alimentos"; // o el endpoint combinado que prefieras
 
@@ -140,7 +146,7 @@ public class CalculoBoloFXMLController implements Initializable {
                 .uri(URI.create(url))
                 .header("Accept", "application/json")
                 .build();
-
+        // hacemos petición asíncrona al servidor
         httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
                 .thenAccept(this::procesarRespuestaAlimentos)
@@ -149,13 +155,14 @@ public class CalculoBoloFXMLController implements Initializable {
                     return null;
                 });
     }
-
+    // procesamos json recibido - conversión en alimento
     private void procesarRespuestaAlimentos(String json) {
         try {
             JSONArray arr = new JSONArray(json);
             List<Alimento> list = new ArrayList<>();
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject o = arr.getJSONObject(i);
+                // ajuste ante posibles diferencias en nombres desde backend
                 long id = o.has("idAlimento") ? o.getLong("idAlimento")
                         : o.has("id_alimento") ? o.getLong("id_alimento") : 0;
                 String nombre = o.optString("nombre", "sin nombre");
@@ -171,7 +178,7 @@ public class CalculoBoloFXMLController implements Initializable {
             ex.printStackTrace();
         }
     }
-
+    // añadimos alimento seleccionado a tabla
     private void onAgregar() {
         Alimento seleccionado = comboAlimentos.getValue();
         if (seleccionado == null) {
@@ -179,6 +186,7 @@ public class CalculoBoloFXMLController implements Initializable {
             return;
         }
         double cantidad;
+        // validación cantidad
         try {
             cantidad = Double.parseDouble(txtCantidad.getText());
             if (cantidad <= 0) {
@@ -196,34 +204,77 @@ public class CalculoBoloFXMLController implements Initializable {
         // limpiar cantidad (opcional)
         txtCantidad.clear();
     }
-
+    // cálculo totales carbs
     private void actualizarTotales() {
         double totalCarbs = seleccion.stream().mapToDouble(SeleccionAlimento::getCarbs).sum();
         labelTotalCarbs.setText(String.format(Locale.US, "%.1f", totalCarbs));
     }
-
+    // cálculo dosis
     private void onCalcularBolo() {
-        double totalCarbs = seleccion.stream().mapToDouble(SeleccionAlimento::getCarbs).sum();
-        double ratio;
-        try {
-            String txt = txtInsulinRatio.getText();
-            ratio = txt == null || txt.isBlank() ? 10.0 : Double.parseDouble(txt); // default 10 g/UD
-            if (ratio <= 0) {
-                throw new NumberFormatException();
-            }
-        } catch (NumberFormatException ex) {
-            showAlert("Introduce un ratio válido (g de CH por unidad de insulina). Ej: 10");
-            return;
-        }
 
-        double dosis = totalCarbs / ratio;
-        labelDosis.setText(String.format(Locale.US, "%.2f", dosis));
+    // Total de carbohidratos ya calculado en actualizarTotales()
+    double totalCarbs = seleccion.stream()
+            .mapToDouble(SeleccionAlimento::getCarbs)
+            .sum();
+
+    // Glucosa actual
+    double glucosaAntes;
+    try {
+        glucosaAntes = Double.parseDouble(txtGlucosaActual.getText());
+    } catch (Exception e) {
+        showAlert("Introduce una glucosa válida.");
+        return;
     }
+
+    // Ratio insulina-hidratos (por defecto 10 si vacío)
+    double ratio;
+    try {
+        String txt = txtInsulinRatio.getText();
+        ratio = (txt == null || txt.isBlank()) ? 10.0 : Double.parseDouble(txt);
+
+        if (ratio <= 0) throw new NumberFormatException();
+
+    } catch (NumberFormatException e) {
+        showAlert("Introduce un ratio válido (ej. 10).");
+        return;
+    }
+
+    // cálculo unificado
+    double bolo = calcularBoloCompleto(totalCarbs, glucosaAntes, ratio);
+
+    labelDosis.setText(String.format(Locale.US, "%.1f U", bolo));
+}
+
 
     private void showAlert(String msg) {
         Platform.runLater(() -> {
             Alert a = new Alert(Alert.AlertType.WARNING, msg, ButtonType.OK);
+            a.initOwner(Navigator.getStageFrom(topBar));
             a.showAndWait();
         });
     }
+    
+    private double calcularBoloCompleto(double totalCarbs, double glucosaAntes, double ratioInsulina) {
+
+    double glucosaObjetivo = 100.0;   
+    double factorCorreccion = 50.0;   // 1 unidad baja 50 mg/dL
+
+    // bolo por carbohidratos
+    double boloCarbs = totalCarbs / ratioInsulina;
+
+    // corrección por glucosa
+    double boloCorreccion = (glucosaAntes - glucosaObjetivo) / factorCorreccion;
+
+    double boloTotal = boloCarbs + boloCorreccion;
+
+    if (boloTotal < 0) {
+        boloTotal = 0;
+    }
+
+    // redondeo a 0.5 unidades
+    boloTotal = Math.round(boloTotal * 2.0) / 2.0;
+
+    return boloTotal;
+}
+
 }

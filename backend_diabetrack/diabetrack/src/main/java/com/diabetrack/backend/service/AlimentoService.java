@@ -9,17 +9,17 @@ import com.diabetrack.backend.model.Alimento;
 import com.diabetrack.backend.model.Usuario;
 import com.diabetrack.backend.repository.AlimentoRepository;
 import com.diabetrack.backend.repository.UsuarioRepository;
-
+import java.util.List;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 /**
  *
  * @author ESDPC
  */
 
-import java.util.List;
-import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
-
+// sercicio para gestión lógica asociada a alimentos
 @Service
 public class AlimentoService {
 
@@ -29,10 +29,12 @@ public class AlimentoService {
         this.alimentoRepository = alimentoRepository;
     }
 
+    // devolvemos todos los alimentos
     public List<Alimento> getAllAlimentos() {
         return alimentoRepository.findAll();
     }
 
+    // alimentos por ID
     public Optional<Alimento> getAlimentoById(Long id) {
         return alimentoRepository.findById(id);
     }
@@ -68,7 +70,7 @@ public class AlimentoService {
         alimento.setIndiceGlucemico(dto.getIndiceGlucemico());
         alimento.setRacion(dto.getRacion());
 
-        // 🔹 Asignar usuario si viene en el DTO
+        // ? Asignar usuario si viene en el DTO
         if (dto.getIdUsuario() != null) {
             Usuario usuario = usuarioRepository.findById(dto.getIdUsuario())
                     .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));

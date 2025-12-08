@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.diabetrack.backend.service;
+
 import com.diabetrack.backend.dto.ResumenSemanalDTO;
 import com.diabetrack.backend.model.Alimento;
 import com.diabetrack.backend.model.RegistroAlimento;
@@ -17,7 +18,6 @@ import java.time.LocalDateTime;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-
 
 import java.util.List;
 import java.util.Map;
@@ -34,82 +34,81 @@ import org.springframework.stereotype.Service;
 @Service
 public class RegistroComidaService {
 
+    // repo registros comida
     @Autowired
     private RegistroComidaRepository repo;
+    // vínculo registro con user
     @Autowired
-private UsuarioRepository usuarioRepository;
-
-/*
-    public RegistroComida guardarRegistro(RegistroComida registro) {
-        return repo.save(registro);
-    }*/
+    private UsuarioRepository usuarioRepository;
+    // vínculo alimentos con registro
     @Autowired
     private AlimentoRepository alimentoRepository;
-
+    // guardamos registro comida completo
     @Transactional
-public RegistroComida guardarRegistro(RegistroComida registro) {
+    public RegistroComida guardarRegistro(RegistroComida registro) {
 
-    // Asegurar relación bidireccional con usuario
-    if (registro.getUsuario() != null && registro.getUsuario().getIdUsuario() != null) {
-        Usuario u = usuarioRepository.findById(registro.getUsuario().getIdUsuario())
+        // Asegurar relación bidireccional con usuario
+        if (registro.getUsuario() != null && registro.getUsuario().getIdUsuario() != null) {
+            Usuario u = usuarioRepository.findById(registro.getUsuario().getIdUsuario())
                     .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        registro.setUsuario(u);
+            registro.setUsuario(u);
+        }
+
+        // Asegurar alimentos
+        for (RegistroAlimento ra : registro.getAlimentos()) {
+            Alimento a = alimentoRepository.findById(ra.getAlimento().getIdAlimento())
+                    .orElseThrow(() -> new RuntimeException("Alimento no encontrado"));
+            ra.setAlimento(a);
+            ra.setRegistro(registro);
+        }
+
+        return repo.save(registro);
     }
 
-    // Asegurar alimentos
-    for (RegistroAlimento ra : registro.getAlimentos()) {
-    Alimento a = alimentoRepository.findById(ra.getAlimento().getIdAlimento())
-                .orElseThrow(() -> new RuntimeException("Alimento no encontrado"));
-    ra.setAlimento(a);
-    ra.setRegistro(registro);
-}
+    public List<RegistroComida> obtenerTodos() {
+        return repo.findAll();
+    }
 
+    public List<RegistroComida> findByUsuario(Long idUsuario) {
+        return repo.findByUsuario_IdUsuario(idUsuario);
+    }
 
-    return repo.save(registro);
-}
-public List<RegistroComida> obtenerTodos() {
-    return repo.findAll();
-}
+    public List<RegistroComida> ultimos5(Long idUsuario) {
+        Pageable limit = PageRequest.of(0, 5);
+        return repo.findLast5ByUsuario(idUsuario, limit);
+    }
 
-public List<RegistroComida> findByUsuario(Long idUsuario) {
-    return repo.findByUsuario_IdUsuario(idUsuario);
-}
+    public List<RegistroComida> ultimos7Dias(Long idUsuario) {
+        LocalDateTime hace7dias = LocalDateTime.now().minusDays(7);
+        return repo.findUltimos7Dias(idUsuario, hace7dias);
+    }
+    // construimos resumen semanal
+    public ResumenSemanalDTO resumen7dias(Long idUsuario) {
+        LocalDateTime desde = LocalDateTime.now().minusDays(7);
+        List<RegistroComida> lista = repo.registrosUltimos7Dias(idUsuario, desde);
 
-public List<RegistroComida> ultimos5(Long idUsuario) {
-    Pageable limit = PageRequest.of(0, 5);
-    return repo.findLast5ByUsuario(idUsuario, limit);
-}
-public List<RegistroComida> ultimos7Dias(Long idUsuario) {
-    LocalDateTime hace7dias = LocalDateTime.now().minusDays(7);
-    return repo.findUltimos7Dias(idUsuario, hace7dias);
-}
+        ResumenSemanalDTO dto = new ResumenSemanalDTO();
 
-public ResumenSemanalDTO resumen7dias(Long idUsuario) {
-    LocalDateTime desde = LocalDateTime.now().minusDays(7);
-    List<RegistroComida> lista = repo.registrosUltimos7Dias(idUsuario, desde);
+        dto.totalRegistros = lista.size();
+        dto.carbohidratosTotales = lista.stream()
+                .mapToDouble(RegistroComida::getCarbohidratos)
+                .sum();
 
-    ResumenSemanalDTO dto = new ResumenSemanalDTO();
+        // carbs agrupados por día
+        Map<LocalDate, Double> porDia = lista.stream()
+                .collect(Collectors.groupingBy(
+                        r -> r.getFechaHora().toLocalDate(),
+                        Collectors.summingDouble(RegistroComida::getCarbohidratos)
+                ));
 
-    dto.totalRegistros = lista.size();
-    dto.carbohidratosTotales = lista.stream()
-        .mapToDouble(RegistroComida::getCarbohidratos)
-        .sum();
+        porDia.forEach((fecha, carbs)
+                -> dto.carbohidratosPorDia.add(new ResumenSemanalDTO.CarbsDia(fecha, carbs))
+        );
 
-    // carbs agrupados por día
-    Map<LocalDate, Double> porDia = lista.stream()
-        .collect(Collectors.groupingBy(
-                r -> r.getFechaHora().toLocalDate(),
-                Collectors.summingDouble(RegistroComida::getCarbohidratos)
-        ));
-
-    porDia.forEach((fecha, carbs) ->
-        dto.carbohidratosPorDia.add(new ResumenSemanalDTO.CarbsDia(fecha, carbs))
-    );
-
-    if (!lista.isEmpty())
-        dto.ultimoRegistro = lista.get(0); // ya ordenado DESC
-
-    return dto;
-}
+        if (!lista.isEmpty()) {
+            dto.ultimoRegistro = lista.get(0); // ya ordenado DESC
+        }
+        return dto;
+    }
 
 }

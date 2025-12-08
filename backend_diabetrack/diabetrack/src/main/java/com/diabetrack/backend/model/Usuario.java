@@ -18,16 +18,17 @@ import java.util.List;
 @Setter
 @Table(name = "usuarios")
 public class Usuario {
-
+    // identifier único de usuario
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
 
     private String nombre;
     private String apellido;
-
+    // email único para autenticación
     @Column(unique = true, nullable = false)
     private String email;
+    // password cifrada usuario. Ignoramos serialización JSON por seguridad
     @JsonIgnore
     private String password;
     private LocalDate fecha_nacimiento;
@@ -40,7 +41,9 @@ public class Usuario {
     private LocalDate año_diagnostico;
     private String tipo_insulina;
     private String marca_insulina;
-
+    // añadiendo foto de perfil
+    private String fotoPerfil;
+    // rol asociado user - many usuarios pueden compartir el mismo rol
     @ManyToOne
     @JoinColumn(name = "id_rol")
     private Rol rol;
@@ -167,6 +170,14 @@ private List<Alimento> alimentos = new ArrayList<>();
 
     public void setRol(Rol rol) {
         this.rol = rol;
+    }
+
+    public String getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(String fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 
 }

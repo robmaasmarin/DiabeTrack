@@ -4,6 +4,8 @@
  */
 package diabetrack_interface.models;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  *
  * @author ESDPC
@@ -22,47 +24,122 @@ public class Usuario {
     private String año_diagnostico;
     private String tipo_insulina;
     private String marca_insulina;
+    @SerializedName("fotoPerfil")
+    private String fotoPerfil;
 
     private Rol rol;
 
     // --- GETTERS Y SETTERS ----
-    public Long getIdUsuario() { return idUsuario; }
-    public void setIdUsuario(Long idUsuario) { this.idUsuario = idUsuario; }
+    public Long getIdUsuario() {
+        return idUsuario;
+    }
 
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setIdUsuario(Long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
-    public String getApellido() { return apellido; }
-    public void setApellido(String apellido) { this.apellido = apellido; }
+    public String getNombre() {
+        return nombre;
+    }
 
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
+    public String getApellido() {
+        return apellido;
+    }
 
-    public String getFecha_nacimiento() { return fecha_nacimiento; }
-    public void setFecha_nacimiento(String fecha_nacimiento) { this.fecha_nacimiento = fecha_nacimiento; }
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
-    public String getSexo() { return sexo; }
-    public void setSexo(String sexo) { this.sexo = sexo; }
+    public String getEmail() {
+        return email;
+    }
 
-    public Double getPeso() { return peso; }
-    public void setPeso(Double peso) { this.peso = peso; }
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-    public Double getAltura() { return altura; }
-    public void setAltura(Double altura) { this.altura = altura; }
+    public String getPassword() {
+        return password;
+    }
 
-    public String getAño_diagnostico() { return año_diagnostico; }
-    public void setAño_diagnostico(String año_diagnostico) { this.año_diagnostico = año_diagnostico; }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-    public String getTipo_insulina() { return tipo_insulina; }
-    public void setTipo_insulina(String tipo_insulina) { this.tipo_insulina = tipo_insulina; }
+    public String getFecha_nacimiento() {
+        return fecha_nacimiento;
+    }
 
-    public String getMarca_insulina() { return marca_insulina; }
-    public void setMarca_insulina(String marca_insulina) { this.marca_insulina = marca_insulina; }
+    public void setFecha_nacimiento(String fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
+    }
 
-    public Rol getRol() { return rol; }
-    public void setRol(Rol rol) { this.rol = rol; }
-    
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+
+    public Double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(Double peso) {
+        this.peso = peso;
+    }
+
+    public Double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(Double altura) {
+        this.altura = altura;
+    }
+
+    public String getAño_diagnostico() {
+        return año_diagnostico;
+    }
+
+    public void setAño_diagnostico(String año_diagnostico) {
+        this.año_diagnostico = año_diagnostico;
+    }
+
+    public String getTipo_insulina() {
+        return tipo_insulina;
+    }
+
+    public void setTipo_insulina(String tipo_insulina) {
+        this.tipo_insulina = tipo_insulina;
+    }
+
+    public String getMarca_insulina() {
+        return marca_insulina;
+    }
+
+    public void setMarca_insulina(String marca_insulina) {
+        this.marca_insulina = marca_insulina;
+    }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
+    public String getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(String fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
+    }
+
 }

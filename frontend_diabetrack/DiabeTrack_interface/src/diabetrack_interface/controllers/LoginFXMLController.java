@@ -10,6 +10,7 @@ import java.net.URI;
 import java.net.URL;
 
 import com.google.gson.Gson;
+import diabetrack_interface.utils.Navigator;
 import java.io.IOException;
 
 import java.net.http.HttpClient;
@@ -68,11 +69,20 @@ public class LoginFXMLController {
     private Label newUserLabel;
     @FXML
     private Label signupLabel;
-
+    // cliente HTTP reutilizable
     private final HttpClient httpClient = HttpClient.newHttpClient();
 
+    // ir a pantalla de regisro
     @FXML
-    private void handleLogin(ActionEvent event) {
+    public void initialize() {
+        signupLabel.setOnMouseClicked(event -> {
+            Navigator.fadeTo(signupLabel, "/diabetrack_interface/fxml/RegistroFXML.fxml");
+        });
+    }
+
+    // manejo de login - envío petición post a backend
+    @FXML
+    public void handleLogin(ActionEvent event) {
         String email = emailTextField.getText();
         String password = passwordField.getText();
 
@@ -90,25 +100,28 @@ public class LoginFXMLController {
                     .header("Content-Type", "application/json")
                     .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
                     .build();
-
+            // petición asíncrona a backend
             httpClient.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                     .thenAccept(response -> {
-
+                        // login correcto
                         if (response.statusCode() == 200) {
 
                             Gson gson = new Gson();
                             Usuario usuario = gson.fromJson(response.body(), Usuario.class);
+                            System.out.println(" FOTO PERFIL -> " + usuario.getFotoPerfil());
+
+                            System.out.println("🔍 JSON recibido del backend:");
+                            System.out.println(response.body());
 
                             // Guardamos sesión
                             CurrentUser.set(usuario);
 
                             // cambiar pantalla
                             Platform.runLater(() -> {
-                                try {
-                                    cambiarPantalla("/diabetrack_interface/fxml/NewDashboardFXML.fxml");
-                                } catch (IOException e) {
-                                    throw new RuntimeException(e);
-                                }
+
+                                Navigator.fadeTo(loginButton, "/diabetrack_interface/fxml/NewDashboardFXML.fxml");
+                                Navigator.centerOnScreen(Navigator.getStageFrom(loginButton));
+
                             });
 
                         } else {
@@ -133,18 +146,11 @@ public class LoginFXMLController {
     private void showAlert(String message) {
         javafx.application.Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(Navigator.getStageFrom(logoDBT));
             alert.setHeaderText(null);
             alert.setContentText(message);
             alert.showAndWait();
         });
-    }
-
-    private void cambiarPantalla(String fxmlPath) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-        Parent root = loader.load();
-        Stage stage = (Stage) loginButton.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
     }
 
 }

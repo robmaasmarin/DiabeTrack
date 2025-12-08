@@ -11,13 +11,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+
 /**
  *
  * @author ESDPC
  */
-
-
-
 
 @RestController
 @RequestMapping("/api/registros")
@@ -30,32 +28,38 @@ public class RegistroController {
         this.registroService = registroService;
     }
 
+    // devolvemos todos los registros existentes
     @GetMapping
     public List<Registro> getAllRegistros() {
         return registroService.getAllRegistros();
     }
 
+    // registro por ID
     @GetMapping("/{id}")
     public Optional<Registro> getRegistroById(@PathVariable Long id) {
         return registroService.getRegistroById(id);
     }
 
+    // creación nuevo registro
     @PostMapping
     public Registro createRegistro(@RequestBody Registro registro) {
         return registroService.saveRegistro(registro);
     }
+// update de registro
 
-@PutMapping("/{id}")
+    @PutMapping("/{id}")
     public Registro updateRegistro(@PathVariable Long id, @RequestBody Registro registro) {
         registro.setIdRegistro(id); //
         return registroService.saveRegistro(registro);
     }
 
+    // eliminar registro
     @DeleteMapping("/{id}")
     public void deleteRegistro(@PathVariable Long id) {
         registroService.deleteRegistro(id);
     }
 
+    // registros asociados a user
     @GetMapping("/usuario/{idUsuario}")
     public List<Registro> getRegistrosByUsuario(@PathVariable Long idUsuario) {
         return registroService.getRegistrosByUsuario(idUsuario);

@@ -18,18 +18,18 @@ import jakarta.persistence.ManyToOne;
  */
 @Entity
 public class RegistroAlimento {
-
+    // identificador único del detalle de registro de comida
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Double cantidad;
-
+    // registro al que pertenece el detalle - relación muchos detalles --> un registro
     @ManyToOne
     @JoinColumn(name = "registro_id")
     @JsonBackReference
     private RegistroComida registro;
-
+    // alimento asociado al detalle
     @ManyToOne
     @JoinColumn(name = "alimento_id")
     private Alimento alimento;

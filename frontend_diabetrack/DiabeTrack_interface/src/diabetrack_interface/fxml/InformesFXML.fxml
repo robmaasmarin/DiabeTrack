@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" stylesheets="@../css/dashboard.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="diabetrack_interface.controllers.InformesFXMLController">
+<BorderPane id="AnchorPane" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: white;" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="diabetrack_interface.controllers.InformesFXMLController">
 
     <!-- ========== BARRA SUPERIOR (copiada de CalculoBolo) ========== -->
     <top>
@@ -28,39 +28,30 @@
 
                 <Region fx:id="regionSeparar" prefWidth="200" HBox.hgrow="ALWAYS" />
 
-                <HBox fx:id="comboHbox" alignment="CENTER_RIGHT" prefWidth="200">
-                    <children>
-                        <ImageView fx:id="profileImg" fitHeight="45" fitWidth="70" preserveRatio="true">
-                            <image>
-                                <Image url="@../resources/images/user_8338841.png" />
-                            </image>
-                            <HBox.margin>
-                                <Insets right="25" top="8" />
-                            </HBox.margin>
-                        </ImageView>
-                    </children>
-                </HBox>
+                <HBox fx:id="comboHbox" alignment="CENTER_RIGHT" prefWidth="200" />
 
             </children>
         </HBox>
     </top>
 
     <!-- ========== MENÚ LATERAL ========== -->
-    <left>
-        <VBox spacing="15">
-            <padding>
-                <Insets left="15" right="10" top="20" />
-            </padding>
+   <left>
+    <VBox spacing="15" styleClass="cardMenu">
+        <padding>
+            <Insets bottom="20" left="20" right="10" top="20" />
+        </padding>
 
-            <Button fx:id="btnInformeSemanal" prefWidth="220" text="Informe semanal (últimos 7 días)" />
+        <Label styleClass="tituloMenu" text="Informes" />
 
-            <Button fx:id="btnInformeTabla" prefWidth="220" text="Tabla de alimentos" />
+        <Button fx:id="btnInformeSemanal" prefHeight="45.0" prefWidth="238.0" styleClass="btnGuardar" text="Informe últimos registros" />
+        <Button fx:id="btnInformeTabla" prefHeight="45.0" prefWidth="238.0" styleClass="btnGuardar" text="Tabla de alimentos" />
 
-            <Separator />
+        <Separator />
 
-            <Button fx:id="btnVolver" prefWidth="220" text="Volver" />
-        </VBox>
-    </left>
+        <Button fx:id="btnVolver" styleClass="btnVolver" text="Volver" />
+    </VBox>
+</left>
+
 
     <!-- ========== CONTENIDO CENTRAL ========== -->
     <center>

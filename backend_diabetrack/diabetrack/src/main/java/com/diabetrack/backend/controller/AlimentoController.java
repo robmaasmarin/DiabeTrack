@@ -31,48 +31,54 @@ public class AlimentoController {
     private final UsuarioRepository usuarioRepository;
     private final CategoriaRepository categoriaRepository;
     private final AlimentoRepository alimentoRepository;
+// inyectamos dependencias necesarias para operar con alimentos, users y categorías
 
-public AlimentoController(
-        AlimentoService alimentoService,
-        UsuarioRepository usuarioRepository,
-        CategoriaRepository categoriaRepository,
-        AlimentoRepository alimentoRepository) {  
-    this.alimentoService = alimentoService;
-    this.usuarioRepository = usuarioRepository;
-    this.categoriaRepository = categoriaRepository;
-    this.alimentoRepository = alimentoRepository;  
-}
+    public AlimentoController(
+            AlimentoService alimentoService,
+            UsuarioRepository usuarioRepository,
+            CategoriaRepository categoriaRepository,
+            AlimentoRepository alimentoRepository) {
+        this.alimentoService = alimentoService;
+        this.usuarioRepository = usuarioRepository;
+        this.categoriaRepository = categoriaRepository;
+        this.alimentoRepository = alimentoRepository;
+    }
+// obtenemos alimento por id
 
     @GetMapping("/{id}")
-public ResponseEntity<Alimento> obtenerPorId(@PathVariable Long id) {
-    return alimentoRepository.findById(id)
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
-}
+    public ResponseEntity<Alimento> obtenerPorId(@PathVariable Long id) {
+        return alimentoRepository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 
+    // alimentos "globales"
     @GetMapping("/usuario/{idUsuario}")
-public List<Alimento> getAlimentosByUsuario(@PathVariable Long idUsuario) {
-    return alimentoService.getAlimentosByUsuario(idUsuario);
-}
-@GetMapping
+    public List<Alimento> getAlimentosByUsuario(@PathVariable Long idUsuario) {
+        return alimentoService.getAlimentosByUsuario(idUsuario);
+    }
+    // alimentos globales + alimentos usuario
+
+    @GetMapping
     public List<Alimento> getAllAlimentos() {
         return alimentoService.getAllAlimentos();
     }
+
     //nuevo endpoint para obtener alimentos globales más alimentos guardados por usuario
     @GetMapping("/usuario/{id}/todos")
-public ResponseEntity<List<Alimento>> getAlimentosGlobalesYUsuario(@PathVariable Long id) {
-    List<Alimento> globales = alimentoService.getAlimentosGlobales();
-    List<Alimento> personales = alimentoService.getAlimentosByUsuario(id);
+    public ResponseEntity<List<Alimento>> getAlimentosGlobalesYUsuario(@PathVariable Long id) {
+        List<Alimento> globales = alimentoService.getAlimentosGlobales();
+        List<Alimento> personales = alimentoService.getAlimentosByUsuario(id);
 
-    // Combinar ambas listas
-    List<Alimento> todos = new ArrayList<>();
-    todos.addAll(globales);
-    todos.addAll(personales);
+        // Combinar ambas listas
+        List<Alimento> todos = new ArrayList<>();
+        todos.addAll(globales);
+        todos.addAll(personales);
 
-    return ResponseEntity.ok(todos);
-}
+        return ResponseEntity.ok(todos);
+    }
 
-
+    // creación nuevo alimento de usuario
     @PostMapping("/usuario/{idUsuario}")
     public ResponseEntity<Alimento> createAlimento(
             @PathVariable Long idUsuario,
@@ -99,4 +105,3 @@ public ResponseEntity<List<Alimento>> getAlimentosGlobalesYUsuario(@PathVariable
         return ResponseEntity.ok(saved);
     }
 }
-

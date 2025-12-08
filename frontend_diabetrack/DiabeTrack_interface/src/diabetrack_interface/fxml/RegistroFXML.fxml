@@ -22,136 +22,172 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane id="AnchorPane" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="diabetrack_interface.controllers.RegistroFXMLController">
-   <center>
-      <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" styleClass="tabPane" stylesheets="@../css/tabs.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab fx:id="basicData" styleClass="basicTab" text="Paso 1 de 3">
-            <content>
-              <AnchorPane fx:id="anchorTab" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchorTab" stylesheets="@../css/registro.css">
-                     <children>
-                        <VBox fx:id="vboxData" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="400.0" spacing="15.0" styleClass="vboxData" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
-                           <children>
+    <center>
+        <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" styleClass="tabPane" stylesheets="@../css/tabs.css" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <tabs>
+                <Tab fx:id="basicData" styleClass="basicTab" text="Paso 1 de 3">
+                    <content>
+                        <AnchorPane fx:id="anchorTab" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchorTab" stylesheets="@../css/registro.css">
+                            <children>
+                                <VBox fx:id="vboxData" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="400.0" spacing="15.0" styleClass="vboxData" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+                                    <children>
                              
-                              <ImageView fx:id="logoRegistro" fitHeight="76.0" fitWidth="242.0" pickOnBounds="true" preserveRatio="true" styleClass="logoRegistro">
-                                 <image>
-                                    <Image url="@../resources/images/logoletrasmoradohorizontal.png" />
-                                 </image>
-                                 <VBox.margin>
-                                    <Insets top="30.0" />
-                                 </VBox.margin>
-                              </ImageView>
-                              <Label fx:id="labelRegistroNuevo" alignment="TOP_LEFT" styleClass="labelRegistroNuevo" text="Crea tu cuenta" textAlignment="CENTER">
-                                 <font>
-                                    <Font name="System Bold" size="27.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets top="30.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <TextField fx:id="emailField" maxWidth="300.0" minHeight="40.0" promptText="Correo electrónico" styleClass="emailField">
-                                 <VBox.margin>
-                                    <Insets top="50.0" />
-                                 </VBox.margin>
-                              </TextField>
-                              <PasswordField fx:id="passField" maxWidth="300.0" minHeight="40.0" promptText="Password" styleClass="passField" />
-                              <PasswordField fx:id="passConf" maxWidth="300.0" minHeight="40.0" promptText="Confirmar password" styleClass="passConf" />
-                              <HBox maxWidth="300.0" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fx:id="infoImg" fitHeight="23.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true" styleClass="infoImg">
-                                       <image>
-                                          <Image url="@../resources/images/circle-info-solid-fullpurple.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label fx:id="labelRequisitos" prefHeight="69.0" prefWidth="259.0" styleClass="labelRequisitos" text="La contraseña debe tener al menos 8 caracteres e incluir una combinación de letras mayúsculas, letras minúsculas, números y símbolos especiales." wrapText="true">
-                                       <HBox.margin>
-                                          <Insets left="15.0" />
-                                       </HBox.margin>
+                                        <ImageView fx:id="logoRegistro" fitHeight="76.0" fitWidth="242.0" pickOnBounds="true" preserveRatio="true" styleClass="logoRegistro">
+                                            <image>
+                                                <Image url="@../resources/images/logoletrasmoradohorizontal.png" />
+                                            </image>
+                                            <VBox.margin>
+                                                <Insets top="30.0" />
+                                            </VBox.margin>
+                                        </ImageView>
+                                        <Label fx:id="labelRegistroNuevo" alignment="TOP_LEFT" styleClass="labelRegistroNuevo" text="Crea tu cuenta" textAlignment="CENTER">
+                                            <font>
+                                                <Font name="System Bold" size="27.0" />
+                                            </font>
+                                            <VBox.margin>
+                                                <Insets top="30.0" />
+                                            </VBox.margin>
+                                        </Label>
+                                        <TextField fx:id="emailField" maxWidth="300.0" minHeight="40.0" promptText="Correo electrónico" styleClass="emailField">
+                                            <VBox.margin>
+                                                <Insets top="50.0" />
+                                            </VBox.margin>
+                                        </TextField>
+                                        <PasswordField fx:id="passField" maxWidth="300.0" minHeight="40.0" promptText="Password" styleClass="passField" />
+                                        <PasswordField fx:id="passConf" maxWidth="300.0" minHeight="40.0" promptText="Confirmar password" styleClass="passConf" />
+                                        <HBox maxWidth="300.0" prefHeight="100.0" prefWidth="200.0">
+                                            <children>
+                                                <ImageView fx:id="infoImg" fitHeight="23.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true" styleClass="infoImg">
+                                                    <image>
+                                                        <Image url="@../resources/images/circle-info-solid-fullpurple.png" />
+                                                    </image>
+                                                </ImageView>
+                                                <Label fx:id="labelRequisitos" prefHeight="69.0" prefWidth="259.0" styleClass="labelRequisitos" text="La contraseña debe tener al menos 8 caracteres e incluir una combinación de letras mayúsculas, letras minúsculas, números y símbolos especiales." wrapText="true">
+                                                    <HBox.margin>
+                                                        <Insets left="15.0" />
+                                                    </HBox.margin>
+                                                </Label>
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="medicalTab" styleClass="medicalTab" text="Paso 2 de 3">
+                    <content>
+                        <AnchorPane fx:id="anchorTab2" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchorTab" stylesheets="@../css/registro.css">
+                            <children>
+                                <VBox fx:id="vboxData2" prefHeight="0.0" prefWidth="400.0" spacing="15.0" styleClass="vboxData2" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+                                    <Label fx:id="nameLabel" styleClass="nameLabel" text="Nombre">
+                                        <font>
+                                            <Font name="System Bold" size="20.0" />
+                                        </font>
                                     </Label>
-                                 </children>
-                              </HBox>
-                           </children></VBox>
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-          <Tab fx:id="medicalTab" styleClass="medicalTab" text="Paso 2 de 3">
-            <content>
-              <AnchorPane fx:id="anchorTab2" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchorTab" stylesheets="@../css/registro.css">
-                     <children>
-                        <VBox fx:id="vboxData2" prefHeight="0.0" prefWidth="400.0" spacing="15.0" styleClass="vboxData2" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
-                           <Label fx:id="nameLabel" styleClass="nameLabel" text="Nombre">
-                              <font>
-                                 <Font name="System Bold" size="20.0" />
-                              </font>
-                           </Label>
-                           <TextField fx:id="nameTField" maxWidth="300.0" prefHeight="25.0" prefWidth="427.0" styleClass="nameTField" />
-                           <Label fx:id="surnameLabel" styleClass="surnameLabel" text="Apellido" />
-                           <TextField fx:id="surnameTField" maxWidth="300.0" styleClass="surnameTField" />
-                           <Label fx:id="fechaLabel" styleClass="fechaLabel" text="Fecha nacimiento:" />
-                           <DatePicker fx:id="datePicker" styleClass="datePicker" />
-                           <Label fx:id="genreLabel" styleClass="genreLabel" text="Sexo" />
-                           <HBox fx:id="hboxGenre" prefHeight="28.0" prefWidth="436.0" styleClass="hboxGenre">
-                              <children>
-                                 <RadioButton fx:id="hombreRB" mnemonicParsing="false" styleClass="hombreRB" text="Hombre" />
-                                 <RadioButton fx:id="mujerRB" mnemonicParsing="false" styleClass="mujerRB" text="Mujer" />
-                              </children>
-                           </HBox>
-                           <GridPane fx:id="gridPesoAltura" styleClass="gridPesoAltura">
-                             <columnConstraints>
-                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                             </columnConstraints>
-                             <rowConstraints>
-                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                             </rowConstraints>
-                              <children>
-                                 <Label fx:id="weightLabel" styleClass="weightLabel" text="Peso" />
-                                 <Label fx:id="alturaLabel" styleClass="alturaLabel" text="Altura" GridPane.columnIndex="1" />
-                                 <TextField fx:id="pesoTfield" maxWidth="100.0" styleClass="pesoTfield" GridPane.rowIndex="1" />
-                                 <TextField fx:id="alturaTfield" maxWidth="100.0" styleClass="alturaTfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              </children>
-                           </GridPane>
-                        </VBox>
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-          <Tab fx:id="prefTab" styleClass="prefTab" text="Paso 3 de 3">
-            <content>
-              <AnchorPane fx:id="anchorTab3" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchorTab" stylesheets="@../css/registro.css">
-                     <children>
-                        <VBox fx:id="vboxData3" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="400.0" spacing="15.0" styleClass="vboxData" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
-                           <children>
-                              <Label fx:id="medicalLabel" styleClass="medicalLabel" text="Datos médicos" />
-                              <Label fx:id="tipoInsulinaLabel" styleClass="tipoInsulinaLabel" text="Tipo de insulina:" />
-                              <ComboBox fx:id="tipoDCombo" prefWidth="150.0" styleClass="tipoDCombo" />
-                              <Label fx:id="yearLabel" styleClass="yearLabel" text="Año de diagnóstico" />
-                              <ComboBox fx:id="yearCombo" prefWidth="150.0" styleClass="yearCombo" />
-                              <GridPane fx:id="gridInsulina" styleClass="gridInsulina">
-                                <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                </columnConstraints>
-                                <rowConstraints>
-                                  <RowConstraints />
-                                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                </rowConstraints>
-                                 <children>
-                                    <Label fx:id="insulinaMarcaLabel" styleClass="insulinaMarcaLabel" text="Marca insulina" GridPane.rowIndex="1" />
-                                    <ComboBox fx:id="insulinaMarcaCombo" prefHeight="25.0" prefWidth="155.0" styleClass="insulinaMarcaCombo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                 </children>
-                              </GridPane>
-                              <Button fx:id="createAccount" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" styleClass="nextButton" text="Crear Cuenta">
-                                 <font>
-                                    <Font name="System Bold" size="22.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </VBox>
-                     </children></AnchorPane>
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
-   </center>
+                                    <TextField fx:id="nameTField" maxWidth="300.0" prefHeight="25.0" prefWidth="427.0" styleClass="nameTField" />
+                                    <Label fx:id="surnameLabel" styleClass="surnameLabel" text="Apellido" />
+                                    <TextField fx:id="surnameTField" maxWidth="300.0" styleClass="surnameTField" />
+                                    <Label fx:id="fechaLabel" styleClass="fechaLabel" text="Fecha nacimiento:" />
+                                    <DatePicker fx:id="datePicker" styleClass="datePicker" />
+                                    <Label fx:id="genreLabel" styleClass="genreLabel" text="Sexo" />
+                                    <HBox fx:id="hboxGenre" prefHeight="28.0" prefWidth="436.0" styleClass="hboxGenre">
+                                        <children>
+                                            <RadioButton fx:id="hombreRB" mnemonicParsing="false" styleClass="hombreRB" text="Hombre" />
+                                            <RadioButton fx:id="mujerRB" mnemonicParsing="false" styleClass="mujerRB" text="Mujer">
+                                    <HBox.margin>
+                                       <Insets left="20.0" />
+                                    </HBox.margin></RadioButton>
+                                        </children>
+                                    </HBox>
+                                    <GridPane fx:id="gridPesoAltura" styleClass="gridPesoAltura">
+                                        <columnConstraints>
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        </rowConstraints>
+                                        <children>
+                                            <Label fx:id="weightLabel" styleClass="weightLabel" text="Peso" />
+                                            <Label fx:id="alturaLabel" styleClass="alturaLabel" text="Altura" GridPane.columnIndex="1" />
+                                            <TextField fx:id="pesoTfield" maxWidth="100.0" styleClass="pesoTfield" GridPane.rowIndex="1" />
+                                            <TextField fx:id="alturaTfield" maxWidth="100.0" styleClass="alturaTfield" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                        </children>
+                                    </GridPane>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="prefTab" styleClass="prefTab" text="Paso 3 de 3">
+                    <content>
+                        <AnchorPane fx:id="anchorTab3" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="anchorTab" stylesheets="@../css/registro.css">
+                            <children>
+                                <VBox fx:id="vboxData3" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="400.0" spacing="15.0" styleClass="vboxData" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+                                    <children>
+                                        <Label fx:id="medicalLabel" styleClass="nameLabel" text="Datos médicos" />
+                                        <HBox spacing="15">
+                                            <Label fx:id="tipoInsulinaLabel" styleClass="nameLabel" text="Tipo de insulina:">
+                                    <HBox.margin>
+                                       <Insets left="25.0" />
+                                    </HBox.margin></Label>
+                                            <ComboBox fx:id="tipoDCombo" prefHeight="25.0" prefWidth="163.0">
+                                    <HBox.margin>
+                                       <Insets left="30.0" />
+                                    </HBox.margin></ComboBox>
+                                        </HBox>
+
+                                        <HBox spacing="15">
+                                            <Label fx:id="yearLabel" styleClass="nameLabel" text="Año de diagnóstico">
+                                    <HBox.margin>
+                                       <Insets left="25.0" />
+                                    </HBox.margin></Label>
+                                            <ComboBox fx:id="yearCombo" prefWidth="150.0">
+                                    <padding>
+                                       <Insets left="4.0" />
+                                    </padding></ComboBox>
+                                        </HBox>
+
+                                        <GridPane fx:id="gridInsulina" styleClass="gridInsulina">
+                                            <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="221.0" minWidth="10.0" prefWidth="200.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="251.0" minWidth="10.0" prefWidth="251.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                            <children>
+                                                <Label fx:id="insulinaMarcaLabel" styleClass="nameLabel" text="Marca insulina" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="10.0" />
+                                       </font></Label>
+                                                <ComboBox fx:id="insulinaMarcaCombo" prefHeight="25.0" prefWidth="155.0" styleClass="insulinaMarcaCombo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                            </children>
+                                 <VBox.margin>
+                                    <Insets left="25.0" />
+                                 </VBox.margin>
+                                        </GridPane>
+                                        <Label fx:id="labelProfilePicture" styleClass="nameLabel" text="Elegir foto de perfil:" />
+                                        <Label fx:id="fotoStatus" style="-fx-text-fill: #4CAF50;" text="" />
+
+                                        <Button fx:id="btnElegirFoto" mnemonicParsing="false" styleClass="btnElegirFoto" text="Subir foto" />
+                                        <ImageView fx:id="imagePerfil" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" styleClass="imagePerfil" />
+                                        <Button fx:id="createAccount" mnemonicParsing="false" prefHeight="40.0" prefWidth="300.0" styleClass="nextButton" text="Crear Cuenta">
+                                            <font>
+                                                <Font name="System Bold" size="22.0" />
+                                            </font>
+                                        </Button>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
 </BorderPane>

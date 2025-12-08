@@ -2,11 +2,12 @@
 
 ## 1. Título y descripción breve
 - **Nombre del proyecto:** Diabetrack  
-- **Descripción:** “Aplicación para el seguimiento de glucemia y cálculo de dosis de insulina adaptada a la alimentación.”
+- **Descripción:** “Aplicación de escritorio para el seguimiento de glucemia y el cálculo orientativo de dosis de insulina en personas con diabetes tipo 1.
+Desarrollada con arquitectura cliente–servidor, JavaFX en el frontend y Spring Boot en el backend.”
 
 ---
 
-## 2. Objetivos  
+## 2. 🎯 Objetivo del proyecto  
   
 El principal objetivo del proyecto DiabeTrack es desarrollar una aplicación de escritorio que asista a personas con diabetes tipo 1 en el cálculo de la dosis de insulina a inyectar antes de las comidas, basándose en los niveles de glucosa en sangre y los alimentos seleccionados. Como objetivos específicos se consideran:  
 
@@ -18,18 +19,27 @@ El principal objetivo del proyecto DiabeTrack es desarrollar una aplicación de 
 
 ---
 
-## 3. Tecnologías empleadas  
+## 3. 🛠 Tecnologías empleadas  
 ### Frontend (aplicación de escritorio)
 - Lenguaje principal: *Java.*
-- Interfaz gráfica: *JavaFX - Scene Builder.*
+- Interfaz gráfica: *JavaFX - Scene Builder.*  
+- CSS para estilos
 ### Backend (Servidor de aplicaciones)
 - Servidor: Spring Boot.
-- Persistencia: Spring Data JPA.
+- Persistencia: Spring Data JPA.  
+- Hibernate  
+- JasperReports (informes PDF)
+ 
+### Backend (Servidor de aplicaciones)  
 - Base de datos: MySQL.
-- Herramienta de modelado y consultas: MySQL Workbench.
-### Frontend & Backend
+- Herramienta de modelado y consultas: MySQL Workbench. 
+
+### Herramientas
 - IDE de desarrollo: NetBeans.
-- Control de versiones: Git.
+- Control de versiones: Git.  
+- SmartDraw  
+- TeamGantt  
+- VSCode --> Postman
 
 
 ---
@@ -71,7 +81,7 @@ Esta organización permitirá mantener una clara separación entre las capas de 
 
 La aplicación contará con una base de datos relacional MySQL, diseñada para mantener integridad referencial y escalabilidad.  
 
-Se contemplan al menos cinco tablas relacionadas, incluyendo una tabla de roles y relaciones entre usuarios, alimentos, registros e historial.  
+Se contemplan al menos cinco tablas relacionadas, incluyendo una tabla de roles y relaciones entre usuarios, alimentos, registros e historial.    
 Boceto de la bbdd:  
 
 ### Tablas de usuarios: contiene datos personales y de acceso de los usuarios registrados (pacientes).
@@ -85,8 +95,12 @@ Boceto de la bbdd:
 ### Tabla de alimentos: contendrá la info nutricional de los alimentos y los vinculará a la categoría correspondiente:  
 ![Tabla alimentos](/readme_images/tablaalimentos.png)   
 ### Tabla de registros: guardar el histórico de mediciones y dosis de insulina calculadas por el usuario.  
-![Tabla registros](/readme_images/tablaregistros.png)   
+![Tabla registros](/readme_images/tablaregistros.png)     
   
+  ### 5.1.	Modelo Entidad-Relación: La siguiente figura muestra el diagrama E/R empleado en el proyecto:.    
+    
+    
+  ![Modelo](/readme_images/modelo.PNG) 
   
 
 ---
@@ -117,8 +131,81 @@ Boceto de la bbdd:
 
 
 ## 6. Instalación y ejecución
+⚙️ **INSTALACIÓN**  
+  
+  1️⃣ Requisitos previos    
+    **Hardware**
 
-- Ejecución
+  - CPU Intel i5 o superior
+
+  - 8 GB RAM (recomendado 16 GB)
+
+  - 1 GB de espacio libre  
+
+**Software**
+
+  - Java JDK 17
+
+  - MySQL Server 8.x
+
+  - MySQL Workbench
+
+  - NetBeans / IntelliJ / Eclipse (solo si deseas modificar código)
+
+  - Maven
+
+  - Git (opcional)  
+
+2️⃣ Instalación de la base de datos  
+  - Crear base de datos vacía
+
+  - Ejecutar en MySQL Workbench:  
+  **_CREATE DATABASE diabetrack CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;_**  
+    
+  - Insertar datos iniciales obligatorios:      
+    **ROLES**   <br>
+    **_INSERT INTO roles (id_rol, nombre) VALUES_**  
+**_(1, 'usuario'),_**  
+**_(2, 'admin');_**  
+ **ALIMENTOS** 
+ **_INSERT INTO alimentos (id_alimento, nombre, carbohidratos, indice_glucemico, racion)_**   
+**_VALUES_**   
+**_(1, 'Manzana', 12, 40, 100),_**   
+**_(2, 'Banana', 22, 55, 100),_**   
+**_(3, 'Pan blanco', 49, 70, 30),_**   
+**_(4, 'Arroz blanco cocido', 28, 73, 100),_**   
+**_(5, 'Pasta cocida', 25, 50, 100),_**   
+**_(6, 'Leche entera', 5, 30, 100),_**   
+**_(7, 'Yogur natural', 4, 35, 100),_**   
+**_(8, 'Galletas María', 69, 60, 30),_**   
+**_(9, 'Cereal corn flakes', 84, 81, 30),_**   
+**_(10, 'Zanahoria cocida', 10, 49, 100);_**   
+
+3️⃣ Configuración del backend (Spring Boot)
+
+Edita el archivo application.properties:  
+  __spring.datasource.url=jdbc:mysql://localhost:3306/diabetrack__  
+__spring.datasource.username=root__  
+__spring.datasource.password=***__  
+__spring.jpa.hibernate.ddl-auto=update__    
+  A continuación ejecutar el backend:  
+  **_mvn spring boot:run_** 
+
+4️⃣ Instalación del cliente JavaFX
+
+  -  Abrir el proyecto frontend_diabetrack en NetBeans.
+
+  - Verificar que JavaFX está configurado correctamente.
+
+  - Ejecutar la aplicación con Run Project o, si tienes un JAR empaquetado, doble clic sobre él.
+
+  5️⃣ Configuración del cliente
+
+El cliente obtiene la URL del servidor desde:  
+**_config.properties_**
+  
+
+- 🚀 **EJECUCIÓN**
 
 Una vez instalada la app se abrirá a través de su ejecutable, cargará una splash screen durante unos segundos:  
   
@@ -150,10 +237,7 @@ Tras la creación del la cuenta podremos iniciar sesión para poder utilizar las
   
   ![RegistroEntrada1](/readme_images/RegistrarEntrada1.png)   
     
-  ![RegistroEntrada1](/readme_images/RegistrarEntrada2.png)   
-    
-  ![RegistroEntrada1](/readme_images/RegistrarEntrada3.png)   
-
+ 
 - Cálculo del bolo: nos permite realizar el cálculo del bolo en base a diferentes valores y alimentos escogidos, pero sin registro de ingestas.    
 
 ![CalculoBolo](/readme_images/CalculoBolo.png)   
@@ -182,17 +266,7 @@ La aplicación tendrá, entre otras, las siguientes funcionalidades:
 
 ---
 
-## 8. Capturas
-
-  
-
-
-
-
-
----
-
-## 9. Créditos y licencia 
+## 8. 👨‍💻  Créditos y licencia 
 - **Autor:**  Roberto Abelleira Pesqueira
 - **Licencia:** “Uso académico.
 

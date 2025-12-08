@@ -44,12 +44,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-padding: 20px;
 }
 
-.table-view {
-    -fx-background-image: url("/diabetrack_interface/resources/images/calculoback.PNG");
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: cover;  /* Hace que ocupe todo el área */
-    -fx-background-position: center center;
-}
+
 
 .text-field:readonly {
     -fx-opacity: 1.0;                /* Para que NO se vea gris */
@@ -58,4 +53,230 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-border-color: #7B2CBF;       /* Borde morado coherente */
     -fx-border-radius: 6;
     -fx-background-radius: 6;
+}
+
+/* --- estilos botón logout --- */
+.logOut, .btnVolver, .btnGuardar, .btnCalcularBolo {
+    -fx-background-color: transparent;
+    -fx-text-fill: #5d08a5;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+
+    -fx-padding: 6px 18px;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+
+    -fx-border-color: rgba(93, 8, 165, 1);
+    -fx-border-width: 1.5;
+
+    -fx-cursor: hand;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.25) , 8,0,0,2 );
+    -fx-transition: all 0.3s ease;
+}
+
+/* efecto al hacer hover */
+.logOut:hover {
+    -fx-background-color: rgba(255,255,255,0.2);
+    -fx-border-color: white;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.35) , 12,0,0,3 );
+}
+
+/* efecto al presionar */
+.logOut:pressed {
+    -fx-background-color: rgba(255,255,255,0.3);
+    -fx-translate-y: 1;
+}
+
+.labelGlucosa,
+.labelRegister,
+.labelBolo,
+.labelInformes,
+.labelProfile, 
+.totalCH,
+.labelRatio,
+.labelDosis
+{
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    
+}
+
+
+
+
+
+.text-field, .txtGlucosaActual, #txtInsulinRatio {
+    -fx-background-color: white;
+    -fx-border-color: #9b4fd9;
+    -fx-border-width: 1.2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 6px 10px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 6,0,0,1);
+}
+
+.text-field:focused {
+    -fx-border-color: #5d08a5;
+    -fx-effect: dropshadow(gaussian, rgba(93,8,165,0.3), 10,0,0,2);
+}
+.combo-box, .comboAlimentos {
+    -fx-background-color: white;
+    -fx-border-color: #9b4fd9;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 4px 6px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+.combo-box:focused {
+    -fx-border-color: #5d08a5;
+    -fx-effect: dropshadow(gaussian, rgba(93,8,165,0.3), 10,0,0,2);
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: white;
+    -fx-border-color: #9b4fd9;
+}
+.tableSeleccion {
+    -fx-background-color: rgba(255,255,255,0.7);
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-padding: 5px;
+    -fx-border-color: #ddd;
+    -fx-border-width: 1px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #f2e8ff;
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-border-color: transparent;
+}
+
+.table-row-cell {
+    -fx-background-color: rgba(255,255,255,0.8);
+}
+
+.table-row-cell:filled:hover {
+    -fx-background-color: #efe3ff;
+}
+
+/* perfil */
+
+.labelHeading {
+    -fx-text-fill: #333333;
+}
+
+/* PANTALLA REGISTRAR ENTRADA */
+
+/* ---------- título ---------- */
+.tituloRegistrar {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #5d08a5;
+    -fx-padding: 10 0 20 0;
+}
+
+/* ---------- etiquetas del formulario ---------- */
+.labelFormulario {
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #333;
+}
+
+/* ---------- formato del listview ---------- */
+.listaUltimos {
+    -fx-background-color: rgba(255,255,255,0.7);
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: #ddd;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+}
+
+/* ---------- formato botón añadir ---------- */
+.btnAdd {
+    -fx-background-color: #5d08a5;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-padding: 4px 14px;
+    -fx-background-radius: 50%;
+    -fx-effect: dropshadow(gaussian, rgba(93,8,165,0.4), 10,0,0,2);
+}
+
+.btnAdd:hover {
+    -fx-background-color: #7d29d9;
+}
+
+/* ---------- formato botón  guardar ---------- */
+.btnGuardar {
+    -fx-background-color: #5d08a5;
+    -fx-text-fill: white;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-padding: 10 25;
+    -fx-background-radius: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2),12,0,0,3);
+}
+
+.btnGuardar:hover {
+    -fx-background-color: #7d29d9;
+}
+
+/* ---------- formato de la tabla (misma estética que en Cálculo de Bolo) ---------- */
+.tableSeleccion {
+    -fx-background-color: rgba(255,255,255,0.7);
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: #ddd;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #f2e8ff;
+}
+
+.table-row-cell {
+    -fx-background-color: rgba(255,255,255,0.8);
+}
+
+.table-row-cell:filled:hover {
+    -fx-background-color: #efe3ff;
+}
+
+
+/*  ESTILOS PANTALLA INFORMES */
+
+/* ===== TARJETAS ===== */
+
+.cardMenu, .cardContent {
+    -fx-background-color: rgba(255,255,255,0.75);
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #d3d3d3;
+    -fx-border-width: 1.2;
+}
+
+.tituloPrincipal {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #5d08a5;
+}
+
+.textoSecundario {
+    -fx-font-size: 14px;
+    -fx-text-fill: #444;
+}
+
+.tituloMenu {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333;
 }

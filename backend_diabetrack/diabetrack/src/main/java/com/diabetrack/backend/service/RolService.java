@@ -21,7 +21,7 @@ public class RolService {
         this.rolRepository = rolRepository;
     }
 
-   public Rol getRolByName(String nombre) {
+    public Rol getRolByName(String nombre) {
         return rolRepository.findByNombreIgnoreCase(nombre).orElse(null);
     }
 }

@@ -42,16 +42,17 @@ public class PerfilUsuarioController {
     @FXML
     private Button btnVolver;
 
-  
-
+// cliente HTTP reutilizable
     private final HttpClient http = HttpClient.newHttpClient();
 
     @FXML
     public void initialize() {
+        // carga datos user logado
         cargarDatos();
-
+        // guardar cambios en perfil
         btnGuardar.setOnAction(e -> guardarCambios());
-                btnVolver.setOnAction(e -> Navigator.goToDashboard(btnVolver));
+        // botón regreso al dashboard
+        btnVolver.setOnAction(e -> Navigator.goToDashboard(btnVolver));
 
     }
 
@@ -69,10 +70,11 @@ public class PerfilUsuarioController {
         txtMarcaInsulina.setText(u.getMarca_insulina());
     }
 
+    // método para enviar modificaciones hechas al backend
     private void guardarCambios() {
         try {
             long id = CurrentUser.get().getIdUsuario();
-
+            // conversión en JSON de datos modificados
             String json = """
             {
                 "peso": %s,
@@ -99,6 +101,7 @@ public class PerfilUsuarioController {
                         Platform.runLater(() -> {
 
                             if (resp.statusCode() == 200) {
+                                // actualizamos sesión local
                                 Usuario updated = CurrentUser.get();
                                 updated.setPeso(Double.valueOf(txtPeso.getText()));
                                 updated.setAltura(Double.valueOf(txtAltura.getText()));
@@ -107,7 +110,7 @@ public class PerfilUsuarioController {
 
                                 mostrarAlerta("Éxito", "Perfil actualizado correctamente.");
 
-                                // 🚀 vuelve al dashboard usando tu Navigator
+                                // volvemos al dashboard
                                 Navigator.goToDashboard(btnGuardar);
 
                             } else {
@@ -126,6 +129,7 @@ public class PerfilUsuarioController {
 
     private void mostrarAlerta(String titulo, String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.initOwner(Navigator.getStageFrom(txtNombre));
         alert.setTitle(titulo);
         alert.setHeaderText(null);
         alert.setContentText(msg);

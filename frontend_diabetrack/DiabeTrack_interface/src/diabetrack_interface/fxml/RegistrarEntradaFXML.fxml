@@ -1,115 +1,125 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.geometry.Insets?>
-
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
-
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 
-<?import javafx.geometry.Insets?>
 
-
-<BorderPane prefHeight="800" prefWidth="1200"
-            stylesheets="@../css/dashboard.css"
-            xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="diabetrack_interface.controllers.RegistrarEntradaFXMLController">
+<BorderPane prefHeight="800" prefWidth="1200" style="-fx-background-color: white;" stylesheets="@../css/dashboard.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="diabetrack_interface.controllers.RegistrarEntradaFXMLController">
 
     <!-- ========== BARRA SUPERIOR ========== -->
     <top>
-        <HBox fx:id="topBar" maxHeight="120" minHeight="120" prefHeight="120"
-              styleClass="topBar" BorderPane.alignment="CENTER">
+        <HBox fx:id="topBar" maxHeight="120" minHeight="120" prefHeight="120" styleClass="topBar" BorderPane.alignment="CENTER">
 
             <children>
                 <ImageView fx:id="imgLogo" fitHeight="100" preserveRatio="true">
                     <image>
-                        <Image url="@../resources/images/logoletrasblancassinfondohorizontal.png"/>
+                        <Image url="@../resources/images/logoletrasblancassinfondohorizontal.png" />
                     </image>
                 </ImageView>
 
-                <Region fx:id="regionSeparar" prefWidth="200" HBox.hgrow="ALWAYS"/>
+                <Region fx:id="regionSeparar" prefWidth="200" HBox.hgrow="ALWAYS" />
 
-                <HBox fx:id="comboHbox" alignment="CENTER_RIGHT" prefWidth="200" styleClass="comboHbox">
-                    <children>
-                        <ImageView fx:id="profileImg" fitHeight="45" fitWidth="70" preserveRatio="true" styleClass="profileImg">
-                            <image>
-                                <Image url="@../resources/images/user_8338841.png" />
-                            </image>
-                            <HBox.margin>
-                                <Insets right="25" top="8"/>
-                            </HBox.margin>
-                        </ImageView>
-                    </children>
-                </HBox>
+                <HBox fx:id="comboHbox" alignment="CENTER_RIGHT" prefWidth="200" styleClass="comboHbox" />
             </children>
         </HBox>
     </top>
+<!-- ========== contenido central ========== -->
+ <center>
+    <StackPane alignment="TOP_CENTER">
 
-    <!-- ========== CONTENIDO CENTRAL (TU VBOX) ========== -->
-    <center>
-        <VBox alignment="TOP_CENTER" spacing="20" prefHeight="700" prefWidth="900">
-            
-            <Label styleClass="titulo" text="Registrar Entrada" />
+        <VBox alignment="TOP_CENTER" spacing="25" prefWidth="900">
 
-            <ListView fx:id="listaUltimos" prefHeight="200" styleClass="listaUltimos"/>
+            <!-- título centrado -->
+            <Label styleClass="tituloRegistrar" text="Registrar Entrada" />
 
-            <HBox spacing="10">
-                <Label text="Glucosa (mg/dL):"/>
-                <TextField fx:id="txtGlucosa" promptText="Ej: 120"/>
-            </HBox>
+            <!-- GRID DE 2 COLUMNAS -->
+            <GridPane hgap="40" vgap="25" alignment="TOP_CENTER">
 
-            <HBox spacing="10">
-                <ComboBox fx:id="comboAlimentos" promptText="Seleccionar alimento"/>
-                <TextField fx:id="txtCantidad" promptText="Cantidad (g)"/>
-                <Button fx:id="btnAñadirAlimento" text="Añadir"/>
-            </HBox>
+                <columnConstraints>
+                    <ColumnConstraints halignment="CENTER" />
+                    <ColumnConstraints halignment="CENTER" />
+                </columnConstraints>
 
-            <TableView fx:id="tablaAlimentos" prefHeight="200">
-                <columns>
-                    <TableColumn fx:id="colNombre" text="Alimento"/>
-                    <TableColumn fx:id="colCantidad" text="Cantidad (g)"/>
-                    <TableColumn fx:id="colCarbs" text="Carbohidratos (g)"/>
-                </columns>
-            </TableView>
+                <!-- ===================== COLUMNA IZQUIERDA ===================== -->
+                <VBox GridPane.columnIndex="0" alignment="TOP_CENTER" spacing="15" prefWidth="360">
+                    <ListView fx:id="listaUltimos"
+                              prefWidth="360"
+                              prefHeight="500"
+                              styleClass="listaUltimos" />
+                </VBox>
 
-            <Label fx:id="labelCarbsTotales" styleClass="carbsTotales" text="Carbohidratos totales: 0 g"/>
-            <Label fx:id="labelBolo" text="Bolo recomendado: -"/>
+                <!-- ===================== COLUMNA DERECHA ===================== -->
+                <VBox GridPane.columnIndex="1" alignment="TOP_CENTER" spacing="20" prefWidth="360">
 
-            <Button fx:id="btnGuardar" styleClass="btnGuardar" text="Guardar entrada"/>
+                    <!-- glucosa -->
+                    <HBox alignment="CENTER" spacing="10">
+                        <Label styleClass="labelFormulario" text="Glucosa (mg/dL):" />
+                        <TextField fx:id="txtGlucosa" prefWidth="120" />
+                    </HBox>
 
-            <HBox alignment="CENTER_LEFT">
-                <Button fx:id="btnVolver"
-                        text="← Volver"
-                        style="-fx-font-size: 16px; -fx-background-color: transparent; -fx-text-fill: black;">
-                    <HBox.margin>
-                        <Insets left="20" top="5"/>
-                    </HBox.margin>
-                </Button>
-            </HBox>
+                    <!-- selector alimento -->
+                    <HBox alignment="CENTER" spacing="10">
+                        <ComboBox fx:id="comboAlimentos" prefWidth="250" promptText="Seleccionar alimento" />
+                        <TextField fx:id="txtCantidad" prefWidth="60" promptText="g" />
+                        <Button fx:id="btnAñadirAlimento" styleClass="btnAdd" text="+" />
+                    </HBox>
+
+                    <!-- TABLA dentro de columna derecha -->
+                    <TableView fx:id="tablaAlimentos"
+                               prefWidth="350"
+                               prefHeight="220"
+                               styleClass="tableSeleccion">
+                        <columns>
+                            <TableColumn fx:id="colNombre" prefWidth="130" text="Alimento" />
+                            <TableColumn fx:id="colCantidad" prefWidth="100" text="Cantidad (g)" />
+                            <TableColumn fx:id="colCarbs" prefWidth="120" text="Carbohidratos (g)" />
+                        </columns>
+                    </TableView>
+
+                    <!-- totals -->
+                    <Label fx:id="labelCarbsTotales" styleClass="labelFormulario" text="Carbohidratos totales: 0 g" />
+                    <Label fx:id="labelBolo" styleClass="labelFormulario" text="Bolo recomendado: -" />
+
+                    <!-- botón guardar -->
+                    <Button fx:id="btnGuardar" styleClass="btnGuardar" text="Guardar entrada" />
+
+                </VBox>
+
+            </GridPane>
+
         </VBox>
-    </center>
+
+    </StackPane>
+</center>
+
+
+
 
     <!-- ========== STACK INFERIOR ========== -->
     <bottom>
         <StackPane fx:id="stackContact" prefHeight="150" styleClass="stackContact" BorderPane.alignment="CENTER">
             <BorderPane.margin>
-                <Insets top="20"/>
+                <Insets top="20" />
             </BorderPane.margin>
+         <children>
+                <Button fx:id="btnVolver" styleClass="btnVolver" text="← Volver" />
+         </children>
         </StackPane>
     </bottom>
 
 </BorderPane>
-
-

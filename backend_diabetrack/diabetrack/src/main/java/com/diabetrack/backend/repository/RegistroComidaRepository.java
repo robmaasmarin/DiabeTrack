@@ -17,30 +17,29 @@ import org.springframework.data.repository.query.Param;
  * @author ESDPC
  */
 public interface RegistroComidaRepository extends JpaRepository<RegistroComida, Long> {
+
+    // obtenemos registros de comida asociados a usuario
     List<RegistroComida> findByUsuario_IdUsuario(Long idUsuario);
-    
-@Query("SELECT r FROM RegistroComida r WHERE r.usuario.idUsuario = :id ORDER BY r.fechaHora DESC")
-List<RegistroComida> findLast5ByUsuario(@Param("id") Long id, Pageable pageable);
+    // obtenemos registros de comida más recientes asociados a usuario
+
+    @Query("SELECT r FROM RegistroComida r WHERE r.usuario.idUsuario = :id ORDER BY r.fechaHora DESC")
+    List<RegistroComida> findLast5ByUsuario(@Param("id") Long id, Pageable pageable);
 
 // ultios 7 días
-@Query("SELECT r FROM RegistroComida r WHERE r.usuario.idUsuario = :id AND r.fechaHora >= :desde ORDER BY r.fechaHora DESC")
-List<RegistroComida> findUltimos7Dias(@Param("id") Long id, @Param("desde") LocalDateTime desde);
+    @Query("SELECT r FROM RegistroComida r WHERE r.usuario.idUsuario = :id AND r.fechaHora >= :desde ORDER BY r.fechaHora DESC")
+    List<RegistroComida> findUltimos7Dias(@Param("id") Long id, @Param("desde") LocalDateTime desde);
 
 // query para informes
-@Query("""
+    @Query("""
     SELECT r FROM RegistroComida r 
     WHERE r.usuario.idUsuario = :id 
       AND r.fechaHora >= :desde 
     ORDER BY r.fechaHora DESC
 """)
-List<RegistroComida> registrosUltimos7Dias(@Param("id") Long id,
-                                          @Param("desde") LocalDateTime desde);
+    List<RegistroComida> registrosUltimos7Dias(@Param("id") Long id,
+            @Param("desde") LocalDateTime desde);
 
+// 5 últimos registros
+    List<RegistroComida> findTop5ByUsuarioIdUsuarioOrderByFechaHoraDesc(Long idUsuario);
 
-List<RegistroComida> findTop5ByUsuarioIdUsuarioOrderByFechaHoraDesc(Long idUsuario);
-
-
-    
 }
-
-

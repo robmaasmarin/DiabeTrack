@@ -36,21 +36,19 @@ public class ReporteService {
         List<RegistroComida> registros = registroRepo.findTop5ByUsuarioIdUsuarioOrderByFechaHoraDesc(idUsuario);
 
         List<RegistroReporteDTO> data = registros.stream()
-        .map(r -> new RegistroReporteDTO(r))
-        .collect(Collectors.toList());
-
+                .map(r -> new RegistroReporteDTO(r))
+                .collect(Collectors.toList());
 
         InputStream jrxml = getClass().getResourceAsStream("/reports/report_registros.jrxml");
-JasperReport report = JasperCompileManager.compileReport(jrxml);
+        JasperReport report = JasperCompileManager.compileReport(jrxml);
 
-Map<String, Object> params = new HashMap<>();
-params.put("REPORT_DIR", getClass().getResource("/reports/").toString());
+        Map<String, Object> params = new HashMap<>();
+        params.put("REPORT_DIR", getClass().getResource("/reports/").toString());
 
-JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(data);
-JasperPrint jp = JasperFillManager.fillReport(report, params, ds);
+        JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(data);
+        JasperPrint jp = JasperFillManager.fillReport(report, params, ds);
 
-return JasperExportManager.exportReportToPdf(jp);
+        return JasperExportManager.exportReportToPdf(jp);
 
     }
 }
-

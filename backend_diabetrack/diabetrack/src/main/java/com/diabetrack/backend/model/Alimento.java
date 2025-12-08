@@ -22,35 +22,36 @@ import java.util.List;
 @Table(name = "alimentos")
 public class Alimento {
 
+    // identificamos y mapeamos alimento
     @JsonProperty("idAlimento")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_alimento")
     private Long idAlimento;
+    // nombre del alimento
     @JsonProperty("nombre")
     private String nombre;
+    // cantidad de carbs del alimento
     @JsonProperty("carbohidratos")
     private double carbohidratos;
+    // índice glucémico
     @JsonProperty("indiceGlucemico")
     private int indiceGlucemico;
     @JsonProperty("racion")
     private double racion;
-
+    // relación con categoría
     @ManyToOne
     @JoinColumn(name = "id_categoria")
+    // evitar ciclos infinitos
     @JsonBackReference
     private Categoria categoria;
-/*
+    // relación opcional con user
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = true)
-    private Usuario usuario; // null = alimento general
-*/
-    @ManyToOne
-@JoinColumn(name = "id_usuario", nullable = true)
-@JsonBackReference(value = "usuario-alimentos")
-private Usuario usuario;
+    @JsonBackReference(value = "usuario-alimentos")
+    private Usuario usuario;
 
-
+    // relación inversa alimento en muchos registros
     @OneToMany(mappedBy = "alimento")
     private List<Registro> registros;
 
@@ -59,7 +60,8 @@ private Usuario usuario;
     public Long getIdAlimento() {
         return idAlimento;
     }
-@JsonProperty("id")
+
+    @JsonProperty("id")
 
     public void setIdAlimento(Long idAlimento) {
         this.idAlimento = idAlimento;
@@ -96,19 +98,21 @@ private Usuario usuario;
     public void setRacion(double racion) {
         this.racion = racion;
     }
-public Usuario getUsuario() {
-    return usuario;
-}
 
-public void setUsuario(Usuario usuario) {
-    this.usuario = usuario;
-}
-public Categoria getCategoria() {
-    return categoria;
-}
+    public Usuario getUsuario() {
+        return usuario;
+    }
 
-public void setCategoria(Categoria categoria) {
-    this.categoria = categoria;
-}
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 
 }

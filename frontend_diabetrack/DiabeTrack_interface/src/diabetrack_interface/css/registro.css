@@ -46,14 +46,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 }
 
 .nextButton {
-    -fx-background-radius: 15;
--fx-border-radius: 15;
--fx-background-color: #5d08a5;
--fx-text-fill: #ffffff;
--fx-pref-width: 300;
--fx-pref-height: 40;
--fx-font-size: 23;
--fx-font-weight: bold;
+    -fx-background-color:#7c37b6;
+     -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+
+    -fx-padding: 6px 18px;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+
+    -fx-border-color: rgba(93, 8, 165, 1);
+    -fx-border-width: 1.5;
+
+    -fx-cursor: hand;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.25) , 8,0,0,2 );
+    -fx-transition: all 0.3s ease;
 }
 
 .vboxData2 {
@@ -71,4 +78,11 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-font-size: 20;
 -fx-font-weight: bold;
     
+}
+
+
+.regLabel {
+    -fx-font-size: 15px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #444;
 }

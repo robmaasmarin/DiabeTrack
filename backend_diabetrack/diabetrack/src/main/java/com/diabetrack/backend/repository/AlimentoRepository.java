@@ -21,8 +21,5 @@ public interface AlimentoRepository extends JpaRepository<Alimento, Long> {
     List<Alimento> findByUsuarioIsNull();
     // Devuelve los alimentos creados por un usuario específico
     List<Alimento> findByUsuario_IdUsuario(Long idUsuario);
-    
-    
 
-    
 }

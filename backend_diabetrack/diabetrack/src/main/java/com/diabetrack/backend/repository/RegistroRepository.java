@@ -23,6 +23,7 @@ public interface RegistroRepository extends JpaRepository<Registro, Long> {
    @Query("SELECT r FROM Rol r WHERE LOWER(r.nombre) = LOWER(:nombre)")
     Optional<Rol> findByNombreIgnoreCase(@Param("nombre") String nombre);
     @Query("SELECT r FROM Registro r WHERE r.usuario.idUsuario = :idUsuario")
+        // obtenemos los registros asociados a usuario específico
 List<Registro> findByUsuarioIdUsuario(@Param("idUsuario") Long idUsuario);
 
 }
